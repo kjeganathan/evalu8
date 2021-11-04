@@ -1,0 +1,68 @@
+.Login{
+    display:flex;
+    flex-direction:column;
+    justify-content: space-between;
+}
+
+.Login-header{
+    /* position: absolute; */
+    width: 100%;
+    height: 75px;
+    margin-top: 10%;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 35px;
+    line-height: 42px;
+    text-align: center;
+    color: rgba(48, 62, 77, 0.85);
+}
+
+#inputBox1{
+    margin-left:auto;
+    margin-right:auto;
+    margin-top:1%;
+    width:25%;
+    height:47px;
+    border-radius: 50px;
+    border: 1px solid #00798C;
+
+}
+
+#inputBox2{
+    margin-left:auto;
+    margin-right:auto;
+    margin-top:3%;
+    width:25%;
+    height:47px;
+    border-radius: 50px;
+    border: 1px solid #00798C;
+}
+
+#loginButton{
+    width: 25%;
+    height: 47px;
+    margin-top: 5%;
+    background: #00798C;
+    border: 1px solid #00798C;
+    box-sizing: border-box;
+    border-radius: 50px;
+}
+
+.option{
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 200;
+    font-size: 18px;
+    line-height: 42px;
+    margin-top: 10px;
+    text-align: center;
+    color: rgba(48, 62, 77, 0.85);
+}
+
+.createAccountLink{
+    color:#00798C;
+}
+
+
+     
