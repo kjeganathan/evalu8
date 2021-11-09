@@ -22,7 +22,6 @@
     margin-left:auto;
     margin-right:auto;
     margin-top:1%;
-    width:25%;
     height:47px;
     border-radius: 50px;
     border: 1px solid #00798C;
@@ -33,14 +32,12 @@
     margin-left:auto;
     margin-right:auto;
     margin-top:3%;
-    width:25%;
     height:47px;
     border-radius: 50px;
     border: 1px solid #00798C;
 }
 
 #loginButton{
-    width: 25%;
     height: 47px;
     margin-top: 5%;
     background: #00798C;
@@ -48,6 +45,19 @@
     box-sizing: border-box;
     border-radius: 50px;
 }
+
+.form-group{
+    margin-left:auto;
+    margin-right:auto;
+    width:80%;
+}
+
+.loginButton{
+    margin-left: auto;
+    margin-right:auto;
+    width:80%;
+}
+
 
 .option{
     font-family: Roboto;

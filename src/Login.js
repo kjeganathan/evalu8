@@ -13,13 +13,12 @@ class Login extends Component {
             <div id="loginForm" className="col-sm border-right">
                     <form>
                         <div className="form-group">
-                     
                           <input type="email" className="form-control" id="inputBox1" aria-describedby="emailHelp" placeholder="Email"/>
                         </div>
                         <div className="form-group">
                             <input type="password" className="form-control" id="inputBox2" placeholder="Password"/>
                         </div>
-                        <div className="loginButtons">
+                        <div className="loginButton">
                           <button id="loginButton" type="submit" className="btn btn-dark">Login</button>
                         </div>
                           <div className="option">Don't have an account? &nbsp;

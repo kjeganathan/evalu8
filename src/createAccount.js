@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './createAccount.css';
-import Login from './Login.js';
  
 class createAccount extends Component {
     render() {
@@ -26,7 +25,7 @@ class createAccount extends Component {
                         <div className="form-group">
                             <input type="password" className="form-control" id="inputBox2" placeholder="Verify Password"/>
                         </div>
-                        <div className="loginButtons">
+                        <div className="loginButton">
                           <button id="loginButton" type="submit" className="btn btn-dark">Create Account</button>
                         </div>
                           <div className="option">Already have an account? &nbsp;
