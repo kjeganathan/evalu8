@@ -6,27 +6,27 @@ class createAccount extends Component {
     render() {
       return (
         
-        <div className="Login">
-            <h1 className="Login-header">Create Account</h1>
+        <div className="createAccount">
+            <h1 className="createAccount-header">Create Account</h1>
             <div id="loginForm" className="col-sm border-right">
                     <form>
                         <div className="form-group">
-                          <input type="text" className="form-control" id="inputBox2" placeholder="First Name"/>
+                          <input type="text" className="form-control" id="createFirstName" placeholder="First Name"/>
                         </div>
                         <div className="form-group">
-                          <input type="text" className="form-control" id="inputBox2" placeholder="Last Name"/>
+                          <input type="text" className="form-control" id="createLastName" placeholder="Last Name"/>
                         </div>
                         <div className="form-group">
-                          <input type="email" className="form-control" id="inputBox2" aria-describedby="emailHelp" placeholder="Email"/>
+                          <input type="email" className="form-control" id="createEmail" aria-describedby="emailHelp" placeholder="Email"/>
                         </div>
                         <div className="form-group">
-                            <input type="password" className="form-control" id="inputBox2" placeholder="Password"/>
+                            <input type="password" className="form-control" id="createPassword" placeholder="Password"/>
                         </div>
                         <div className="form-group">
-                            <input type="password" className="form-control" id="inputBox2" placeholder="Verify Password"/>
+                            <input type="password" className="form-control" id="createVerifyPassword" placeholder="Verify Password"/>
                         </div>
-                        <div className="loginButton">
-                          <button id="loginButton" type="submit" className="btn btn-dark">Create Account</button>
+                        <div className="createAccountButton">
+                          <button id="createAccountButton" type="submit" className="btn btn-dark">Create Account</button>
                         </div>
                           <div className="option">Already have an account? &nbsp;
                           <a href="http://localhost:3000/login" className="createAccountLink">log in</a>

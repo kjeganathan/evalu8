@@ -13,10 +13,10 @@ class Login extends Component {
             <div id="loginForm" className="col-sm border-right">
                     <form>
                         <div className="form-group">
-                          <input type="email" className="form-control" id="inputBox1" aria-describedby="emailHelp" placeholder="Email"/>
+                          <input type="email" className="form-control" id="loginEmail" aria-describedby="emailHelp" placeholder="Email"/>
                         </div>
                         <div className="form-group">
-                            <input type="password" className="form-control" id="inputBox2" placeholder="Password"/>
+                            <input type="password" className="form-control" id="loginPassword" placeholder="Password"/>
                         </div>
                         <div className="loginButton">
                           <button id="loginButton" type="submit" className="btn btn-dark">Login</button>
