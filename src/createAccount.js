@@ -1,8 +1,39 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './createAccount.css';
  
 class createAccount extends Component {
+
+    // createNewAccount() {
+    //   let firstName = document.getElementById('createFirstName');
+    //   let lastName = document.getElementById('createLastName');
+    //   let email = document.getElementById('createEmail');
+    //   let password = document.getElementById('createPassword');
+
+    //   let managerObj = {
+    //       firstName: firstName,
+    //       lastName: lastName,
+    //       email: email,
+    //       password: password
+    //   };
+
+    //     const baseURL = "http://localhost:8080/api/getAllManagers";
+    //     axios.post("/api/getPost", {
+    //             firstName: "Sandra",
+    //             lastName: "Peterson",
+    //             email: "sp@gmail.com",
+    //             password: "sp123"
+    //         }
+    //         ).then((response) => {
+    //                 console.log(response.data);
+    //     });
+
+
+    //}
+
+
+
     render() {
       return (
         
