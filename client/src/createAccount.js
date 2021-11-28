@@ -30,7 +30,7 @@ class createAccount extends Component {
 
     const data = { firstname:this.state.firstname, lastname:this.state.lastname , email:this.state.email, password:this.state.password }
 
-    fetch('/createAccountPost', { method: 'POST', 
+    fetch('/api/createAccount', { method: 'POST', 
 
     body: JSON.stringify(data), // data can be `string` or {object}!
 

@@ -2,7 +2,6 @@
   "name": "evaluate-app",
   "version": "0.1.0",
   "private": true,
-  "main":"express.js",
   "dependencies": {
     "axios": "^0.24.0",
     "bootstrap": "^5.1.3",
@@ -18,12 +17,12 @@
     "react-scripts": "^4.0.3"
   },
   "devDependencies": {},
+  "proxy": "http://localhost:8000",
   "scripts": {
-    "start": "node express.js",
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject",
-    "heroku-postbuild": "cd client && npm install && npm run build"
+    "eject": "react-scripts eject"
   },
   "browserslist": {
     "production": [
