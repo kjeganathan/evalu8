@@ -17,12 +17,8 @@
     "react-scripts": "^4.0.3"
   },
   "devDependencies": {},
-  "proxy": "https://localhost:8000",
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "start": "react-scripts start"
   },
   "browserslist": {
     "production": [
