@@ -18,14 +18,20 @@ app.post("/api/createAccount", (req, res) => {
     console.log(data.firstname);
 });
 
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, "client/build", "./client/public/index.html"));
-});
+// app.get('/', (req, res) => {
+//     res.sendFile(path.join(__dirname, "client/build", "./client/public/index.html"));
+// });
 
 //serves all the 
 // app.use((req, res, next) => {
 //     res.sendFile(path.join(__dirname, "..", "./evalu8/client/build", "index.html"));
 // });
+
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, "./client/build", "index.html"));
+  });
+
+// app.use(express.static(path.join(__dirname, '../client/build', "index.html")));
 
 const port = 3000; // specify the port 
 app.listen(process.env.PORT || port);
