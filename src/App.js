@@ -7,6 +7,7 @@ import CreateAccount from './createAccount.js';
 
 
 class App extends Component {
+
   render() {
     return (
       <div className="App">
@@ -14,6 +15,10 @@ class App extends Component {
           <img src={logo} className="App-logo" alt="logo" />
         </div>
         <div className="App-intro">
+        {/* <form action="../../post" method="post" 
+              className="form">
+          <button type="submit">Connected?</button>
+        </form> */}
         <BrowserRouter>
         <div>
           

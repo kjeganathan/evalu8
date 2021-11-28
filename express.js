@@ -6,13 +6,10 @@ const app = express();
 app.use(express.json()); // lets you handle JSON input
 app.use(express.static('src/')); // specify the directory 
 
-app.get("/", (req, res) => {
-    res.send("Hello World!");
+app.post("/createAccountPost", (req, res) => {
+    console.log("Connected to React");
+    const data = req.body;
+    console.log(data.firstname);
 });
-
-app.get('/', (req, res) => {
-    res.sendFile(path.resolve('./login'));
-});
-
 
 app.listen(8000, console.log(`Server started on port ${8000}`));

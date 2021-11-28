@@ -5,34 +5,43 @@ import './createAccount.css';
  
 class createAccount extends Component {
 
-    // createNewAccount() {
-    //   let firstName = document.getElementById('createFirstName');
-    //   let lastName = document.getElementById('createLastName');
-    //   let email = document.getElementById('createEmail');
-    //   let password = document.getElementById('createPassword');
+  constructor() {
+    super();
 
-    //   let managerObj = {
-    //       firstName: firstName,
-    //       lastName: lastName,
-    //       email: email,
-    //       password: password
-    //   };
+    this.state = {
+      firstname: '',
+      lastname:'',
+      email:'',
+      password:''
+      };
 
-    //     const baseURL = "http://localhost:8080/api/getAllManagers";
-    //     axios.post("/api/getPost", {
-    //             firstName: "Sandra",
-    //             lastName: "Peterson",
-    //             email: "sp@gmail.com",
-    //             password: "sp123"
-    //         }
-    //         ).then((response) => {
-    //                 console.log(response.data);
-    //     });
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleChange = (e) => {
+    this.setState({
+      [e.target.name]: e.target.value
+    })
+  }
+
+  handleSubmit(event) {
+    event.preventDefault();
 
 
-    //}
+    const data = { firstname:this.state.firstname, lastname:this.state.lastname , email:this.state.email, password:this.state.password }
 
+    fetch('/createAccountPost', { method: 'POST', 
 
+    body: JSON.stringify(data), // data can be `string` or {object}!
+
+    headers:{ 'Content-Type': 'application/json' } })
+
+    .then(res => res.json())
+
+    .catch(error => console.error('Error:', error))
+
+    .then(response => console.log('Success:', response));
+   }
 
     render() {
       return (
@@ -40,21 +49,21 @@ class createAccount extends Component {
         <div className="createAccount">
             <h1 className="createAccount-header">Create Account</h1>
             <div id="loginForm" className="col-sm border-right">
-                    <form>
+                    <form onSubmit={this.handleSubmit}>
                         <div className="form-group">
-                          <input type="text" className="form-control" id="createFirstName" placeholder="First Name"/>
+                          <input onChange={this.handleChange} name="firstname" type="text" className="form-control" id="createFirstName" placeholder="First Name"/>
                         </div>
                         <div className="form-group">
-                          <input type="text" className="form-control" id="createLastName" placeholder="Last Name"/>
+                          <input onChange={this.handleChange} name="lastname" type="text" className="form-control" id="createLastName" placeholder="Last Name"/>
                         </div>
                         <div className="form-group">
-                          <input type="email" className="form-control" id="createEmail" aria-describedby="emailHelp" placeholder="Email"/>
+                          <input onChange={this.handleChange} name="email" type="email" className="form-control" id="createEmail" aria-describedby="emailHelp" placeholder="Email"/>
                         </div>
                         <div className="form-group">
-                            <input type="password" className="form-control" id="createPassword" placeholder="Password"/>
+                            <input onChange={this.handleChange} name="password" type="password" className="form-control" id="createPassword" placeholder="Password"/>
                         </div>
                         <div className="form-group">
-                            <input type="password" className="form-control" id="createVerifyPassword" placeholder="Verify Password"/>
+                            <input onChange={this.handleChange} name="verifypassword" type="password" className="form-control" id="createVerifyPassword" placeholder="Verify Password"/>
                         </div>
                         <div className="createAccountButton">
                           <button id="createAccountButton" type="submit" className="btn btn-dark">Create Account</button>
@@ -62,8 +71,7 @@ class createAccount extends Component {
                           <div className="option">Already have an account? &nbsp;
                           <a href="http://localhost:3000/login" className="createAccountLink">log in</a>
                           </div>
-                         
-                 
+
                     </form>
                 </div>
         </div>
