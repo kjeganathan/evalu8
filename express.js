@@ -8,7 +8,7 @@ const app = express();
 app.use(express.json()); // lets you handle JSON input
 //app.use(express.static('src/')); // specify the directory 
 
-app.use(express.static(path.join(__dirname, 'client')));
+app.use(express.static(path.join(__dirname, "client/build")));
 
 
 
@@ -18,8 +18,13 @@ app.post("/api/createAccount", (req, res) => {
     console.log(data.firstname);
 });
 
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname+'/client/index.html'));
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'client/build', '/client/public/index.html'));
+});
+
+//serves all the 
+app.use((req, res, next) => {
+    res.sendFile(path.join(__dirname, "..", "/evalu8/client/build", "index.html"));
   });
 
-app.listen(8000, console.log(`Server started on port ${8000}`));
+app.listen(3000, console.log(`Server started on port ${3000}`));
