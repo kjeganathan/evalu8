@@ -24,7 +24,8 @@ app.get('/', (req, res) => {
 
 //serves all the 
 app.use((req, res, next) => {
-    res.sendFile(path.join(__dirname, "..", "/evalu8/client/build", "index.html"));
-  });
+    res.sendFile(path.join(__dirname, "..", "./evalu8/client/build", "index.html"));
+});
 
-app.listen(3000, console.log(`Server started on port ${3000}`));
+const port = 3000; // specify the port 
+app.listen(process.env.PORT || port);
