@@ -29,13 +29,14 @@ class createAccount extends Component {
     const data = { firstname:this.state.firstname, lastname:this.state.lastname , email:this.state.email, password:this.state.password }
     
     //Fetch request to create an account for a new manager
-    await fetch('/api/createAccount',{ 
+    fetch('/api/createAccount',{ 
       method:'POST', 
       body: JSON.stringify(data), // data can be `string` or {object}!
-      headers:{ 'Content-Type': 'application/json' } })
-      .then(res => res.json())
+      headers:{ 'Content-Type': 'application/json' } 
+    }).then(res => res.json())
       .catch(error => console.error('Error:', error))
       .then(response => console.log('Success:', response));
+
    }
 
     render() {
