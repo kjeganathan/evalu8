@@ -49,6 +49,17 @@ async function addUser(firstname, lastname, email, password) {
     );
 }
 
+//Takes a managers email and sets the teammembers where the email is the same
+async function addTeamMembers(email, teammembers){
+    return await connectAndRun((db) =>
+      db.none(
+        "UPDATE managers SET teammembers = $1 WHERE email = $2",
+        [teammembers, email]
+      )
+    );
+}
+
 module.exports = {
-addUser
+addUser,
+addTeamMembers
 };

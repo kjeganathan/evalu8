@@ -17,6 +17,12 @@ app.post("/api/createAccount", async (req, res) => {
     console.log("Created a new account successfully!");
 });
 
+app.post("/api/addTeamMembers", async (req, res) => {
+    const data = req.body;
+    await dblast.addTeamMembers(data.email, data.teammembers);
+    console.log("Added team members of manager to their account!");
+});
+
 //Creates links to every route on the client side
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, "./client/build", "index.html"));

@@ -16,6 +16,22 @@ class uploadFile extends Component {
   handleOnFileLoad = (data) => {
     console.log('---------------------------')
     console.log(data)
+    let stringTeamMembers = data[1]["data"][0] + " " + data[1]["data"][1]
+    for(let i=2; i<11; i++){
+      stringTeamMembers = stringTeamMembers + "," + data[i]["data"][0] + " " + data[i]["data"][1]
+    }
+    console.log(stringTeamMembers);
+    fetch('/api/addTeamMembers',{ 
+      method:'POST', 
+      body: JSON.stringify({
+        email:"kjeganathan@umass.edu",
+        teammembers: stringTeamMembers
+    }),
+      headers:{ 'Content-Type': 'application/json' } 
+    }).then(res => res.json())
+      .catch(error => console.error('Error:', error))
+      .then(response => console.log('Success:', response));
+
     console.log('---------------------------')
   }
 
@@ -68,7 +84,7 @@ class uploadFile extends Component {
                   paddingRight: 0
                 }}
               >
-                Browe file
+                Browse file
               </button>
               <div
                 style={{
