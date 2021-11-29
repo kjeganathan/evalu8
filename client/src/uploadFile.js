@@ -20,11 +20,12 @@ class uploadFile extends Component {
     for(let i=2; i<11; i++){
       stringTeamMembers = stringTeamMembers + "," + data[i]["data"][0] + " " + data[i]["data"][1]
     }
-    console.log(stringTeamMembers);
+    let stringEmail = localStorage.getItem("email");
+    console.log(stringEmail);
     fetch('/api/addTeamMembers',{ 
       method:'POST', 
       body: JSON.stringify({
-        email:"kjeganathan@umass.edu",
+        email:JSON.parse(stringEmail),
         teammembers: stringTeamMembers
     }),
       headers:{ 'Content-Type': 'application/json' } 
@@ -84,7 +85,7 @@ class uploadFile extends Component {
                   paddingRight: 0
                 }}
               >
-                Browse file
+                Browse and Upload file
               </button>
               <div
                 style={{

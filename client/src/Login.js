@@ -4,6 +4,30 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import './Login.css';
 
 class Login extends Component {
+
+  constructor() {
+    super();
+
+    this.state = {
+      email:'',
+      password:''
+      };
+
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleChange = (e) => {
+    this.setState({
+      [e.target.name]: e.target.value
+    })
+  }
+
+    handleSubmit(event) {
+      event.preventDefault();
+      localStorage.setItem("email", JSON.stringify(this.state.email));
+    }
+    
+
     render() {
       return (
         
@@ -11,12 +35,12 @@ class Login extends Component {
             <h1 className="Login-header">Login</h1>
             {/* Login Form */}
             <div id="loginForm" className="col-sm border-right">
-                    <form>
+                    <form onSubmit={this.handleSubmit}>
                         <div className="form-group">
-                          <input type="email" className="form-control" id="loginEmail" aria-describedby="emailHelp" placeholder="Email"/>
+                          <input onChange={this.handleChange} name="email" type="email" className="form-control" id="loginEmail" aria-describedby="emailHelp" placeholder="Email"/>
                         </div>
                         <div className="form-group">
-                            <input type="password" className="form-control" id="loginPassword" placeholder="Password"/>
+                            <input onChange={this.handleChange} name="password" type="password" className="form-control" id="loginPassword" placeholder="Password"/>
                         </div>
                         <div className="loginButton">
                           <button id="loginButton" type="submit" className="btn btn-dark">Login</button>
