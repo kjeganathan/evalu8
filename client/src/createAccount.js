@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './createAccount.css';
+import logo from './logo.png';
  
 class createAccount extends Component {
 
@@ -41,7 +42,10 @@ class createAccount extends Component {
 
     render() {
       return (
-        
+        <div>
+        <div className="App-header">
+          <img src={logo} className="App-logo" alt="logo" />
+        </div>
         <div className="createAccount">
             <h1 className="createAccount-header">Create Account</h1>
             <div id="loginForm" className="col-sm border-right">
@@ -71,7 +75,7 @@ class createAccount extends Component {
                     </form>
                 </div>
         </div>
-        
+        </div>
       );
     }
   }

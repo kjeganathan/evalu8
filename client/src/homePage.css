@@ -1,0 +1,82 @@
+.homePage{
+    background-color:#101825;
+    height:100vh;
+}
+
+.homePage-header{
+    padding-top:180px;
+    margin-top:80px;
+    font-family: "Avenir LT Std Book", sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size:calc(4.5vmin + 0.5vmax);
+    letter-spacing: 0.05em;
+    line-height: 1.5;
+    text-align: center;
+    color: #EDAE49;
+    background-color: #101825;
+}
+
+.homePage-body{
+    margin-top:30px;
+    font-family: "Avenir LT Std Book", sans-serif;
+    font-style: normal;
+    font-weight: 300; 
+    letter-spacing: .1em;
+    font-size:calc(2.3vmin + 0.01vmax);
+    /* font-size: 1.125rem; */
+    line-height: 1.75rem;
+    text-align: center;
+    color: white;
+}
+
+#homePage-button-id{
+    background-color: #EDAE49;
+    font-family: "Avenir LT Std Book", sans-serif;
+    font-style: normal;
+    font-weight: 350; 
+    font-size: calc(2.3vmin + 0.01vmax);
+    padding-top:12px;
+    padding-bottom:12px;
+    padding-left:28px;
+    padding-right:28px;
+    margin-top:50px;
+}
+
+#homePage-button-id:hover{
+    color:#101825;
+    background-color:white;
+    border-color:white;
+    
+}
+
+#homePage-header-button-id{
+    background-color: #101825;
+    border-color:#EDAE49;
+    border-width:1px;
+    font-family: "Avenir LT Std Book", sans-serif;
+    font-style: normal;
+    font-weight: 350; 
+    font-size: calc(1.8vmin + 0.01vmax);
+    padding-top:8px;
+    padding-bottom:8px;
+    padding-left:16px;
+    padding-right:16px;
+    position:absolute;
+    top:0;
+    right:0;
+    margin-top:16px;
+    margin-right:20px;
+    color:#EDAE49;
+}
+
+#homePage-header-button-id:hover{
+    color:white;
+    background-color: #101825;
+    border-color: #101825;
+}
+
+
+
+
+     

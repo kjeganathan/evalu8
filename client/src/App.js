@@ -5,6 +5,7 @@ import Login from './Login.js'
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import CreateAccount from './createAccount.js';
 import UploadFile from './uploadFile.js';
+import HomePage from './homePage.js';
 
 
 class App extends Component {
@@ -12,18 +13,14 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <div className="App-header">
+        {/* <div className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-        </div>
+        </div> */}
         <div className="App-intro">
-        {/* <form action="../../post" method="post" 
-              className="form">
-          <button type="submit">Connected?</button>
-        </form> */}
         <BrowserRouter>
         <div>
-          
             <Switch>
+            <Route exact path="/" component={HomePage}/>
              <Route path="/login" component={Login}/>
              <Route path="/createAccount" component={CreateAccount}/>
              <Route path="/upload" component={UploadFile}/>

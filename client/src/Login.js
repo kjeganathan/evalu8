@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import './Login.css';
+import logo from './logo.png';
 
 class Login extends Component {
 
@@ -30,7 +31,10 @@ class Login extends Component {
 
     render() {
       return (
-        
+        <div>
+          <div className="App-header">
+          <img src={logo} className="App-logo" alt="logo" />
+        </div>
         <div className="Login">
             <h1 className="Login-header">Login</h1>
             {/* Login Form */}
@@ -53,7 +57,7 @@ class Login extends Component {
                     </form>
                 </div>
         </div>
-        
+        </div>
       );
     }
   }
