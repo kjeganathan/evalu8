@@ -17,6 +17,7 @@
     font-size: 48px;
     text-align: center;
     color: rgba(255, 255, 255, 0.755);
+    margin-bottom:1px;
     
 }
 
@@ -89,7 +90,7 @@ label{
 }
 
 #loginButton{
-    width: 25%;
+    width: 50%;
     height: 47px;
     margin-top: 5%;
     background: #028FA3;
