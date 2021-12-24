@@ -1,42 +1,64 @@
 .Login{
-    display:flex;
-    flex-direction:column;
-    justify-content: space-between;
+   
+    background-color:#101825;
+    height:100vh;
 }
 
 .Login-header{
-    margin-top:212px;
+    background-color:#101825;
     width: 100%;
+    margin-top:80px;
+    padding-top:10px;
     height: 75px;
-    font-family: Roboto;
+    font-family: "Avenir LT Std Book", sans-serif;
     font-style: normal;
-    font-weight: 300;
-    font-size: 35px;
-    line-height: 42px;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    line-height: 1.5;
+    font-size: 40px;
     text-align: center;
-    color: rgba(48, 62, 77, 0.85);
+    color: rgba(255, 255, 255, 0.934);
+    margin-bottom:40px;
 }
 
-
+#loginForm{
+    padding-top:120px;
+}
 
 #loginEmail{
     margin-left:auto;
     margin-right:auto;
-    margin-top:1%;
+    /* margin-top:1%; */
     width:25%;
     height:47px;
-    border-radius: 50px;
-    border: 1px solid #00798C;
+    /* border: 1px solid #00798C; */ 
+    background-color: hsl(215, 40%, 18%);
+    border-color: hsl(215, 40%, 18%);
+}
+
+#emailForm{
+    margin-top:1%;
+}
+
+label{
+    color:slategray;
+    text-align:left;
+    width: 25%;
+    font-size:small;
 }
 
 #loginPassword{
     margin-left:auto;
     margin-right:auto;
     width:25%;
-    margin-top:3%;
     height:47px;
-    border-radius: 50px;
-    border: 1px solid #00798C;
+    background-color: hsl(215, 40%, 18%);
+    border-color: hsl(215, 40%, 18%);
+}
+
+
+#passwordForm{
+    margin-top:3%;
 }
 
 #loginButton{

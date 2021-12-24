@@ -26,7 +26,7 @@ class teamMembers extends Component {
                         xmlns="http://www.w3.org/2000/svg"
                         width="77"
                         height="78"
-                        fill="white"
+                        fill="hsl(215, 40%, 18%)"
                         className="bi bi-person-circle"
                         viewBox="0 0 16 16"
                       >
@@ -54,7 +54,7 @@ class teamMembers extends Component {
                         xmlns="http://www.w3.org/2000/svg"
                         width="77"
                         height="78"
-                        fill="#028FA3"
+                        fill="#00798C"
                         className="bi bi-person-circle"
                         viewBox="0 0 16 16"
                       >
@@ -115,7 +115,7 @@ class teamMembers extends Component {
                         xmlns="http://www.w3.org/2000/svg"
                         width="77"
                         height="78"
-                        fill="white"
+                        fill="hsl(215, 40%, 18%)"
                         className="bi bi-person-circle"
                         viewBox="0 0 16 16"
                       >
@@ -147,7 +147,7 @@ class teamMembers extends Component {
                         xmlns="http://www.w3.org/2000/svg"
                         width="77"
                         height="78"
-                        fill="white"
+                        fill="hsl(215, 40%, 18%)"
                         className="bi bi-person-circle"
                         viewBox="0 0 16 16"
                       >
@@ -175,7 +175,7 @@ class teamMembers extends Component {
                         xmlns="http://www.w3.org/2000/svg"
                         width="77"
                         height="78"
-                        fill="#014161"
+                        fill="#EDAE49"
                         className="bi bi-person-circle"
                         viewBox="0 0 16 16"
                       >
@@ -206,7 +206,7 @@ class teamMembers extends Component {
                         xmlns="http://www.w3.org/2000/svg"
                         width="77"
                         height="78"
-                        fill="#EDAE49"
+                        fill="#00798C"
                         className="bi bi-person-circle"
                         viewBox="0 0 16 16"
                       >
@@ -234,7 +234,7 @@ class teamMembers extends Component {
                         xmlns="http://www.w3.org/2000/svg"
                         width="77"
                         height="78"
-                        fill="white"
+                        fill="hsl(215, 40%, 18%)"
                         className="bi bi-person-circle"
                         viewBox="0 0 16 16"
                       >
@@ -265,7 +265,7 @@ class teamMembers extends Component {
                         xmlns="http://www.w3.org/2000/svg"
                         width="77"
                         height="78"
-                        fill="white"
+                        fill="hsl(215, 40%, 18%)"
                         className="bi bi-person-circle"
                         viewBox="0 0 16 16"
                       >
@@ -293,7 +293,7 @@ class teamMembers extends Component {
                         xmlns="http://www.w3.org/2000/svg"
                         width="77"
                         height="78"
-                        fill="#028FA3"
+                        fill="#A53860"
                         className="bi bi-person-circle"
                         viewBox="0 0 16 16"
                       >

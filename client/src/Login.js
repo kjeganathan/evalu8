@@ -37,15 +37,18 @@ class Login extends Component {
           <img src={logo} className="App-logo" alt="logo" />
         </div>
         <div className="Login">
-            <h1 className="Login-header">Login</h1>
+
             {/* Login Form */}
             <div id="loginForm" className="col-sm border-right">
                     <form onSubmit={this.handleSubmit}>
-                        <div className="form-group">
-                          <input onChange={this.handleChange} name="email" type="email" className="form-control" id="loginEmail" aria-describedby="emailHelp" placeholder="Email"/>
+                    <h1 className="Login-header">Welcome Back!</h1>
+                        <div id="emailForm" className="form-group">
+                          <label for="loginEmail">Email</label>
+                          <input onChange={this.handleChange} name="email" type="email" className="form-control" id="loginEmail" aria-describedby="emailHelp"/>
                         </div>
-                        <div className="form-group">
-                            <input onChange={this.handleChange} name="password" type="password" className="form-control" id="loginPassword" placeholder="Password"/>
+                        <div id="passwordForm" className="form-group">
+                            <label for="loginPassword">Password</label>
+                            <input onChange={this.handleChange} name="password" type="password" className="form-control" id="loginPassword"/>
                         </div>
                         <div className="loginButton">
                           <button id="loginButton" type="submit" className="btn btn-dark">Login</button>

@@ -26,7 +26,7 @@
     box-shadow: 4px 4px 4px 2px rgba(0, 0, 0, 0.15);
     border-radius: 20px;
     padding:10px;
-    /* background-color: #014161; */
+    background-color: hsl(215, 40%, 18%);
 
 }
 
@@ -43,7 +43,7 @@
     font-family: "Avenir LT Std Book", sans-serif;
     font-style: normal;
     font-weight: 700; 
-    color:white;
+    color:rgba(255, 255, 255, 0.934);
     letter-spacing: .1em;
     font-size:calc(2.3vmin + 0.01vmax);
 }
@@ -55,7 +55,7 @@
     font-family: "Avenir LT Std Book", sans-serif;
     font-style: normal;
     font-weight: 500; 
-    color:white;
+    color:rgba(255, 255, 255, 0.934);
     letter-spacing: .1em;
     font-size:calc(1.6vmin + 0.01vmax);
 }
@@ -64,7 +64,7 @@
 .card-subtext5, .card-subtext6, .card-subtext7, .card-subtext8,
 .card-subtext9, .card-subtext10 {
     padding-top: 30px;
-    color:white;
+    color:rgba(255, 255, 255, 0.934);
     font-family: "Avenir LT Std Book", sans-serif;
     font-style: normal;
     font-weight: 300; 
@@ -75,8 +75,8 @@
 .card-button1,.card-button2,.card-button3,.card-button4,
 .card-button5,.card-button6,.card-button7,.card-button8,
 .card-button9,.card-button10{
-    background-color:white;
-    border-color:white;
+    background-color:hsl(215, 40%, 18%);
+    border-color:hsl(215, 40%, 18%);
     font-weight:400;
     font-size:14px;
     border-radius:50px;
@@ -85,38 +85,42 @@
 
 /* Colors for the cards */
 
-/* Card 1 and 9 */
-.teamMembers-card1, .teamMembers-card9{
-    background-color: #014161;
+/* Card 1 */
+.teamMembers-card1{
+    background-color: #a53860c4;
 }
 
-.card-button1, .card-button9{
-    color:#014161;
+.card-button1{
+    color:#A53860;
 }
 
 /* Card 2 */
 
 .card-title2, .card-text2, .card-subtext2{
-    color:#028FA3;
+    color:#01b7d3;
 }
 
 .card-button2{
-    background-color:#028FA3;
+    background-color:#00798C;
+    border-color:#00798C;
+    color:hsl(215, 40%, 18%);
 }
 
 /* Card 3 */
 
 .card-title3, .card-text3, .card-subtext3{
-    color:#A53860;
+    color:#fa5693;
 }
 
 .card-button3{
+    color:hsl(215, 40%, 18%);
     background-color:#A53860;
+    border-color:#A53860;
 }
 
 /* Card 4 */
 .teamMembers-card4{
-    background-color: #EDAE49;
+    background-color: #edae49d7;
 }
 
 .card-button4{
@@ -125,50 +129,66 @@
 
 /* Card 5 */
 .teamMembers-card5{
-    background-color: #028FA3;
+    background-color: #00798C;
 }
 
 .card-button5{
-    color:#028FA3;
+    color:#00798C;
 }
 
 /* Card 6 */
 
 .card-title6, .card-text6, .card-subtext6{
-    color:#014161;
+    color:#EDAE49;
 }
 
 .card-button6{
-    background-color:#014161;
+    background-color:#EDAE49;
+    border-color:#EDAE49;
+    color:hsl(215, 40%, 18%);
 }
 
 /* Card 7 */
 
 .card-title7, .card-text7, .card-subtext7{
-    color:#101825;
+    color:#01b7d3;
 }
 
 .card-button7{
-    background-color:#EDAE49;
+    background-color:#00798C;
+    border-color:#00798C;
+    color:hsl(215, 40%, 18%);
 }
 
 /* Card 8 */
 .teamMembers-card8{
-    background-color: #A53860;
+    background-color: #a53860c4;
 }
 
 .card-button8{
     color:#A53860;
 }
 
+/* Card 9 */
+
+.teamMembers-card9{
+    background-color: #edae49d7;
+}
+
+.card-button9{
+    color:#EDAE49;
+}
+
 /* Card 10 */
 
 .card-title10, .card-text10, .card-subtext10{
-    color:#028FA3;
+    color:#fa5693;
 }
 
 .card-button10{
-    background-color:#028FA3;
+    color:hsl(215, 40%, 18%);
+    background-color:#A53860;
+    border-color:#A53860;
 }
 
 
