@@ -43,6 +43,7 @@ class Login extends Component {
                 <div id="login-form-modal">
                     <form onSubmit={this.handleSubmit}>
                     <h1 className="Login-header">Welcome Back</h1>
+                    <h4 className="Login-subheader">Login to continue</h4>
                         <div id="emailForm" className="form-group">
                           <label for="loginEmail">Email</label>
                           <input onChange={this.handleChange} name="email" type="email" className="form-control" id="loginEmail" aria-describedby="emailHelp"/>
