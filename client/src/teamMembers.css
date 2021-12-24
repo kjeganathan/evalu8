@@ -21,9 +21,10 @@
 .teamMembers-card5,.teamMembers-card6,.teamMembers-card7,.teamMembers-card8,
 .teamMembers-card9,.teamMembers-card10{
     margin-bottom:50px;
-    width: 14vmax;
+    width: 13.5vmax;
     box-shadow: 4px 4px 4px 2px rgba(0, 0, 0, 0.15);
     border-radius: 20px;
+    padding:10px;
     /* background-color: #014161; */
 
 }
@@ -95,7 +96,7 @@
 /* Card 2 */
 
 .card-title2, .card-text2, .card-subtext2{
-    color:#101825;
+    color:#028FA3;
 }
 
 .card-button2{
@@ -105,7 +106,7 @@
 /* Card 3 */
 
 .card-title3, .card-text3, .card-subtext3{
-    color:#101825;
+    color:#A53860;
 }
 
 .card-button3{
@@ -133,7 +134,7 @@
 /* Card 6 */
 
 .card-title6, .card-text6, .card-subtext6{
-    color:#101825;
+    color:#014161;
 }
 
 .card-button6{
@@ -162,7 +163,7 @@
 /* Card 10 */
 
 .card-title10, .card-text10, .card-subtext10{
-    color:#101825;
+    color:#028FA3;
 }
 
 .card-button10{
