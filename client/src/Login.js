@@ -42,9 +42,11 @@ class Login extends Component {
             <div id="loginForm" className="col-sm border-right">
                 <div id="login-form-modal">
                     <form onSubmit={this.handleSubmit}>
-                    <h1 className="Login-header">Welcome Back</h1>
-                    <h4 className="Login-subheader">Login to continue</h4>
+                      <h1 className="Login-header">Welcome Back</h1>
+                      <h4 className="Login-subheader">Login to continue</h4>
+                  
                         <div id="emailForm" className="form-group">
+                         
                           <label for="loginEmail">Email</label>
                           <input onChange={this.handleChange} name="email" type="email" className="form-control" id="loginEmail" aria-describedby="emailHelp"/>
                         </div>
@@ -55,8 +57,8 @@ class Login extends Component {
                         <div className="loginButton">
                           <button id="loginButton" type="submit" className="btn btn-dark">Login</button>
                         </div>
-                          <div className="option">Don't have an account? &nbsp;
-                          <a href="http://localhost:3000/createAccount" className="createAccountLink">sign up</a>
+                          <div id="option-id" className="option">Don't have an account? &nbsp;
+                          <a href="http://localhost:3000/createAccount" id="create-account-link-id" className="createAccountLink">sign up</a>
                           </div>
                          
                  
