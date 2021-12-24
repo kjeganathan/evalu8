@@ -11,7 +11,7 @@
     background-color: #101825;
 }
 
-.col-sm{
+#column{
     width:fit-content;
 }
 
@@ -19,7 +19,7 @@
 .teamMembers-card5,.teamMembers-card6,.teamMembers-card7,.teamMembers-card8,
 .teamMembers-card9,.teamMembers-card10{
     margin-bottom:50px;
-    width: 206px;
+    width: 12vmax;
     box-shadow: 4px 4px 4px 2px rgba(0, 0, 0, 0.15);
     border-radius: 20px;
     /* background-color: #014161; */

@@ -18,7 +18,7 @@ class teamMembers extends Component {
             <div className="container">
               <div className="row">
                 {/* Column 1 */}
-                <div className="col-sm">
+                <div id="column" className="col-sm">
                   <Card className="teamMembers-card1">
                     <Card.Body>
                       <svg
@@ -79,7 +79,7 @@ class teamMembers extends Component {
                 </div>
 
                 {/* Column 2 */}
-                <div className="col-sm">
+                <div id="column" className="col-sm">
                   <Card className="teamMembers-card3">
                     <Card.Body>
                       <svg
@@ -138,7 +138,7 @@ class teamMembers extends Component {
                 </div>
 
                 {/* Column 3 */}
-                <div className="col-sm">
+                <div id="column" className="col-sm">
                   
                   <Card className="teamMembers-card5">
                     <Card.Body>
@@ -198,7 +198,7 @@ class teamMembers extends Component {
                 </div>
 
                 {/* Column 4 */}
-                <div className="col-sm">
+                <div id="column" className="col-sm">
                   <Card className="teamMembers-card7">
                     <Card.Body>
                       <svg
@@ -257,7 +257,7 @@ class teamMembers extends Component {
                 </div>
 
                 {/* Column 5 */}
-                <div className="col-sm">
+                <div id="column" className="col-sm">
                 <Card className="teamMembers-card9">
                     <Card.Body>
                       <svg
