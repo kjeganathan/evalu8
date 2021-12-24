@@ -40,8 +40,9 @@ class Login extends Component {
 
             {/* Login Form */}
             <div id="loginForm" className="col-sm border-right">
+                <div id="login-form-modal">
                     <form onSubmit={this.handleSubmit}>
-                    <h1 className="Login-header">Welcome Back!</h1>
+                    <h1 className="Login-header">Welcome Back</h1>
                         <div id="emailForm" className="form-group">
                           <label for="loginEmail">Email</label>
                           <input onChange={this.handleChange} name="email" type="email" className="form-control" id="loginEmail" aria-describedby="emailHelp"/>
@@ -59,6 +60,7 @@ class Login extends Component {
                          
                  
                     </form>
+                    </div>
                 </div>
         </div>
         </div>

@@ -5,20 +5,19 @@
 }
 
 .Login-header{
-    background-color:#101825;
     width: 100%;
     margin-top:80px;
-    padding-top:10px;
+    padding-top:50px;
     height: 75px;
     font-family: "Avenir LT Std Book", sans-serif;
     font-style: normal;
-    font-weight: 500;
+    font-weight: 600;
     letter-spacing: 0.05em;
     line-height: 1.5;
     font-size: 40px;
     text-align: center;
-    color: rgba(255, 255, 255, 0.934);
-    margin-bottom:40px;
+    color: rgba(255, 255, 255, 0.755);
+    margin-bottom:60px;
 }
 
 #loginForm{
@@ -28,32 +27,48 @@
 #loginEmail{
     margin-left:auto;
     margin-right:auto;
-    /* margin-top:1%; */
-    width:25%;
+    width:75%;
     height:47px;
-    /* border: 1px solid #00798C; */ 
-    background-color: hsl(215, 40%, 18%);
-    border-color: hsl(215, 40%, 18%);
+    color:white;
+    background-color: #101825;
+    border-color: #101825;
+    box-shadow: 4px 4px 4px 2px rgba(0, 0, 0, 0.15);
 }
 
 #emailForm{
     margin-top:1%;
 }
 
+#login-form-modal{
+    width:30vw;
+    margin-left:auto;
+    margin-right:auto;
+    padding-top:0px;
+    padding-right:10px;
+    padding-left:10px;
+    padding-bottom:100px;
+    background-color: hsl(215, 40%, 18%);
+    border-color: hsl(215, 40%, 18%);
+    box-shadow: 4px 4px 4px 2px rgba(0, 0, 0, 0.15);
+    border-radius: 20px;
+}
+
 label{
     color:slategray;
     text-align:left;
-    width: 25%;
+    width: 75%;
     font-size:small;
 }
 
 #loginPassword{
     margin-left:auto;
     margin-right:auto;
-    width:25%;
+    width:75%;
     height:47px;
-    background-color: hsl(215, 40%, 18%);
-    border-color: hsl(215, 40%, 18%);
+    color:white;
+    background-color: #101825;
+    border-color:#101825;
+    box-shadow: 4px 4px 4px 2px rgba(0, 0, 0, 0.15);
 }
 
 
@@ -65,16 +80,18 @@ label{
     width: 25%;
     height: 47px;
     margin-top: 5%;
-    background: #00798C;
-    border: 1px solid #00798C;
+    background: #028FA3;
+    border: 1px solid #028FA3;
     box-sizing: border-box;
     border-radius: 50px;
+    color:hsl(215, 40%, 18%);
+    box-shadow: 4px 4px 4px 2px rgba(0, 0, 0, 0.15);
 }
 
 .loginButton{
     margin-left: auto;
     margin-right:auto;
-    width:80%;
+    width:100%;
 }
 
 .form-group{
