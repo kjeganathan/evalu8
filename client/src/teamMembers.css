@@ -13,13 +13,15 @@
 
 #column{
     width:fit-content;
+    margin-left:auto;
+    margin-right:auto;
 }
 
 .teamMembers-card1,.teamMembers-card2, .teamMembers-card3, .teamMembers-card4,
 .teamMembers-card5,.teamMembers-card6,.teamMembers-card7,.teamMembers-card8,
 .teamMembers-card9,.teamMembers-card10{
     margin-bottom:50px;
-    width: 12vmax;
+    width: 14vmax;
     box-shadow: 4px 4px 4px 2px rgba(0, 0, 0, 0.15);
     border-radius: 20px;
     /* background-color: #014161; */
