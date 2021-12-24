@@ -6,6 +6,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import CreateAccount from './createAccount.js';
 import UploadFile from './uploadFile.js';
 import HomePage from './homePage.js';
+import teamMembers from './teamMembers';
 
 
 class App extends Component {
@@ -24,6 +25,7 @@ class App extends Component {
              <Route path="/login" component={Login}/>
              <Route path="/createAccount" component={CreateAccount}/>
              <Route path="/upload" component={UploadFile}/>
+             <Route path="/teamMembers" component={teamMembers}/>
            </Switch>
         </div> 
       </BrowserRouter>

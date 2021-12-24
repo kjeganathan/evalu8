@@ -26,6 +26,7 @@ class Login extends Component {
     handleSubmit(event) {
       event.preventDefault();
       localStorage.setItem("email", JSON.stringify(this.state.email));
+      //relocate to the team members page
     }
     
 
