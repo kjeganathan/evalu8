@@ -7,6 +7,7 @@ import CreateAccount from './createAccount.js';
 import UploadFile from './uploadFile.js';
 import HomePage from './homePage.js';
 import teamMembers from './teamMembers';
+import engagementPage from './engagement';
 
 
 class App extends Component {
@@ -26,6 +27,7 @@ class App extends Component {
              <Route path="/createAccount" component={CreateAccount}/>
              <Route path="/upload" component={UploadFile}/>
              <Route path="/teamMembers" component={teamMembers}/>
+             <Route path="/engagement" component={engagementPage}/>
            </Switch>
         </div> 
       </BrowserRouter>
