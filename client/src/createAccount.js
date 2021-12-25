@@ -47,32 +47,40 @@ class createAccount extends Component {
           <img src={logo} className="App-logo" alt="logo" />
         </div>
         <div className="createAccount">
-            <h1 className="createAccount-header">Create Account</h1>
             <div id="loginForm" className="col-sm border-right">
+              <div id="createAccount-form-modal">
                     <form onSubmit={this.handleSubmit}>
-                        <div className="form-group">
-                          <input onChange={this.handleChange} name="firstname" type="text" className="form-control" id="createFirstName" placeholder="First Name"/>
+                    <h1 className="createAccount-header">Create Your Account</h1>
+                    <h4 className="createAccount-subheader">Create an account to use Evalu8</h4>
+                        <div id="first-name-form" className="form-group">
+                          <label for="createFirstName">First Name</label>
+                          <input onChange={this.handleChange} name="firstname" type="text" className="form-control" id="createFirstName"/> 
                         </div>
-                        <div className="form-group">
-                          <input onChange={this.handleChange} name="lastname" type="text" className="form-control" id="createLastName" placeholder="Last Name"/>
+                        <div id="last-name-form" className="form-group">
+                        <label for="createLastName">Last Name</label>
+                          <input onChange={this.handleChange} name="lastname" type="text" className="form-control" id="createLastName"/>
                         </div>
-                        <div className="form-group">
-                          <input onChange={this.handleChange} name="email" type="email" className="form-control" id="createEmail" aria-describedby="emailHelp" placeholder="Email"/>
+                        <div id="email-form" className="form-group">
+                        <label for="createEmail">Email</label>
+                          <input onChange={this.handleChange} name="email" type="email" className="form-control" id="createEmail" aria-describedby="emailHelp"/>
                         </div>
-                        <div className="form-group">
-                            <input onChange={this.handleChange} name="password" type="password" className="form-control" id="createPassword" placeholder="Password"/>
+                        <div id="password-form" className="form-group">
+                        <label for="createPassword">Password</label>
+                            <input onChange={this.handleChange} name="password" type="password" className="form-control" id="createPassword"/>
                         </div>
-                        <div className="form-group">
-                            <input onChange={this.handleChange} name="verifypassword" type="password" className="form-control" id="createVerifyPassword" placeholder="Verify Password"/>
+                        <div id="verify-password-form" className="form-group">
+                        <label for="createVerifyPassword">Verify Password</label>
+                            <input onChange={this.handleChange} name="verifypassword" type="password" className="form-control" id="createVerifyPassword"/>
                         </div>
                         <div className="createAccountButton">
                           <button id="createAccountButton" type="submit" className="btn btn-dark">Create Account</button>
                         </div>
-                          <div className="option">Already have an account? &nbsp;
-                          <a href="http://localhost:3000/login" className="createAccountLink">log in</a>
+                          <div id="createAccount-option-id" className="option">Already have an account? &nbsp;
+                          <a href="http://localhost:3000/login" id="loginLink-id" className="loginLink">log in</a>
                           </div>
 
                     </form>
+                    </div>
                 </div>
         </div>
         </div>

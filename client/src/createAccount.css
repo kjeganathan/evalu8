@@ -1,55 +1,106 @@
 .createAccount{
-    display:flex;
-    flex-direction:column;
-    justify-content: space-between;
+    background-color:#101825;
+    height:100%;
+    padding-bottom:100px;
 }
 
 .createAccount-header{
     width: 100%;
-    height: 75px;
-    margin-top: 180px;
-    font-family: Roboto;
+    margin-top:10px;
+    padding-top:5px;
+    font-family: "Avenir LT Std Book", sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    line-height: 1.5;
+    font-size: calc(4.2vmin + 0.5vmax);
+    text-align: center;
+    color: rgba(255, 255, 255, 0.755);
+    margin-bottom:1px;
+    padding-top:50px;
+}
+
+.createAccount-subheader{
+    width: 100%;
+    font-family: "Avenir LT Std Book", sans-serif;
     font-style: normal;
     font-weight: 300;
-    font-size: 35px;
-    line-height: 42px;
-    text-align: center;
-    color: rgba(48, 62, 77, 0.85);
+    letter-spacing: 0.05em;
+    line-height: 1.5;
+    font-size: calc(2vmin + 0.01vmax);
+    color:slategray;
+   
+}
+
+#createAccount-form-modal{
+    width:calc(38.2vmin + 15vmax);
+    margin-left:auto;
+    margin-right:auto;
+    padding-bottom:20px;
+    padding-bottom:50px;
+    background-color: hsl(215, 40%, 18%);
+    border-color: hsl(215, 40%, 18%);
+    box-shadow: 4px 4px 4px 2px rgba(0, 0, 0, 0.15);
+    border-radius: 20px;
+}
+
+label{
+    color:slategray;
+    text-align:left;
+    width: 75%;
+    font-size:small;
+}
+
+#first-name-form{
+    margin-top:calc(2vmin + 0.01vmax);
+}
+
+#last-name-form, #email-form, #password-form, #verify-password-form{
+    margin-top:3%;
 }
 
 #createFirstName{
     margin-left:auto;
     margin-right:auto;
-    margin-top:1%;
-    width:25%;
+    width:75%;
     height:47px;
-    border-radius: 50px;
-    border: 1px solid #00798C;
+    color:white;
+    background-color: #101825;
+    border-color: #101825;
+    box-shadow: 4px 4px 4px 2px rgba(0, 0, 0, 0.15);
 
 }
 
 #createLastName, #createEmail, #createPassword, #createVerifyPassword{
     margin-left:auto;
     margin-right:auto;
-    margin-top:3%;
-    width:25%;
+    width:75%;
     height:47px;
-    border-radius: 50px;
-    border: 1px solid #00798C;
+    color:white;
+    background-color: #101825;
+    border-color:#101825;
+    box-shadow: 4px 4px 4px 2px rgba(0, 0, 0, 0.15);
 }
 
 #createAccountButton{
-    width: 25%;
-    height: 47px;
-    margin-top: 5%;
-    background: #00798C;
-    border: 1px solid #00798C;
+    width: 50%;
+    height: calc(2vmin + 2vmax);
+    font-family: "Avenir LT Std Book", sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    font-size: calc(2vmin + 0.01vmax);
+    margin-top: 10%;
+    background: #A53860;
+    border: 1px solid #A53860;
     box-sizing: border-box;
     border-radius: 50px;
+    color:hsl(215, 40%, 18%);
+    box-shadow: 4px 4px 4px 2px rgba(0, 0, 0, 0.15);
 }
 
-.createAccountButton{
-    margin-left: auto;
+.form-group{
+    margin-left:auto;
     margin-right:auto;
     width:80%;
 }
@@ -58,16 +109,28 @@
     font-family: Roboto;
     font-style: normal;
     font-weight: 200;
-    font-size: 18px;
     line-height: 42px;
     margin-top: 10px;
     text-align: center;
-    color: rgba(48, 62, 77, 0.85);
 }
 
-.createAccountLink{
-    color:#00798C;
+#createAccount-option-id{
+    font-family: "Avenir LT Std Book", sans-serif;
+    font-style: normal;
+    font-weight: 300;
+    letter-spacing: 0.05em;
+    font-size: calc(2vmin + 0.1vmax);
+    line-height: 1.5;
+    color:slategray;
+    padding-top:20px;
 }
+
+#loginLink-id{
+    color:#A53860;
+    font-weight:500;
+}
+
+
 
 
      
