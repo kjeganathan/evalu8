@@ -24,8 +24,8 @@ class engagementPage extends Component {
 
     let chart = root.container.children.push( 
         am5percent.PieChart.new(root, {
-          layout: root.verticalHorizontal,
-          innerRadius: am5.percent(70)
+          layout: root.verticalLayout,
+          innerRadius: am5.percent(80)
         }) 
       );
     
@@ -33,13 +33,25 @@ class engagementPage extends Component {
     // Define data
     let data = [{
         country: "Absent",
-        sales: 10
+        sales: 10,
+        sliceSettings: {
+          fill: am5.color(0xA53860),
+          stroke: am5.color(0xA53860)
+        }
       }, {
         country: "Present",
-        sales: 9
+        sales: 9,
+        sliceSettings: {
+          fill: am5.color(0x028FA3),
+          stroke: am5.color(0x028FA3)
+        }
       }, {
         country: "Excused",
-        sales: 1
+        sales: 1,
+        sliceSettings: {
+          fill: am5.color(0xEDAE49),
+          stroke: am5.color(0xEDAE49)
+        }
       }];
 
     // Create series
@@ -47,37 +59,50 @@ class engagementPage extends Component {
         am5percent.PieSeries.new(root, {
           name: "Series",
           valueField: "sales",
-          categoryField: "country"
+          categoryField: "country",
+          alignLabels:false
         })
       );
-      series.data.setAll(data);
+     
+      series.labels.template.setAll({
+        textType: "circular",
+        inside: true,
+        radius: 10,
+        fontSize:12,
+        fill: am5.color(0xffffff)
+      });
     
       series.slices.template.setAll({
-        tooltipText: "{country}"
+        tooltipText: "{country}",
+        label:"{sales}",
+        templateField: "sliceSettings"
       });
 
-    // Add legend
-    
-      
-      
+      series.data.setAll(data);
 
+      series.slices.template.setAll({
+        
+      });
+
+    
+    
     // Add cursor
     chart.set("cursor", am5xy.XYCursor.new(root, {}));
 
     this.root = root;
 
-// series.appear();
-// chart.appear();
+series.appear(1600);
+chart.appear();
 
+// Add legend
 let legend = chart.children.push(am5.Legend.new(root, {
-    centerX: am5.percent(50),
-    x: am5.percent(80),
-    y:am5.percent(80),
-    layout: root.verticalLayout
+  centerX: am5.percent(50),
+  x: am5.percent(50),
+  layout: root.verticalLayout,
+  height: am5.percent(100)
   }));
 legend.data.setAll(series.dataItems);
 
-//radial label
 
 
       }
@@ -104,9 +129,36 @@ legend.data.setAll(series.dataItems);
               </Button>
               <Button className="progress-header-button">Progress</Button>
             </div>
+            <div class="container">
+  <div class="row">
+    <div class="col-sm">
+    <div className="attendance-table">
+                        <div id="chartdiv" style={{ width: "100%", height: "40vmax" }}></div>
+                    </div>
+    </div>
+    <div class="col-sm">
+      One of three columns
+      <div class="container">
+  <div class="row">
+    <div class="col-sm">
+      One of three columns
+    </div>
+    <div class="col-sm">
+      One of three columns
+    </div>
+    <div class="col-sm">
+      One of three columns
+    </div>
+  </div>
+</div>
+    </div>
+    <div class="col-sm">
+      One of three columns
+    </div>
+    
+  </div>
+</div>
                    
-                        <div id="chartdiv" style={{ width: "100%", height: "600px" }}></div>
-
                 
               </div>
            
