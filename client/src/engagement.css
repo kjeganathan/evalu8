@@ -42,8 +42,41 @@
     border-radius:10px;
     margin-top:50px;
     box-shadow: 4px 4px 4px 2px rgba(0, 0, 0, 0.15);
-    
+    /* width:80%; */
 }
+
+.attended{
+    
+    /* padding:30px; 
+    border-left: 1px dashed white;
+    border-right: 1px dashed white; */
+    color:white;
+
+}
+
+#numDays, #numEvals{
+
+        color:white;
+        background-color: hsl(215, 40%, 18%);
+        border-color:hsl(215, 40%, 18%);
+        border-radius:10px;
+        margin-top:50px;
+        box-shadow: 4px 4px 4px 2px rgba(0, 0, 0, 0.15);
+        padding:20px;
+}
+
+.attended-line{
+    border-top: 1px dashed white;
+    width:80%;
+    margin-left:auto;
+    margin-right:auto;
+}
+
+#attendance-number{
+    font-size:40px;
+    color: #EDAE49;
+}
+
 
 #chartdiv{
     
