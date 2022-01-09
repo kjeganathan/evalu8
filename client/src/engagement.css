@@ -1,39 +1,154 @@
 .engagementPage{
     background-color:#101825;
-    height:100vh;
+    height:100%;
 }
 
 .engagementPage-content{
     margin-top:80px;
 }
 
+.flex-engagement-header{
+    display:flex;
+    flex-direction:horizontal;
+    justify-content: center;
+}
+
+#team-member-profile{
+    position:absolute;
+    right:10vw;
+    top:11vh;
+    font-size: calc(1vmin + 0.5vmax);
+    color:#a53860c4;
+    /* background-color:white; */
+    padding-top:calc(0.2vmin + 0.5vmax);
+    padding-bottom:calc(0.2vmin + 0.5vmax);
+    padding-left:10px;
+    padding-right:10px;
+    border-radius:20px;
+    border: 1px solid #a53860c4;
+    
+}
+
+.engagement-header{
+    padding-top:20px;
+    /* margin-top:80px; */
+    font-family: "Avenir LT Std Book", sans-serif;
+    font-style: normal;
+    font-weight: 300;
+    font-size:calc(4.5vmin + 0.5vmax);
+    letter-spacing: 0.05em;
+    line-height: 1.5;
+    text-align: center;
+    color: #EDAE49;
+    background-color: #101825;
+}
+
+.header-line{
+    border-top: 1px solid white;
+    width:80%;
+    margin-left:auto;
+    margin-right:auto;
+}
+
 .dashboard-header-buttons-container{
     display:flex;
     flex-direction:row;
-    justify-content:flex-start;
-    margin-left:20px;
+    justify-content:center;
+    margin-bottom:20px;
 }
 
-.engagement-header-button, .contribution-header-button, .progress-header-button{
-    background-color: hsl(215, 40%, 18%);
-    border-color:hsl(215, 40%, 18%);
+#engagement-header-button{
+    background-color: #EDAE49;
+    border-color:#EDAE49;
+    color:#101825;
+    border-width:2px;
     box-shadow: 4px 4px 4px 2px rgba(0, 0, 0, 0.15);
-    border-radius: 20px;
+    border-radius: 10px;
     font-family: "Avenir LT Std Book", sans-serif;
     font-style: normal;
-    font-weight: 350; 
-    font-size: calc(2vmin + 0.01vmax);
+    font-weight:bold;
+    font-size: calc(1.8vmin + 0.01vmax);
     padding-top:12px;
     padding-bottom:12px;
     padding-left:28px;
     padding-right:28px;
-    margin-top:50px;
-    margin-right: 20px;
-    
+    margin-top:15px;
+    margin-right: 50px;
 }
+
+#contribution-header-button, #progress-header-button, #additional-metrics-button{
+    background-color: #101825;
+    border-color:#00798C;
+    color:white;
+    border-width:2px;
+    box-shadow: 4px 4px 4px 2px rgba(0, 0, 0, 0.15);
+    border-radius: 10px;
+    font-family: "Avenir LT Std Book", sans-serif;
+    font-style: normal;
+    font-weight: 350; 
+    font-size: calc(1.8vmin + 0.01vmax);
+    padding-top:12px;
+    padding-bottom:12px;
+    padding-left:28px;
+    padding-right:28px;
+    margin-top:15px;
+    margin-right: 50px;
+    
+    display: inline-block;
+    vertical-align: middle;
+    -webkit-transform: perspective(1px) translateZ(0);
+    transform: perspective(1px) translateZ(0);
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+    -webkit-transition-property: color;
+    transition-property: color;
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+}
+
+#contribution-header-button:before,
+#progress-header-button:before,
+#additional-metrics-button:before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #00798C;
+    -webkit-transform: scaleX(0);
+    transform: scaleX(0);
+    -webkit-transform-origin: 50%;
+    transform-origin: 50%;
+    -webkit-transition-property: transform;
+    transition-property: transform;
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+    -webkit-transition-timing-function: ease-out;
+    transition-timing-function: ease-out;
+    border-radius: 7px;
+  }
+  #contribution-header-button:hover, #progress-header-button:hover, #additional-metrics-button:hover,
+  #contribution-header-button:focus, #progress-header-button:focus, #additional-metrics-button:focus,
+  #contribution-header-button:active, #progress-header-button:active #additional-metrics-button:active {
+    color: #101825;
+    font-weight:bold;
+    box-shadow: 
+    inset -3.5em 0 0 0 var(--hover),
+    inset 3.5em 0 0 0 var(--hover); 
+    
+  }
+ #contribution-header-button:hover:before, #progress-header-button:hover:before, #additional-metrics-button:hover:before,
+  #contribution-header-button:focus:before, #progress-header-button:focus:before, #additional-metrics-button:focus:before,
+   #contribution-header-button:active:before, #progress-header-button:active:before, #additional-metrics-button:active:before {
+    -webkit-transform: scaleX(1);
+    transform: scaleX(1);
+   
+  }
 
 #engagement-container{
     margin-top:80px;
+
 }
 
 .attendance-table{
@@ -42,6 +157,9 @@
     border-radius:10px;
     margin-top:50px;
     box-shadow: 4px 4px 4px 2px rgba(0, 0, 0, 0.15);
+    padding-bottom: 30px;
+    margin-bottom:100px;
+    /* height:80%; */
     /* width:80%; */
 }
 
@@ -65,6 +183,10 @@
         padding:20px;
 }
 
+#numEvals {
+    margin-bottom:100px;
+}
+
 .attended-line{
     border-top: 1px dashed white;
     width:80%;
@@ -72,13 +194,16 @@
     margin-right:auto;
 }
 
+
+
 #attendance-number{
     font-size:40px;
     color: #EDAE49;
 }
 
-
-#chartdiv{
+#chartdiv {
+    width: 100%;
+    height: 38.5vmax;
     
-}
+  }
 
