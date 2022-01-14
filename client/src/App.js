@@ -8,6 +8,7 @@ import UploadFile from './uploadFile.js';
 import HomePage from './homePage.js';
 import teamMembers from './teamMembers';
 import engagementPage from './engagement';
+import contributionPage from './contribution';
 
 
 class App extends Component {
@@ -28,6 +29,7 @@ class App extends Component {
              <Route path="/upload" component={UploadFile}/>
              <Route path="/teamMembers" component={teamMembers}/>
              <Route path="/engagement" component={engagementPage}/>
+             <Route path="/contribution" component={contributionPage}/>
            </Switch>
         </div> 
       </BrowserRouter>
