@@ -15,7 +15,7 @@
 
 #team-member-profile{
     position:absolute;
-    right:10vw;
+    left:10vw;
     top:11vh;
     font-size: calc(1vmin + 0.5vmax);
     color:#a53860c4;

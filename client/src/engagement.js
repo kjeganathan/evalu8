@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Button from "react-bootstrap/Button";
 import "./engagement.css";
@@ -11,8 +11,31 @@ import * as am5 from "@amcharts/amcharts5";
 import * as am5xy from "@amcharts/amcharts5/xy";
 import * as am5percent from "@amcharts/amcharts5/percent";
 import am5themes_Animated from "@amcharts/amcharts5/themes/Animated";
+import SideNav from "./sideNav";
+import MetricsModal from "./metricsModal";
 
 class engagementPage extends Component {
+
+  constructor(){
+    super();
+
+    this.state = { 
+      show:false
+    }
+    
+    this.showModal = this.showModal.bind(this);
+    this.hideModal = this.hideModal.bind(this);
+
+  }
+
+  showModal = () => {
+    this.setState({ show: true });
+  };
+
+  hideModal = () => {
+    this.setState({ show: false });
+  };
+
   componentDidMount() {
     let root = am5.Root.new("chartdiv");
 
@@ -149,6 +172,9 @@ class engagementPage extends Component {
     return (
       <div>
         <div className="App-header">
+        <div>
+            <SideNav />
+          </div>
           <img src={logo} className="App-logo" alt="logo" />
         </div>
         <div className="engagementPage">
@@ -156,25 +182,29 @@ class engagementPage extends Component {
           <div className="flex-engagement-header">
           <h1 className="engagement-header">Engagement </h1>
           
-          <div id="team-member-profile">
+          {/* <div id="team-member-profile">
             Jane Doe &nbsp;
             <svg xmlns="http://www.w3.org/2000/svg" width="3vw" height="4vh" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
               <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
               <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
             </svg>
-            </div>
+            </div> */}
             </div>
           <hr className="header-line"></hr>
             <div className="dashboard-header-buttons-container">
               <button id="engagement-header-button" className="btn btn-dark">Engagement</button>
               <button id="contribution-header-button" className="btn btn-dark">Contribution</button>
               <button id="progress-header-button" className="btn btn-dark">Progress</button>
-              <button id="additional-metrics-button" className="btn btn-dark"> 
+              <button onClick={this.showModal} id="additional-metrics-button" className="btn btn-dark"> 
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
                   <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
               </svg>
-              
               </button>
+              <MetricsModal
+                    show={this.state.show}
+                    onHide={this.hideModal}
+              />
+
             </div>
             <hr className="header-line"></hr>
             <div className="container">

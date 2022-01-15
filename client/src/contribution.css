@@ -3,6 +3,8 @@
     height:100vh;
 }
 
+
+
 .engagementPage-content{
     margin-top:80px;
 }
@@ -13,7 +15,7 @@
     justify-content: center;
 }
 
-#team-member-profile{
+#team-member-profile-cp{
     position:absolute;
     right:10vw;
     top:11vh;
