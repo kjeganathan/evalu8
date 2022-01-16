@@ -3,6 +3,11 @@ import Button from "react-bootstrap/Button";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const EvaluationModal = (props) => {
+    const managerEval = true;
+    const peerEval = true;
+    const goalSettingEval = true;
+    const otherEval = false;
+
     return (
         <Modal
           {...props}
