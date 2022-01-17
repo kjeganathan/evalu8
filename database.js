@@ -49,6 +49,33 @@ async function addUser(firstname, lastname, email, password) {
     );
 }
 
+async function addAttendanceByDate(status, teammemberinfo, date) {
+  return await connectAndRun((db) =>
+  db.none(
+    "INSERT INTO attendanceondate (status, teammemberinfo, date) VALUES ($1, $2, $3);",
+    [status, teammemberinfo, date]
+      )
+    );
+}
+
+async function updateAttendanceByDate(status, teammemberinfo, date) {
+  return await connectAndRun((db) =>
+  db.any(
+    "UPDATE attendanceondate SET status = $1 WHERE teammemberinfo = $2 and date = $3;",
+    [status, teammemberinfo, date]
+      )
+    );
+}
+
+async function viewAttendanceByDate(teammemberinfo, date){
+  return await connectAndRun((db) =>
+  db.any(
+    "SELECT * FROM attendanceondate WHERE teammemberinfo = $1 and date = $2;",
+    [teammemberinfo, date]
+      )
+    );
+}
+
 //Takes a managers email and sets the teammembers where the email is the same
 async function addTeamMembers(email, teammembers){
     return await connectAndRun((db) =>
@@ -61,5 +88,8 @@ async function addTeamMembers(email, teammembers){
 
 module.exports = {
 addUser,
-addTeamMembers
+addTeamMembers,
+addAttendanceByDate,
+updateAttendanceByDate,
+viewAttendanceByDate
 };

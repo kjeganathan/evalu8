@@ -17,6 +17,23 @@ app.post("/api/createAccount", async (req, res) => {
     console.log("Created a new account successfully!");
 });
 
+app.post("/api/addAttendanceByDate", async (req, res) => {
+    const data = req.body;
+    await dblast.addAttendanceByDate(data.status, data.teammemberinfo, data.date);
+    res.sendStatus(200);
+});
+
+app.post("/api/updateAttendanceByDate", async (req, res) => {
+    const data = req.body;
+    await dblast.updateAttendanceByDate(data.status, data.teammemberinfo, data.date);
+    console.log("Updated attendance record");
+});
+
+app.post("/api/viewAttendanceByDate", async (req, res) => {
+    const data = req.body;
+    await dblast.viewAttendanceByDate(data.teammemberinfo, data.date);
+});
+
 app.post("/api/addTeamMembers", async (req, res) => {
     const data = req.body;
     await dblast.addTeamMembers(data.email, data.teammembers);

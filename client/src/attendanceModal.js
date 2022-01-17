@@ -13,6 +13,65 @@ import ReactHtmlParser, { processNodes, convertNodeToElement, htmlparser2 } from
 
 const AttendanceModal = (props) => {
 
+  const [parsedVal, setStateParsedVal] = useState('');
+  let valArr = [];
+  let numChanges = 0;
+
+  let handleSubmit = async () => {
+    let slicedArr = valArr.slice(Math.max(valArr.length - numChanges, 0));
+    let newArr = [];
+    for(let i = 0; i<slicedArr.length;i++){
+      let splitArr = slicedArr[i].split(",");
+      newArr.push(splitArr);
+    }
+    
+    newArr.forEach(async (element) => {
+      console.log(element);
+      let data = {status: element[0], teammemberinfo:element[1], date:element[2]};
+        await fetch('/api/addAttendanceByDate',{ 
+        method:'POST', 
+        body: JSON.stringify({status:element[0], teammemberinfo:element[1], date:element[2]}), 
+        headers:{ 'Content-Type': 'application/json' } 
+      }).then((response) => response.json())
+        .then((responseJSON) => {
+        console.log(responseJSON)
+      })
+      .catch((error) => {
+        console.log("reset client error-------",error);
+   });
+    });
+
+  }
+  
+
+  let getChildData = (val) => {
+    let parsed = JSON.parse(val);
+    numChanges = Object.keys(parsed).length;
+    Object.keys(parsed).forEach((key) => {
+      valArr.push(parsed[key]['status'] + "," + parsed[key]['name'] + "," + parsed[key]['date']);
+      console.log(parsed[key]['status'] + "," + parsed[key]['name'] + "," + parsed[key]['date']);
+      //let data = {status: parsed[key]['status'], teammemberinfo:parsed[key]['name'], date:parsed[key]['date']};
+  //     fetch('/api/addAttendanceByDate',{ 
+  //       method:'POST', 
+  //       body: JSON.stringify(data), // data can be `string` or {object}!
+  //       headers:{ 'Content-Type': 'application/json' } 
+  //     }).then((response) => response.json())
+  //       .then((responseJSON) => {
+  //       console.log(responseJSON)
+  //     })
+  //     .catch((error) => {
+  //       console.log("reset client error-------",error);
+  //  });
+    });
+  }
+
+
+
+  
+    // let parsedData = parsed[1];
+    // console.log("getChildData" + parsedData.name); //val is the present status, name of the person, date from the child component
+
+
   const today = new Date();
   const tomorrow = new Date();
 
@@ -48,10 +107,11 @@ const AttendanceModal = (props) => {
     />
     <br/>
     <br/>
-    <AttendanceModalItem></AttendanceModalItem>
+    <AttendanceModalItem sendChildData={getChildData}></AttendanceModalItem>
       </Modal.Body>
       <Modal.Footer>
-        <Button onClick={props.onHide}>Close</Button>
+        <Button onClick={props.onHide}>Done</Button>
+        <Button onClick={handleSubmit}>Save</Button>
       </Modal.Footer>
     </Modal>
   );
