@@ -20,7 +20,11 @@ class engagementPage extends Component {
     super();
 
     this.state = { 
-      show:false
+      show:false,
+      numDaysPresent:0,
+      numDaysAbsent:0,
+      numDaysExcused:0,
+      teamMember:""
     }
     
     this.showModal = this.showModal.bind(this);
@@ -36,7 +40,7 @@ class engagementPage extends Component {
     this.setState({ show: false });
   };
 
-  componentDidMount() {
+  async componentDidMount() {
     let root = am5.Root.new("chartdiv");
 
     root.setThemes([am5themes_Animated.new(root)]);
@@ -61,12 +65,35 @@ class engagementPage extends Component {
       paddingTop: 0,
       paddingBottom: 0
     }));
+    
+    await fetch('/api/getMemberAttendanceByDate',{ 
+      method:'POST', 
+      body: JSON.stringify({teammemberinfo:'Jane Dore'}), 
+      headers:{ 'Content-Type': 'application/json' } 
+    }).then((response) => response.json())
+    .then(async (responseJSON) => {
+      console.log(responseJSON); //this is the result
+      responseJSON.forEach((item) => {
+        if(item["status"] === "excused"){
+          this.state.numDaysExcused++;
+        }
+        if(item["status"] === "present"){
+          this.state.numDaysPresent++;
+        }
+        if(item["status"] === "absent"){
+          this.state.numDaysAbsent++;
+        }
+      })
+    })
+    .catch((error) => {
+      console.log("reset client error-------",error);
+ });
 
     // Define data
     let data = [
       {
         country: "Absent",
-        sales: 10,
+        sales: this.state.numDaysAbsent,
         sliceSettings: {
           fill: am5.color(0xa53860),
           stroke: am5.color(0xa53860),
@@ -74,7 +101,7 @@ class engagementPage extends Component {
       },
       {
         country: "Present",
-        sales: 9,
+        sales: this.state.numDaysPresent,
         sliceSettings: {
           fill: am5.color(0x028fa3),
           stroke: am5.color(0x028fa3),
@@ -82,7 +109,7 @@ class engagementPage extends Component {
       },
       {
         country: "Excused",
-        sales: 1,
+        sales: this.state.numDaysExcused,
         sliceSettings: {
           fill: am5.color(0xedae49),
           stroke: am5.color(0xedae49),
@@ -239,7 +266,7 @@ class engagementPage extends Component {
                             <br />
                             Attended
                             <hr className="attended-line"></hr>
-                            <div id="attendance-number">15</div>
+                            <div id="attendance-number">{this.state.numDaysPresent}</div>
                           </div>
                         </div>
                         <div className="col-sm">
@@ -257,7 +284,7 @@ class engagementPage extends Component {
                             <br />
                             Absent
                             <hr className="attended-line"></hr>
-                            <div id="attendance-number">9</div>
+                            <div id="attendance-number">{this.state.numDaysAbsent}</div>
                           </div>
                         </div>
                         <div className="col-sm">
@@ -275,7 +302,7 @@ class engagementPage extends Component {
                             <br />
                             Excused
                             <hr className="attended-line"></hr>
-                            <div id="attendance-number">1</div>
+                            <div id="attendance-number">{this.state.numDaysExcused}</div>
                           </div>
                         </div>
                       </div>

@@ -76,6 +76,25 @@ async function viewAttendanceByDate(teammemberinfo, date){
     );
 }
 
+async function getMemberAttendanceOnDate(teammemberinfo){
+  return await connectAndRun((db) =>
+  db.any(
+    "SELECT * FROM attendanceondate WHERE teammemberinfo = $1;",
+    [teammemberinfo]
+      )
+    );
+}
+
+async function statusAttendanceByDate(teammemberinfo, date){
+  return await connectAndRun((db) =>
+  db.any(
+    "SELECT status FROM attendanceondate WHERE teammemberinfo = $1 and date = $2;",
+    [teammemberinfo, date]
+      )
+    );
+}
+
+
 //Takes a managers email and sets the teammembers where the email is the same
 async function addTeamMembers(email, teammembers){
     return await connectAndRun((db) =>
@@ -91,5 +110,7 @@ addUser,
 addTeamMembers,
 addAttendanceByDate,
 updateAttendanceByDate,
-viewAttendanceByDate
+viewAttendanceByDate,
+getMemberAttendanceOnDate,
+statusAttendanceByDate
 };

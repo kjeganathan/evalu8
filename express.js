@@ -26,12 +26,25 @@ app.post("/api/addAttendanceByDate", async (req, res) => {
 app.post("/api/updateAttendanceByDate", async (req, res) => {
     const data = req.body;
     await dblast.updateAttendanceByDate(data.status, data.teammemberinfo, data.date);
-    console.log("Updated attendance record");
+    res.sendStatus(200);
 });
 
 app.post("/api/viewAttendanceByDate", async (req, res) => {
     const data = req.body;
-    await dblast.viewAttendanceByDate(data.teammemberinfo, data.date);
+    let result = await dblast.viewAttendanceByDate(data.teammemberinfo, data.date);
+    res.send(result);
+});
+
+app.post("/api/statusAttendanceByDate", async (req, res) => {
+    const data = req.body;
+    let result = await dblast.statusAttendanceByDate(data.teammemberinfo, data.date);
+    res.send(result);
+});
+
+app.post("/api/getMemberAttendanceByDate", async (req, res) => {
+    const data = req.body;
+    let result = await dblast.getMemberAttendanceOnDate(data.teammemberinfo);
+    res.send(result);
 });
 
 app.post("/api/addTeamMembers", async (req, res) => {

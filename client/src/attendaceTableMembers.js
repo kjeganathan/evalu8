@@ -9,6 +9,9 @@ const AttendanceTableMember = (props) => {
     // in other words we push check status based on db and team member, if date already exists, then we modify already existant date otherwise we create a new row
     
     let count = 1;
+    let checkPresent = false;
+    let checkAbsent = false;
+    let checkExcused = false;
     
     const handlePresentClick = (event) => {
         let checked = event.target.checked;
@@ -57,8 +60,33 @@ const AttendanceTableMember = (props) => {
     let memberArr = [];
     let teamMembers = ["Jane Dore", "Josh Hase", "Derek Hawks", "Rayne Masters", "Tez Martinez",
 "Naomi Reid", "Eric Anderson", "Dayton Peerson", "Lucy Lu", "Jackie Lester"];
-    teamMembers.forEach((teamMember) => {
-        console.log(props.data);  //this props.data is the date for each object
+    teamMembers.forEach(async (teamMember) => {
+    //     await fetch('/api/statusAttendanceByDate',{ 
+    //         method:'POST', 
+    //         body: JSON.stringify({teammemberinfo:teamMember, date:props.data}), 
+    //         headers:{ 'Content-Type': 'application/json' } 
+    //       }).then((response) => response.json())
+    //       .then(async (responseJSON) => {
+    //         console.log(responseJSON.length); //this is the result
+    //         if(responseJSON.length !== 0){
+    //             if(responseJSON[0]['status'] === "excused"){
+    //                 checkExcused = true;
+    //               }
+    //               if(responseJSON[0]['status'] === "present"){
+    //                 checkPresent = true;
+    //               }
+    //               if(responseJSON[0]['status'] === "absent"){
+    //                 checkAbsent = true;
+    //               }
+    //         }
+            
+            
+              
+    //       })
+    //       .catch((error) => {
+    //         console.log("reset client error-------",error);
+    //    });
+        
         member = (
             <tr>
               <td>{count}</td>
@@ -70,6 +98,7 @@ const AttendanceTableMember = (props) => {
                     <div key={`inline-${type}`} className="mb-3">
                       <Form.Check
                         inline
+                        // checked={checkPresent}
                         onChange={handlePresentClick}
                         checkedName="Present"
                         label="Present"
@@ -79,6 +108,7 @@ const AttendanceTableMember = (props) => {
                       />
                       <Form.Check
                         inline
+                        // checked={checkAbsent}
                         onChange={handleAbsentClick}
                         label="Absent"
                         name="group1"
@@ -87,6 +117,7 @@ const AttendanceTableMember = (props) => {
                       />
                       <Form.Check
                         inline
+                        // checked={checkExcused}
                         onChange={handleExcusedClick}
                         label="Excused"
                         name="group1"

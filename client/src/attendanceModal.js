@@ -27,18 +27,38 @@ const AttendanceModal = (props) => {
     
     newArr.forEach(async (element) => {
       console.log(element);
-      let data = {status: element[0], teammemberinfo:element[1], date:element[2]};
-        await fetch('/api/addAttendanceByDate',{ 
+      let data = await fetch('/api/viewAttendanceByDate',{ 
         method:'POST', 
-        body: JSON.stringify({status:element[0], teammemberinfo:element[1], date:element[2]}), 
+        body: JSON.stringify({teammemberinfo:element[1], date:element[2]}), 
         headers:{ 'Content-Type': 'application/json' } 
       }).then((response) => response.json())
-        .then((responseJSON) => {
-        console.log(responseJSON)
+        .then(async (responseJSON) => {
+        console.log(responseJSON);
+        if(responseJSON.length === 0){
+          await fetch('/api/addAttendanceByDate',{ 
+            method:'POST', 
+            body: JSON.stringify({status:element[0], teammemberinfo:element[1], date:element[2]}), 
+            headers:{ 'Content-Type': 'application/json' } 
+          }).then((response) => response.json())
+          .catch((error) => {
+            console.log("reset client error-------",error);
+       });
+        }else{
+          await fetch('/api/updateAttendanceByDate',{ 
+            method:'POST', 
+            body: JSON.stringify({status:element[0], teammemberinfo:element[1], date:element[2]}), 
+            headers:{ 'Content-Type': 'application/json' } 
+          }).then((response) => response.json())
+          .catch((error) => {
+            console.log("reset client error-------",error);
+       });
+        }
       })
       .catch((error) => {
         console.log("reset client error-------",error);
    });
+      // let data = {status: element[0], teammemberinfo:element[1], date:element[2]};
+        
     });
 
   }
