@@ -1,7 +1,11 @@
 import Table from "react-bootstrap/Table";
 import Form from "react-bootstrap/Form";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import React, { Component } from "react";
+
+let checkPresent = false;
+let checkAbsent = false;
+let checkExcused = false;
 
 const AttendanceTableMember = (props) => {
 
@@ -9,9 +13,6 @@ const AttendanceTableMember = (props) => {
     // in other words we push check status based on db and team member, if date already exists, then we modify already existant date otherwise we create a new row
     
     let count = 1;
-    let checkPresent = false;
-    let checkAbsent = false;
-    let checkExcused = false;
     
     const handlePresentClick = (event) => {
         let checked = event.target.checked;
@@ -54,6 +55,40 @@ const AttendanceTableMember = (props) => {
         props.sendData(checkedInfo);
 
     }
+
+    const assignChecked = async (data) => {
+
+        await fetch('/api/statusAttendanceByDate',{ 
+            method:'POST', 
+            body: JSON.stringify(data), 
+            headers:{ 'Content-Type': 'application/json' } 
+          }).then((response) => response.json())
+          .then(async (responseJSON) => {
+            console.log(responseJSON.length); //this is the result
+            if(responseJSON.length !== 0){
+                if(responseJSON[0]['status'] === "excused"){
+                    checkExcused = true;
+                    
+                  }
+                  if(responseJSON[0]['status'] === "present"){
+                    checkPresent = true;
+                    
+                  }
+                  if(responseJSON[0]['status'] === "absent"){
+                    checkAbsent = true;
+                    
+                  }
+                }   
+            console.log(checkAbsent); 
+            // checkedArr =  [checkPresent, checkAbsent, checkExcused];
+            
+            // console.log(checkedObj);
+            // return checkedObj;
+          })
+          .catch((error) => {
+            console.log("reset client error-------",error);
+       });
+    }
     
     
     let member = "";
@@ -61,31 +96,13 @@ const AttendanceTableMember = (props) => {
     let teamMembers = ["Jane Dore", "Josh Hase", "Derek Hawks", "Rayne Masters", "Tez Martinez",
 "Naomi Reid", "Eric Anderson", "Dayton Peerson", "Lucy Lu", "Jackie Lester"];
     teamMembers.forEach(async (teamMember) => {
-    //     await fetch('/api/statusAttendanceByDate',{ 
-    //         method:'POST', 
-    //         body: JSON.stringify({teammemberinfo:teamMember, date:props.data}), 
-    //         headers:{ 'Content-Type': 'application/json' } 
-    //       }).then((response) => response.json())
-    //       .then(async (responseJSON) => {
-    //         console.log(responseJSON.length); //this is the result
-    //         if(responseJSON.length !== 0){
-    //             if(responseJSON[0]['status'] === "excused"){
-    //                 checkExcused = true;
-    //               }
-    //               if(responseJSON[0]['status'] === "present"){
-    //                 checkPresent = true;
-    //               }
-    //               if(responseJSON[0]['status'] === "absent"){
-    //                 checkAbsent = true;
-    //               }
-    //         }
-            
-            
-              
-    //       })
-    //       .catch((error) => {
-    //         console.log("reset client error-------",error);
-    //    });
+        let data = {teammemberinfo:teamMember, date:props.data};
+        // let returnedData = assignChecked(data);
+        assignChecked(data);
+        // console.log("returned" + JSON.stringify(returnedData));
+        // console.log("checkArr" + checkedArr);
+        // console.log("checkedObj" + (checkedObj[]));
+        console.log("checkAbsent"+ checkAbsent);
         
         member = (
             <tr>
@@ -98,7 +115,7 @@ const AttendanceTableMember = (props) => {
                     <div key={`inline-${type}`} className="mb-3">
                       <Form.Check
                         inline
-                        // checked={checkPresent}
+                        checked={checkPresent}
                         onChange={handlePresentClick}
                         checkedName="Present"
                         label="Present"
@@ -108,7 +125,7 @@ const AttendanceTableMember = (props) => {
                       />
                       <Form.Check
                         inline
-                        // checked={checkAbsent}
+                        checked={checkAbsent}
                         onChange={handleAbsentClick}
                         label="Absent"
                         name="group1"
@@ -117,7 +134,7 @@ const AttendanceTableMember = (props) => {
                       />
                       <Form.Check
                         inline
-                        // checked={checkExcused}
+                        checked={checkExcused}
                         onChange={handleExcusedClick}
                         label="Excused"
                         name="group1"
@@ -137,6 +154,7 @@ const AttendanceTableMember = (props) => {
         memberArr.push(member);
         count++;
     });
+    console.log(memberArr);
     return (memberArr);
 }
 

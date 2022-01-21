@@ -40,6 +40,11 @@ class engagementPage extends Component {
     this.setState({ show: false });
   };
 
+  showPresent = () => {
+    console.log(this.state.numDaysPresent);
+    return this.state.numDaysPresent;
+  }
+
   async componentDidMount() {
     let root = am5.Root.new("chartdiv");
 
@@ -75,13 +80,22 @@ class engagementPage extends Component {
       console.log(responseJSON); //this is the result
       responseJSON.forEach((item) => {
         if(item["status"] === "excused"){
-          this.state.numDaysExcused++;
+          let newState = this.state.numDaysExcused + 1;
+          this.setState({
+            numDaysExcused: newState,
+          });
         }
         if(item["status"] === "present"){
-          this.state.numDaysPresent++;
+          let newState = this.state.numDaysPresent + 1;
+          this.setState({
+            numDaysPresent: newState,
+          });
         }
         if(item["status"] === "absent"){
-          this.state.numDaysAbsent++;
+          let newState = this.state.numDaysAbsent+1;
+          this.setState({
+            numDaysAbsent: newState,
+          });
         }
       })
     })
