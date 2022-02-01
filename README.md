@@ -30,4 +30,37 @@ Here is a consolidated list of the planned RESTful APIs:
 | /tasks/findbyemail           |  gets	a	team	member’s	task	statistics based	on	a	team	member’s	email                                                |
 | /goals/findbyemail    |  gets	a	team	member’s	goal-setting	statistics	based	on	a	team	member’s	email                              |
 
+## Postgres Database
+
+Evalu8 uses a PostgreSQL database.
+
+### Managers Table
+| Column            | Data Type | Description                       |
+|-------------------|-----------|-----------------------------------|
+| email             | text      | The email of the manager             |
+| first name        | text      | The first name of the manager        |
+| last name         | text      | The last name of the manager         |
+| password          | text      | The password of the manager          |
+| id                | int4      | The generated unique id of the manager           |
+| team members                | text[]      | An array of the team members of a manager           |
+| repository	name                | text      | the	repository	name	for	the	COMPSCI 320	semester	long	project           |
+| repository	owner                | text      | the	repository	owner	name	for	the	COMPSCI 320	semester	long	project           |
+| repository	token                | text      | the	repository private token for	the	COMPSCI 320	semester	long	project           |
+
+### Team Member Table
+| Column            | Data Type | Description                       |
+|-------------------|-----------|-----------------------------------|
+| email             | text      | The email of the team member             |
+| first name        | text      | The first name of the team member        |
+| last name         | text      | The last name of the team member         |
+
+### Attendance on Date Table
+| Column            | Data Type | Description                       |
+|-------------------|-----------|-----------------------------------|
+| date             | text      | The record of the date attendance is taken             |
+| status        | text      | The attendance status of the team member        |
+| team member info         | text      | The identity of the team member         |
+
+
+
 
