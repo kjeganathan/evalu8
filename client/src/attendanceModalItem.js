@@ -3,11 +3,21 @@ import Table from "react-bootstrap/Table";
 import Form from "react-bootstrap/Form";
 import "./attendanceModalItem.css";
 import AttendanceTableMember from "./attendaceTableMembers.js";
+import { useState, useEffect, useRef } from "react";
 
 const AttendanceModalItem = (props) => {
   let valLargeObj = {};
   let i = 0;
+//   let newVal = useRef('');
 
+  let returnVal = (val) => {
+      return val;
+  }
+
+  let getChildPresent = (val) => {
+      returnVal(val);
+  }
+ 
   let getData = (val) => {
     let flag = true;
     console.log("getData" + val); //val is the present status, name of the person, date from the child component
@@ -67,6 +77,8 @@ const AttendanceModalItem = (props) => {
             <AttendanceTableMember
               data={date}
               sendData={getData}
+              sendCheckedPresent={getChildPresent}
+              checkPresent = {returnVal}
             ></AttendanceTableMember>
           </tbody>
         </Table>

@@ -24,7 +24,13 @@ class engagementPage extends Component {
       numDaysPresent:0,
       numDaysAbsent:0,
       numDaysExcused:0,
-      teamMember:""
+      teamMember:"",
+      numManagerEvals:0,
+      percentManagerEvals:0,
+      percentPeerEvals:0,
+      percentGoalEvals:0,
+      numPeerEvals:0,
+      numGoalEvals:0
     }
     
     this.showModal = this.showModal.bind(this);
@@ -46,6 +52,72 @@ class engagementPage extends Component {
   }
 
   async componentDidMount() {
+
+    //evaluation calculations
+    let count = 0;
+    // let evalTypeArr = [];
+    // await fetch('/api/getDistinctEvalType',{ 
+    //   method:'GET',  
+    //   headers:{ 'Content-Type': 'application/json' } 
+    // }).then((response) => response.json())
+    // .then(async (responseJSON) => {
+    //   responseJSON.forEach(async (item) => {
+    //   console.log(item['evaltype']);
+    //           if(item['evaltype' !=null]){
+    //             evalTypeArr.push(item['evaltype']);
+    //           }
+    //         });
+    // });
+    // console.log(evalTypeArr);
+    
+    let numTotalEvals = 3; //CHANGE THIS TO BE DYNAMIC LATER and grabbed from db
+
+        await fetch('/api/getEvalByMember',{ 
+          method:'POST',
+          body: JSON.stringify({teammemberinfo:'Jane Dore', ischecked:true}), 
+          headers:{ 'Content-Type': 'application/json' } 
+        }).then((responsenext) => responsenext.json())
+        .then(async (responseJSONnext) => {
+          console.log(responseJSONnext); //this is the result
+          responseJSONnext.forEach((item) => {
+            console.log(item['evaltype'] == 'Manager Evaluations');
+            if(item['evaltype'] == 'Manager Evaluations'){
+              let newState = this.state.numManagerEvals + 1;
+              console.log("new" + newState);
+              let newPercent = ((100 * newState) / numTotalEvals).toFixed(0);
+               this.setState({
+                numManagerEvals: newState,
+                percentManagerEvals:newPercent
+              });
+            }
+            if(item['evaltype'] == 'Peer Evaluations'){
+              console.log(item['evaltype'] == 'Peer Evaluations');
+              let newPeerState = this.state.numPeerEvals + 1;
+              console.log("newPeerState" + newPeerState);
+              let newPeerPercent = ((100 * newPeerState) / numTotalEvals).toFixed(0);
+              this.setState({
+               numPeerEvals: newPeerState,
+               percentPeerEvals:newPeerPercent
+             });
+           }
+           if(item['evaltype'] == 'Goal Setting Evaluations'){
+            let newGoalState = this.state.numGoalEvals + 1;
+            let newGoalPercent = ((100 * newGoalState) / numTotalEvals).toFixed(0);
+            this.setState({
+             numGoalEvals: newGoalState,
+             percentGoalEvals:newGoalPercent
+           });
+         }
+              
+          });
+          
+          
+        });
+      
+   
+    
+
+    //attendance calculations
     let root = am5.Root.new("chartdiv");
 
     root.setThemes([am5themes_Animated.new(root)]);
@@ -345,7 +417,7 @@ class engagementPage extends Component {
                             <br />
                             Manager
                             <hr className="attended-line"></hr>
-                            <div id="attendance-number">100%</div>
+                            <div id="attendance-number">{this.state.percentManagerEvals + "%"}</div>
                           </div>
                         </div>
                         <div className="col-sm">
@@ -364,7 +436,7 @@ class engagementPage extends Component {
                             <br />
                             Peer
                             <hr className="attended-line"></hr>
-                            <div id="attendance-number">75%</div>
+                            <div id="attendance-number">{this.state.percentPeerEvals + "%"}</div>
                           </div>
                         </div>
                         <div className="col-sm">
@@ -383,7 +455,7 @@ class engagementPage extends Component {
                             <br />
                             Goal Setting
                             <hr className="attended-line"></hr>
-                            <div id="attendance-number">100%</div>
+                            <div id="attendance-number">{this.state.percentGoalEvals + "%"}</div>
                           </div>
                         </div>
                       </div>

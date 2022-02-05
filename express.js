@@ -53,6 +53,35 @@ app.post("/api/addTeamMembers", async (req, res) => {
     console.log("Added team members of manager to their account!");
 });
 
+app.post("/api/addEvaluation", async (req, res) => {
+    const data = req.body;
+    await dblast.addEval(data.teammemberinfo, data.evaltype, data.evalnumber, data.ischecked);
+    res.sendStatus(200);
+});
+
+app.post("/api/viewEvaluation", async (req, res) => {
+    const data = req.body;
+    let result = await dblast.viewEval(data.teammemberinfo, data.evaltype, data.evalnumber);
+    res.send(result);
+});
+
+app.post("/api/getEvalByMember", async (req, res) => {
+    const data = req.body;
+    let result = await dblast.getEvalByMember(data.teammemberinfo, data.ischecked);
+    res.send(result);
+});
+
+app.get("/api/getDistinctEvalType", async (req, res) => {
+    let result = await dblast.getDistinctEvalType();
+    res.send(result);
+});
+
+app.post("/api/updateEvaluation", async (req, res) => {
+    const data = req.body;
+    await dblast.updateEval(data.ischecked, data.teammemberinfo, data.evaltype, data.evalnumber);
+    res.sendStatus(200);
+});
+
 //Creates links to every route on the client side
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, "./client/build", "index.html"));

@@ -105,6 +105,50 @@ async function addTeamMembers(email, teammembers){
     );
 }
 
+async function addEval(teamMemberInfo, evalType, evalNumber, isChecked) {
+  return await connectAndRun((db) =>
+    db.none(
+      "INSERT INTO evaluations (teammemberinfo, evaltype, evalnumber, ischecked) VALUES ($1, $2, $3, $4);",
+      [teamMemberInfo, evalType, evalNumber, isChecked]
+    )
+  );
+}
+
+async function viewEval(teammemberinfo, evaltype, evalnumber){
+  return await connectAndRun((db) =>
+  db.any(
+    "SELECT * FROM evaluations WHERE teammemberinfo = $1 and evaltype = $2 and evalnumber = $3;",
+    [teammemberinfo, evaltype, evalnumber]
+      )
+    );
+}
+
+async function getEvalByMember(teammemberinfo, ischecked){
+  return await connectAndRun((db) =>
+  db.any(
+    "SELECT * FROM evaluations WHERE teammemberinfo = $1 and ischecked = $2;",
+    [teammemberinfo, ischecked]
+      )
+    );
+}
+
+async function getDistinctEvalType(){
+  return await connectAndRun((db) =>
+  db.any(
+    "SELECT DISTINCT evaltype FROM evaluations;"
+      )
+    );
+}
+
+async function updateEval(ischecked, teammemberinfo, evaltype, evalnumber) {
+  return await connectAndRun((db) =>
+  db.any(
+    "UPDATE evaluations SET ischecked = $1 WHERE teammemberinfo = $2 and evaltype = $3 and evalnumber = $4;",
+    [ischecked, teammemberinfo, evaltype, evalnumber]
+      )
+    );
+}
+
 module.exports = {
 addUser,
 addTeamMembers,
@@ -112,5 +156,10 @@ addAttendanceByDate,
 updateAttendanceByDate,
 viewAttendanceByDate,
 getMemberAttendanceOnDate,
-statusAttendanceByDate
+statusAttendanceByDate,
+addEval,
+viewEval,
+updateEval,
+getEvalByMember,
+getDistinctEvalType
 };

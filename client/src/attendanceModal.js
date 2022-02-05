@@ -97,8 +97,6 @@ const AttendanceModal = (props) => {
 
   tomorrow.setDate(tomorrow.getDate() + 1);
 
-  let teamMembers = ["Sam Collins", "Derek Hawkins", "Chloe Knight"];
-
   const [values, setValues] = useState([]);
 
   // for each date we want to generate a new meeting WHICH IS a new collapsible trigger

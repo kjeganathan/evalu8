@@ -6,6 +6,7 @@ import React, { Component } from "react";
 let checkPresent = false;
 let checkAbsent = false;
 let checkExcused = false;
+let checkedObj = {present:false, absent:false, excused:false};
 
 const AttendanceTableMember = (props) => {
 
@@ -13,10 +14,11 @@ const AttendanceTableMember = (props) => {
     // in other words we push check status based on db and team member, if date already exists, then we modify already existant date otherwise we create a new row
     
     let count = 1;
+   
     
     const handlePresentClick = (event) => {
         let checked = event.target.checked;
-        console.log(checked);
+        console.log(checked);  
 
         let checkedValue = event.target.value;
         console.log(checkedValue);
@@ -71,7 +73,7 @@ const AttendanceTableMember = (props) => {
                     
                   }
                   if(responseJSON[0]['status'] === "present"){
-                    checkPresent = true;
+                    checkedObj.present = true;
                     
                   }
                   if(responseJSON[0]['status'] === "absent"){
@@ -79,11 +81,8 @@ const AttendanceTableMember = (props) => {
                     
                   }
                 }   
-            console.log(checkAbsent); 
-            // checkedArr =  [checkPresent, checkAbsent, checkExcused];
-            
-            // console.log(checkedObj);
-            // return checkedObj;
+                
+            console.log(checkedObj['present']);
           })
           .catch((error) => {
             console.log("reset client error-------",error);
@@ -98,11 +97,14 @@ const AttendanceTableMember = (props) => {
     teamMembers.forEach(async (teamMember) => {
         let data = {teammemberinfo:teamMember, date:props.data};
         // let returnedData = assignChecked(data);
-        assignChecked(data);
+        let res = assignChecked(data);
+        console.log(JSON.stringify(res));
         // console.log("returned" + JSON.stringify(returnedData));
         // console.log("checkArr" + checkedArr);
         // console.log("checkedObj" + (checkedObj[]));
-        console.log("checkAbsent"+ checkAbsent);
+        let value = props.checkPresent;
+        console.log(value);
+        console.log(JSON.stringify(checkedObj));
         
         member = (
             <tr>
@@ -115,7 +117,7 @@ const AttendanceTableMember = (props) => {
                     <div key={`inline-${type}`} className="mb-3">
                       <Form.Check
                         inline
-                        checked={checkPresent}
+                        // checked={checkPresent}
                         onChange={handlePresentClick}
                         checkedName="Present"
                         label="Present"
@@ -125,7 +127,7 @@ const AttendanceTableMember = (props) => {
                       />
                       <Form.Check
                         inline
-                        checked={checkAbsent}
+                        // checked={checkAbsent}
                         onChange={handleAbsentClick}
                         label="Absent"
                         name="group1"
@@ -134,7 +136,7 @@ const AttendanceTableMember = (props) => {
                       />
                       <Form.Check
                         inline
-                        checked={checkExcused}
+                        // checked={checkExcused}
                         onChange={handleExcusedClick}
                         label="Excused"
                         name="group1"
