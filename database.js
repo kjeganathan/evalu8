@@ -96,11 +96,11 @@ async function statusAttendanceByDate(teammemberinfo, date){
 
 
 //Takes a managers email and sets the teammembers where the email is the same
-async function addTeamMembers(email, teammembers){
+async function addTeamMembers(github_username, github_reponame, team_members){
     return await connectAndRun((db) =>
       db.none(
-        "UPDATE managers SET teammembers = $1 WHERE email = $2",
-        [teammembers, email]
+        "UPDATE managers SET team_members = $1 WHERE github_username = $2 AND github_reponame = $3",
+        [team_members, github_username, github_reponame]
       )
     );
 }

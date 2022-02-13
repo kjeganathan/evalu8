@@ -3,6 +3,7 @@ import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './createAccount.css';
 import logo from './logo.png';
+import { Link } from 'react-router-dom';
  
 class createAccount extends Component {
 
@@ -14,7 +15,8 @@ class createAccount extends Component {
       github_username:'',
       github_reponame:'',
       github_token:'',
-      password:''
+      password:'',
+      teamMemberArr:[]
       };
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -27,6 +29,7 @@ class createAccount extends Component {
   }
 
   handleSubmit(event) {
+    console.log("hello");
     event.preventDefault();
     const data = { name:this.state.name, github_username:this.state.github_username, github_reponame: this.state.github_reponame, github_token:this.state.github_token, password:this.state.password }
     
@@ -37,7 +40,42 @@ class createAccount extends Component {
       headers:{ 'Content-Type': 'application/json' } 
     }).then(res => res.json())
       .catch(error => console.error('Error:', error))
-      .then(response => console.log('Success:', response));  
+      .then(response => {
+        console.log('Success:', response);
+        let owner = data.github_username;
+        let reponame = data.github_reponame;
+        console.log(owner);
+        console.log(reponame);
+        fetch(`/gitapi/github/teamInfo/${owner}/${reponame}`)
+        .then( async responsenext => {
+          try{
+            //data2 is an array of objects
+            const data2 = await responsenext.json();
+            console.log('response data?', data2);
+            // let dataLength = data2.length;
+            let newState = [];
+            data2.forEach((obj) => {
+              if(data.github_username != obj['login']){
+                console.log(obj['login']);
+                newState.push(obj['login']);
+              }   
+            })
+            console.log(newState);
+            let teamMemberData = {github_username: this.state.github_username, github_reponame:this.state.github_reponame, team_members: newState}
+            fetch('/api/addTeamMembers',{ 
+              method:'POST', 
+              body: JSON.stringify(teamMemberData), // data can be `string` or {object}!
+              headers:{ 'Content-Type': 'application/json' } 
+            });
+          }catch(error){
+            console.log('Error happened here');
+            console.log(error);
+          }
+        })
+      }); 
+      console.log(this.state.teamMemberArr);
+      <Link to="/login" />
+    
    }
 
     render() {

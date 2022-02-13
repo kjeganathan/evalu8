@@ -25,6 +25,7 @@ app.post("/api/createAccount", async (req, res) => {
     const data = req.body;
     await dblast.addUser(data.name, data.github_username, data.github_reponame, data.github_token, data.password);
     console.log("Created a new account successfully!");
+    res.sendStatus(200);
 });
 
 app.post("/api/addAttendanceByDate", async (req, res) => {
@@ -59,8 +60,9 @@ app.post("/api/getMemberAttendanceByDate", async (req, res) => {
 
 app.post("/api/addTeamMembers", async (req, res) => {
     const data = req.body;
-    await dblast.addTeamMembers(data.email, data.teammembers);
+    await dblast.addTeamMembers(data.github_username, data.github_reponame, data.team_members);
     console.log("Added team members of manager to their account!");
+    res.sendStatus(200);
 });
 
 app.post("/api/addEvaluation", async (req, res) => {
