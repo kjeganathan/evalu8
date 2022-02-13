@@ -16,6 +16,7 @@ class createAccount extends Component {
       github_reponame:'',
       github_token:'',
       password:'',
+      classroom:'',
       teamMemberArr:[]
       };
 
@@ -31,7 +32,7 @@ class createAccount extends Component {
   handleSubmit(event) {
     console.log("hello");
     event.preventDefault();
-    const data = { name:this.state.name, github_username:this.state.github_username, github_reponame: this.state.github_reponame, github_token:this.state.github_token, password:this.state.password }
+    const data = { name:this.state.name, classroom: this.state.classroom, github_username:this.state.github_username, github_reponame: this.state.github_reponame, github_token:this.state.github_token, password:this.state.password }
     
     //Fetch request to create an account for a new manager
     fetch('/api/createAccount',{ 
@@ -58,6 +59,18 @@ class createAccount extends Component {
               if(data.github_username != obj['login']){
                 console.log(obj['login']);
                 newState.push(obj['login']);
+                fetch(`/gitapi/github/userInfo/${obj['login']}`)
+                .then(async responsethird => {
+                  const data3 = await responsethird.json();
+                  console.log('response data3!', data3);
+                  console.log('data3name:' + data3['name']);
+                  let teammember_table_data = {name:data3['name'], course:this.state.classroom, github_username: obj['login'], manager_name:this.state.github_username}
+                  fetch('/api/addToTeamMemberTable',{ 
+                    method:'POST', 
+                    body: JSON.stringify(teammember_table_data), // data can be `string` or {object}!
+                    headers:{ 'Content-Type': 'application/json' } 
+                  })
+                })
               }   
             })
             console.log(newState);
@@ -93,6 +106,10 @@ class createAccount extends Component {
                         <div id="first-name-form" className="form-group">
                           <label for="createFirstName">Name</label>
                           <input onChange={this.handleChange} name="name" type="text" className="form-control" id="createFirstName"/> 
+                        </div>
+                        <div id="last-name-form" className="form-group">
+                          <label for="classRoomName">Course (ex. COMPSCI 326)</label>
+                          <input onChange={this.handleChange} name="classroom" type="text" className="form-control" id="classRoomName"/> 
                         </div>
                         <div id="last-name-form" className="form-group">
                         <label for="createLastName">Github Username</label>

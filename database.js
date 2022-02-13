@@ -40,11 +40,11 @@ async function connectAndRun(task) {
 }
 
 // Database functions for log in 
-async function addUser(name, github_username, github_reponame, github_token, password) {
+async function addUser(name, classroom, github_username, github_reponame, github_token, password) {
     return await connectAndRun((db) =>
       db.none(
-        "INSERT INTO managers (name, github_username, github_reponame, github_token, password) VALUES ($1, $2, $3, $4, $5);",
-        [name, github_username, github_reponame, github_token, password]
+        "INSERT INTO managers (name, classroom, github_username, github_reponame, github_token, password) VALUES ($1, $2, $3, $4, $5, $6);",
+        [name, classroom, github_username, github_reponame, github_token, password]
       )
     );
 }
@@ -105,6 +105,15 @@ async function addTeamMembers(github_username, github_reponame, team_members){
     );
 }
 
+async function addToTeamMemberTable(name, course, github_username, manager_name) {
+  return await connectAndRun((db) =>
+    db.none(
+      "INSERT INTO teammember (name, course, github_username, manager_name) VALUES ($1, $2, $3, $4);",
+      [name, course, github_username, manager_name]
+    )
+  );
+}
+
 async function addEval(teamMemberInfo, evalType, evalNumber, isChecked) {
   return await connectAndRun((db) =>
     db.none(
@@ -161,6 +170,7 @@ async function updateEval(ischecked, teammemberinfo, evaltype, evalnumber) {
 module.exports = {
 addUser,
 addTeamMembers,
+addToTeamMemberTable,
 addAttendanceByDate,
 updateAttendanceByDate,
 viewAttendanceByDate,

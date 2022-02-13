@@ -23,7 +23,7 @@ app.use(express.static(path.join(__dirname, "client/build")));
 
 app.post("/api/createAccount", async (req, res) => {
     const data = req.body;
-    await dblast.addUser(data.name, data.github_username, data.github_reponame, data.github_token, data.password);
+    await dblast.addUser(data.name, data.classroom, data.github_username, data.github_reponame, data.github_token, data.password);
     console.log("Created a new account successfully!");
     res.sendStatus(200);
 });
@@ -62,6 +62,13 @@ app.post("/api/addTeamMembers", async (req, res) => {
     const data = req.body;
     await dblast.addTeamMembers(data.github_username, data.github_reponame, data.team_members);
     console.log("Added team members of manager to their account!");
+    res.sendStatus(200);
+});
+
+app.post("/api/addToTeamMemberTable", async (req, res) => {
+    const data = req.body;
+    await dblast.addToTeamMemberTable(data.name, data.course, data.github_username, data.manager_name);
+    console.log("Added team member to teammember table");
     res.sendStatus(200);
 });
 
