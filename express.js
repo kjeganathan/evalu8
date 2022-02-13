@@ -3,17 +3,27 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED='0';
 const express = require('express');
 const path = require("path");
 const dblast = require("./database.js");
-
+const gitapi = require('./routes/gitapi');
 const app = express();
 
 app.use(express.json()); // lets you handle JSON input
 //app.use(express.static('src/')); // specify the directory 
+app.use(function(req, res, next){
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With, content-type');
+    res.setHeader('Access-Control-Allow-Credentials', true);
+    res.setHeader('kjeganathan', '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');
+    next();
+});
+
+app.use('/gitapi', gitapi);
 
 app.use(express.static(path.join(__dirname, "client/build")));
 
 app.post("/api/createAccount", async (req, res) => {
     const data = req.body;
-    await dblast.addUser(data.firstname, data.lastname, data.email, data.password);
+    await dblast.addUser(data.name, data.github_username, data.github_reponame, data.github_token, data.password);
     console.log("Created a new account successfully!");
 });
 
@@ -65,6 +75,12 @@ app.post("/api/viewEvaluation", async (req, res) => {
     res.send(result);
 });
 
+app.post("/api/getChecked", async (req, res) => {
+    const data = req.body;
+    let result = await dblast.getChecked(data.teammemberinfo, data.evaltype, data.evalnumber);
+    res.send(result);
+});
+
 app.post("/api/getEvalByMember", async (req, res) => {
     const data = req.body;
     let result = await dblast.getEvalByMember(data.teammemberinfo, data.ischecked);
@@ -81,6 +97,10 @@ app.post("/api/updateEvaluation", async (req, res) => {
     await dblast.updateEval(data.ischecked, data.teammemberinfo, data.evaltype, data.evalnumber);
     res.sendStatus(200);
 });
+
+//GITHUB API CALLS
+
+
 
 //Creates links to every route on the client side
 app.get('*', (req, res) => {

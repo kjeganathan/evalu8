@@ -40,11 +40,11 @@ async function connectAndRun(task) {
 }
 
 // Database functions for log in 
-async function addUser(firstname, lastname, email, password) {
+async function addUser(name, github_username, github_reponame, github_token, password) {
     return await connectAndRun((db) =>
       db.none(
-        "INSERT INTO managers (firstname, lastname, email, password) VALUES ($1, $2, $3, $4);",
-        [firstname, lastname, email, password]
+        "INSERT INTO managers (name, github_username, github_reponame, github_token, password) VALUES ($1, $2, $3, $4, $5);",
+        [name, github_username, github_reponame, github_token, password]
       )
     );
 }
@@ -123,6 +123,15 @@ async function viewEval(teammemberinfo, evaltype, evalnumber){
     );
 }
 
+async function getChecked(teammemberinfo, evaltype, evalnumber){
+  return await connectAndRun((db) =>
+  db.any(
+    "SELECT ischecked FROM evaluations WHERE teammemberinfo = $1 and evaltype = $2 and evalnumber=$3;",
+    [teammemberinfo, evaltype, evalnumber]
+      )
+    );
+}
+
 async function getEvalByMember(teammemberinfo, ischecked){
   return await connectAndRun((db) =>
   db.any(
@@ -161,5 +170,6 @@ addEval,
 viewEval,
 updateEval,
 getEvalByMember,
-getDistinctEvalType
+getDistinctEvalType,
+getChecked
 };

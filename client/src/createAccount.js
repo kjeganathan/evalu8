@@ -10,9 +10,10 @@ class createAccount extends Component {
     super();
 
     this.state = {
-      firstname: '',
-      lastname:'',
-      email:'',
+      name: '',
+      github_username:'',
+      github_reponame:'',
+      github_token:'',
       password:''
       };
 
@@ -27,7 +28,7 @@ class createAccount extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    const data = { firstname:this.state.firstname, lastname:this.state.lastname , email:this.state.email, password:this.state.password }
+    const data = { name:this.state.name, github_username:this.state.github_username, github_reponame: this.state.github_reponame, github_token:this.state.github_token, password:this.state.password }
     
     //Fetch request to create an account for a new manager
     fetch('/api/createAccount',{ 
@@ -36,8 +37,7 @@ class createAccount extends Component {
       headers:{ 'Content-Type': 'application/json' } 
     }).then(res => res.json())
       .catch(error => console.error('Error:', error))
-      .then(response => console.log('Success:', response));
-
+      .then(response => console.log('Success:', response));  
    }
 
     render() {
@@ -53,16 +53,20 @@ class createAccount extends Component {
                     <h1 className="createAccount-header">Create Your Account</h1>
                     <h4 className="createAccount-subheader">Create an account to use Evalu8</h4>
                         <div id="first-name-form" className="form-group">
-                          <label for="createFirstName">First Name</label>
-                          <input onChange={this.handleChange} name="firstname" type="text" className="form-control" id="createFirstName"/> 
+                          <label for="createFirstName">Name</label>
+                          <input onChange={this.handleChange} name="name" type="text" className="form-control" id="createFirstName"/> 
                         </div>
                         <div id="last-name-form" className="form-group">
-                        <label for="createLastName">Last Name</label>
-                          <input onChange={this.handleChange} name="lastname" type="text" className="form-control" id="createLastName"/>
+                        <label for="createLastName">Github Username</label>
+                          <input onChange={this.handleChange} name="github_username" type="text" className="form-control" id="createLastName"/>
+                        </div>
+                        <div id="last-name-form" className="form-group">
+                        <label for="reponame">Github Repo Name</label>
+                          <input onChange={this.handleChange} name="github_reponame" type="text" className="form-control" id="reponame"/>
                         </div>
                         <div id="email-form" className="form-group">
-                        <label for="createEmail">Email</label>
-                          <input onChange={this.handleChange} name="email" type="email" className="form-control" id="createEmail" aria-describedby="emailHelp"/>
+                        <label for="createEmail">Github Token</label>
+                          <input onChange={this.handleChange} name="github_token" type="text" className="form-control" id="createEmail" aria-describedby="emailHelp"/>
                         </div>
                         <div id="password-form" className="form-group">
                         <label for="createPassword">Password</label>

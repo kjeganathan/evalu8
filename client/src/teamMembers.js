@@ -7,6 +7,7 @@ import "./teamMembers.css";
 import logo from "./logo.png";
 
 class teamMembers extends Component {
+  
   render() {
     return (
       <div>

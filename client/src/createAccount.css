@@ -71,7 +71,7 @@ label{
 
 }
 
-#createLastName, #createEmail, #createPassword, #createVerifyPassword{
+#createLastName, #createEmail, #createPassword, #createVerifyPassword, #reponame{
     margin-left:auto;
     margin-right:auto;
     width:75%;
