@@ -114,6 +114,15 @@ async function addToTeamMemberTable(name, course, github_username, manager_name)
   );
 }
 
+async function getAllTeamMembersByManagerAndCourse(manager_name, course){
+  return await connectAndRun((db) =>
+  db.any(
+    "SELECT * FROM teammember WHERE manager_name = $1 and course = $2;",
+    [manager_name, course]
+      )
+    );
+}
+
 async function addEval(teamMemberInfo, evalType, evalNumber, isChecked) {
   return await connectAndRun((db) =>
     db.none(
@@ -171,6 +180,7 @@ module.exports = {
 addUser,
 addTeamMembers,
 addToTeamMemberTable,
+getAllTeamMembersByManagerAndCourse,
 addAttendanceByDate,
 updateAttendanceByDate,
 viewAttendanceByDate,

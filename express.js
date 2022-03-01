@@ -72,6 +72,12 @@ app.post("/api/addToTeamMemberTable", async (req, res) => {
     res.sendStatus(200);
 });
 
+app.post("/api/getAllTeamMembersByManagerAndCourse", async (req, res) => {
+    const data = req.body;
+    let result = await dblast.getAllTeamMembersByManagerAndCourse(data.manager_name, data.course);
+    res.send(result);
+});
+
 app.post("/api/addEvaluation", async (req, res) => {
     const data = req.body;
     await dblast.addEval(data.teammemberinfo, data.evaltype, data.evalnumber, data.ischecked);

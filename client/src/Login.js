@@ -10,8 +10,8 @@ class Login extends Component {
     super();
 
     this.state = {
-      email:'',
-      password:''
+      github_username:'',
+      course:''
       };
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -25,8 +25,9 @@ class Login extends Component {
 
     handleSubmit(event) {
       event.preventDefault();
-      localStorage.setItem("email", JSON.stringify(this.state.email));
-      //relocate to the team members page
+      localStorage.setItem("github_username", JSON.stringify(this.state.github_username));
+      localStorage.setItem("course", JSON.stringify(this.state.course));
+      window.location.href='/teamMembers';
     }
     
 
@@ -45,17 +46,21 @@ class Login extends Component {
                       <h1 className="Login-header">Welcome Back</h1>
                       <h4 className="Login-subheader">Login to continue</h4>
                   
-                        <div id="emailForm" className="form-group">
-                         
-                          <label for="loginEmail">Email</label>
-                          <input onChange={this.handleChange} name="email" type="email" className="form-control" id="loginEmail" aria-describedby="emailHelp"/>
+                        <div id="githubusernameForm" className="form-group">
+                          <label for="loginGithubUsername">Github Username</label>
+                          <input onChange={this.handleChange} name="github_username" type="text" className="form-control" id="loginGithubUsername" aria-describedby="emailHelp"/>
+                        </div>
+                        <div id="courseForm" className="form-group">
+                            <label for="loginCourse">Course (ex. COMPSCI 326)</label>
+                            <input onChange={this.handleChange} name="course" type="text" className="form-control" id="loginCourse"/>
                         </div>
                         <div id="passwordForm" className="form-group">
                             <label for="loginPassword">Password</label>
                             <input onChange={this.handleChange} name="password" type="password" className="form-control" id="loginPassword"/>
                         </div>
                         <div className="loginButton">
-                          <button id="loginButton" type="submit" className="btn btn-dark">Login</button>
+                          <button id="loginButton" type="submit" className="btn btn-dark">Login
+                          </button>
                         </div>
                           <div id="option-id" className="option">Don't have an account? &nbsp;
                           <a href="http://localhost:3000/createAccount" id="create-account-link-id" className="createAccountLink">sign up</a>
