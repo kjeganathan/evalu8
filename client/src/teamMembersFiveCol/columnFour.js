@@ -6,6 +6,11 @@ import { ResizeSensor } from "@amcharts/amcharts4/.internal/core/utils/ResizeSen
 
 const FiveColumnFour = (props) => {
 
+  let activateButton = (item) => {
+    localStorage.setItem('team_member', JSON.stringify(item));
+    window.location.href="/contribution"
+}
+
     let element = "";
     let elementArr = [];
     let count = 7;
@@ -38,7 +43,7 @@ const FiveColumnFour = (props) => {
                               <Card.Text className={"card-subtext"+count}>
                                 {item["course"]}
                               </Card.Text>
-                              <Button className={"card-button"+count}>Details</Button>
+                              <Button onClick={(e) => activateButton(item, e)} className={"card-button"+count}>Details</Button>
                             </Card.Body>
         </Card> 
       );

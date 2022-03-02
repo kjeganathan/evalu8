@@ -123,6 +123,15 @@ async function getAllTeamMembersByManagerAndCourse(manager_name, course){
     );
 }
 
+async function getRepoNameByManagerAndCourse(manager_name, course){
+  return await connectAndRun((db) =>
+  db.any(
+    "SELECT github_reponame FROM managers WHERE github_username = $1 and classroom = $2;",
+    [manager_name, course]
+      )
+    );
+}
+
 async function addEval(teamMemberInfo, evalType, evalNumber, isChecked) {
   return await connectAndRun((db) =>
     db.none(
@@ -181,6 +190,7 @@ addUser,
 addTeamMembers,
 addToTeamMemberTable,
 getAllTeamMembersByManagerAndCourse,
+getRepoNameByManagerAndCourse,
 addAttendanceByDate,
 updateAttendanceByDate,
 viewAttendanceByDate,

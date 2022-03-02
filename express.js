@@ -78,6 +78,12 @@ app.post("/api/getAllTeamMembersByManagerAndCourse", async (req, res) => {
     res.send(result);
 });
 
+app.post("/api/getRepoNameByManagerAndCourse", async (req, res) => {
+    const data = req.body;
+    let result = await dblast.getRepoNameByManagerAndCourse(data.manager_name, data.course);
+    res.send(result);
+});
+
 app.post("/api/addEvaluation", async (req, res) => {
     const data = req.body;
     await dblast.addEval(data.teammemberinfo, data.evaltype, data.evalnumber, data.ischecked);

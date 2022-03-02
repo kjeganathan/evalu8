@@ -14,8 +14,129 @@ import am5themes_Animated from "@amcharts/amcharts5/themes/Animated";
 import { ProSidebar, Menu, MenuItem, SubMenu } from "react-pro-sidebar";
 import "react-pro-sidebar/dist/css/styles.css";
 import SideNav from "./sideNav";
+import { truncateWithEllipsis } from "@amcharts/amcharts4/.internal/core/utils/Utils";
 
 class contributionPage extends Component {
+
+  constructor(){
+    super();
+    this.state = {
+      team_member_username:"",
+      commit_total:0,
+      weeks_worked:0,
+      lines_added_total:0,
+      lines_deleted_total:0,
+      tasks_assigned:0,
+      tasks_completed:0
+    }
+  }
+  
+  componentDidMount(){
+    let teamMember = JSON.parse(localStorage.getItem('team_member'));
+    console.log("team " + teamMember);
+    let teamMember_github_username = teamMember["github_username"];
+    let teamMember_name = teamMember["name"];
+    console.log(teamMember_github_username);
+    console.log(teamMember_name);
+    //Setting profile name
+    if(teamMember_name == undefined){
+      this.setState({
+        team_member_username: teamMember_github_username,
+      });
+    }else{
+      this.setState({
+        team_member_username: teamMember_name,
+      });
+    }
+    
+    let owner = JSON.parse(localStorage.getItem("github_username"));
+    let course_name = JSON.parse(localStorage.getItem("course"));
+    let data = {manager_name:owner, course:course_name}
+    //Get the Repo Name
+    fetch('/api/getRepoNameByManagerAndCourse',{ 
+      method:'POST', 
+      body: JSON.stringify(data), // data can be `string` or {object}!
+      headers:{ 'Content-Type': 'application/json' } 
+    }).then(async response => {
+      const res = await response.json();
+      console.log('response data3!', res[0]['github_reponame']);
+      let reponame = res[0]['github_reponame'];
+      fetch(`/gitapi/github/commitInfo/${owner}/${reponame}`)
+      .then(async nextresponse => {
+        const resnext = await nextresponse.json();
+        console.log('response!', resnext);
+        resnext.forEach((item) => {
+          console.log(item['author']['login']);
+          if(item['author']['login'] == teamMember_github_username){
+            //number of commits
+            this.setState({
+              commit_total: item['total'],
+            });
+            //number of weeks worked
+            let weeksWorked = item['weeks'];
+            this.setState({
+              weeks_worked: weeksWorked.length,
+            });
+            //number of additions and deletions
+            let sumOfAdditions = 0;
+            let sumOfDeletions = 0;
+            weeksWorked.forEach((week) => {
+              sumOfAdditions = sumOfAdditions + week['a'];
+              sumOfDeletions = sumOfDeletions + week['d'];
+            });
+            this.setState({
+              lines_added_total: sumOfAdditions,
+              lines_deleted_total: sumOfDeletions
+            });
+            
+            console.log(this.state.lines_added_total);
+            console.log(this.state.lines_deleted_total);
+            console.log(this.state.weeks_worked);
+
+          }
+        });
+
+      });
+      //get all task information
+      let state = 'all';
+      fetch(`/gitapi/github/issueInfo/${owner}/${reponame}/${state}`)
+      .then(async taskresponse => {
+        const taskres = await taskresponse.json();
+        let numTasksAssigned = 0;
+        let numTasksCompleted = 0;
+        taskres.forEach((task) => { //iterates over tasks which are not pull requests
+          if(task['pull_request'] == undefined){
+            console.log('taskresponse!', task);
+            let taskAssignees = task['assignees'];
+            let assignedToTask = false;
+            taskAssignees.forEach((assignee) => {
+              if(assignee['login'] == teamMember_github_username){
+                assignedToTask = true;
+                //checks if our user is the one assigned to task
+              }
+            });
+            if(assignedToTask == true){
+              numTasksAssigned++;
+                if(task['state'] == 'closed'){
+                  numTasksCompleted++;
+                }
+            }
+            
+          }
+        });
+        //set the state here
+        this.setState({
+          tasks_assigned:numTasksAssigned,
+          tasks_completed:numTasksCompleted
+        });
+        console.log(this.state.tasks_assigned);
+        console.log(this.state.tasks_completed);
+      });
+    });
+
+    
+  }
+
   render() {
     return (
       <div>
@@ -46,7 +167,7 @@ class contributionPage extends Component {
               <h1 className="contribution-header">Contribution </h1>
 
               <div id="team-member-profile-cp">
-                Jane Doe &nbsp;
+                {this.state.team_member_username} &nbsp;
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="3vw"
@@ -104,18 +225,70 @@ class contributionPage extends Component {
               <div className="row">
                 <div id="commit-box" className="col-sm">
                   <div className="commit-table">
-                    <h1 className="commit-info-number">10</h1>
+                    <h1 className="commit-info-number">{this.state.commit_total}</h1>
                     <h4 className="commit-info-text">TOTAL COMMITS</h4>
                   </div>
 
-                  <div className="commit-table">
+                  {/* <div className="commit-table">
                     <h1 className="commit-info-number">70</h1>
                     <h4 className="commit-info-text">TOTAL LINES OF CODE</h4>
-                  </div>
+                  </div> */}
                 </div>
 
                 <div id="tasks-box" className="col-sm">
                   <div id="numTasks">
+                    Number of Lines
+                    <br />
+                    <br />
+                    <div className="container">
+                      <div className="row">
+                        <div className="col-sm">
+                          <div className="tasks">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="80" height="81" fill="#2da6b8" class="bi bi-plus-circle" viewBox="0 0 16 16">
+  <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+  <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+</svg>
+                            <br />
+                            <br />
+                            Added
+                            <hr className="task-line"></hr>
+                            <div id="task-number">{this.state.lines_added_total}</div>
+                          </div>
+                        </div>
+                        <div className="col-sm">
+                          <div className="tasks">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="80" height="81" fill="#7cebfc" class="bi bi-dash-circle" viewBox="0 0 16 16">
+  <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+  <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z"/>
+</svg>
+                            <br />
+                            <br />
+                            Deleted
+                            <hr className="task-line"></hr>
+                            <div id="task-number">{this.state.lines_deleted_total}</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                {/* <div class="col-sm">One of three columns</div> */}
+              </div>
+              <div className="row">
+                <div id="commit-box" className="col-sm">
+                  <div className="week-table">
+                    <h1 className="week-info-number">{this.state.weeks_worked}</h1>
+                    <h4 className="commit-info-text">WEEKS WORKED</h4>
+                  </div>
+
+                  {/* <div className="commit-table">
+                    <h1 className="commit-info-number">70</h1>
+                    <h4 className="commit-info-text">TOTAL LINES OF CODE</h4>
+                  </div> */}
+                </div>
+
+                <div id="tasks-box" className="col-sm">
+                  <div id="numTasksBottom">
                     Number of Tasks
                     <br />
                     <br />
@@ -139,7 +312,7 @@ class contributionPage extends Component {
                             <br />
                             Assigned
                             <hr className="task-line"></hr>
-                            <div id="task-number">9</div>
+                            <div id="task-number">{this.state.tasks_assigned}</div>
                           </div>
                         </div>
                         <div className="col-sm">
@@ -163,14 +336,15 @@ class contributionPage extends Component {
                             <br />
                             Completed
                             <hr className="task-line"></hr>
-                            <div id="task-number">1</div>
+                            <div id="task-number">{this.state.tasks_completed}</div>
                           </div>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
-                {/* <div class="col-sm">One of three columns</div> */}
+                
+                {/* Add other part of code here */}
               </div>
             </div>
           </div>

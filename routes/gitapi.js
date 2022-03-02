@@ -90,12 +90,13 @@ router.get('/github/commitInfo/:owner/:reponame', async (req, res) => {
 
 //TASKS OR ISSUE INFORMATION
 
-router.get('/github/issueInfo/:owner/:reponame', async (req, res) => {
+router.get('/github/issueInfo/:owner/:reponame/:state', async (req, res) => {
     const owner = req.params.owner;
     const reponame = req.params.reponame;
+    const state = req.params.state;
     const options = {
         hostname: 'api.github.com',
-        path:'/repos/'+ owner + '/' + reponame + '/issues',
+        path:'/repos/'+ owner + '/' + reponame + '/issues?state=' + state,
         headers: {
             'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/29.0.1521.3 Safari/537.36'
         },

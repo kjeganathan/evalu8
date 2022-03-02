@@ -1,6 +1,6 @@
 .contributionPage{
     background-color:#101825;
-    height:100vh;
+    height:100%;
 }
 
 
@@ -160,9 +160,23 @@
     margin-top:50px;
     box-shadow: 4px 4px 4px 2px rgba(0, 0, 0, 0.15);
     padding-bottom: 30px;
-    width:50%;
+    width:100%;
     margin-right:20px;
     padding-top:40px;
+    margin-bottom:20px;
+}
+
+.week-table{
+    background-color: hsl(215, 40%, 18%);
+    border-color:hsl(215, 40%, 18%);
+    border-radius:10px;
+    margin-top:50px;
+    box-shadow: 4px 4px 4px 2px rgba(0, 0, 0, 0.15);
+    padding-bottom: 30px;
+    width:100%;
+    margin-right:20px;
+    padding-top:40px;
+    margin-bottom:50px;
 }
 
 #commit-box{
@@ -188,7 +202,21 @@
         margin-top:50px;
         box-shadow: 4px 4px 4px 2px rgba(0, 0, 0, 0.15);
         padding:20px;
+        margin-bottom:20px;
         
+}
+
+#numTasksBottom{
+
+    color:white;
+    background-color: hsl(215, 40%, 18%);
+    border-color:hsl(215, 40%, 18%);
+    border-radius:10px;
+    margin-top:50px;
+    box-shadow: 4px 4px 4px 2px rgba(0, 0, 0, 0.15);
+    padding:20px;
+    margin-bottom:50px;
+    
 }
 
 #numEvals {
@@ -218,10 +246,26 @@
 
 .commit-info-number{
     padding-top:20px;
-    color:#EDAE49;
-    font-size:86px;
+    color:#00798C;
+    font-size:150px;
     line-height: 112.5px;
     font-weight:500;
+    padding-bottom:50px;
+    
+}
+
+.commit-info-text{
+    color:#EDAE49;
+}
+
+.week-info-number{
+    padding-top:20px;
+    color:#A53860;
+    font-size:150px;
+    line-height: 112.5px;
+    font-weight:500;
+    padding-bottom:50px;
+    
 }
 
 h4{
