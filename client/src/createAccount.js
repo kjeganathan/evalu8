@@ -30,10 +30,10 @@ class createAccount extends Component {
   }
 
   handleSubmit(event) {
-    console.log("hello");
+
     event.preventDefault();
     const data = { name:this.state.name, classroom: this.state.classroom, github_username:this.state.github_username, github_reponame: this.state.github_reponame, github_token:this.state.github_token, password:this.state.password }
-    
+    let token = JSON.parse(localStorage.getItem('github_token'));
     //Fetch request to create an account for a new manager
     fetch('/api/createAccount',{ 
       method:'POST', 
@@ -47,7 +47,7 @@ class createAccount extends Component {
         let reponame = data.github_reponame;
         console.log(owner);
         console.log(reponame);
-        fetch(`/gitapi/github/teamInfo/${owner}/${reponame}`)
+        fetch(`/gitapi/github/teamInfo/${owner}/${reponame}/${token}`)
         .then( async responsenext => {
           try{
             //data2 is an array of objects
@@ -59,7 +59,7 @@ class createAccount extends Component {
               if(data.github_username != obj['login']){
                 console.log(obj['login']);
                 newState.push(obj['login']);
-                fetch(`/gitapi/github/userInfo/${obj['login']}`)
+                fetch(`/gitapi/github/userInfo/${obj['login']}/${token}`)
                 .then(async responsethird => {
                   const data3 = await responsethird.json();
                   console.log('response data3!', data3);

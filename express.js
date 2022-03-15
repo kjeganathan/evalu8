@@ -13,13 +13,36 @@ app.use(function(req, res, next){
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
     res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With, content-type');
     res.setHeader('Access-Control-Allow-Credentials', true);
-    res.setHeader('kjeganathan', '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');
+    // res.setHeader('kjeganathan', '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');
     next();
 });
 
 app.use('/gitapi', gitapi);
 
 app.use(express.static(path.join(__dirname, "client/build")));
+
+/* ADMIN END POINTS */
+
+app.post("/api/createAdmin", async (req, res) => {
+    const data = req.body;
+    await dblast.addAdmin(data.name, data.course, data.password, data.attendancedates, data.evalmetrics, data.evaluationtypes);
+    console.log("Created a new account successfully!");
+    res.sendStatus(200);
+});
+
+app.post("/api/adminAttendance", async (req, res) => {
+    const data = req.body;
+    await dblast.updateAdminAttendance(data.name, data.course, data.attendancedates);
+    res.sendStatus(200);
+});
+
+app.post("/api/getAttendanceByAdmin", async (req, res) => {
+    const data = req.body;
+    let result = await dblast.getAttendanceByAdmin(data.name, data.course);
+    res.send(result);
+});
+
+//ADMIN ENDPOINTS END
 
 app.post("/api/createAccount", async (req, res) => {
     const data = req.body;
@@ -81,6 +104,12 @@ app.post("/api/getAllTeamMembersByManagerAndCourse", async (req, res) => {
 app.post("/api/getRepoNameByManagerAndCourse", async (req, res) => {
     const data = req.body;
     let result = await dblast.getRepoNameByManagerAndCourse(data.manager_name, data.course);
+    res.send(result);
+});
+
+app.post("/api/getTokenByManager", async (req, res) => {
+    const data = req.body;
+    let result = await dblast.getTokenByManager(data.manager_name);
     res.send(result);
 });
 

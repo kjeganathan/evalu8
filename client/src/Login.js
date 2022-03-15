@@ -11,7 +11,8 @@ class Login extends Component {
 
     this.state = {
       github_username:'',
-      course:''
+      course:'',
+      token:''
       };
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -27,7 +28,34 @@ class Login extends Component {
       event.preventDefault();
       localStorage.setItem("github_username", JSON.stringify(this.state.github_username));
       localStorage.setItem("course", JSON.stringify(this.state.course));
-      window.location.href='/teamMembers';
+      // localStorage.setItem("github_token", JSON.stringify(this.state.token));
+      let github_username = JSON.parse(localStorage.getItem('github_username'));
+    let username = JSON.parse(localStorage.getItem("github_username"));
+      console.log(username);
+      let stringifiedUser = JSON.stringify(username);
+      let data = {manager_name:username}
+      fetch("/api/getTokenByManager",{ 
+        method:'POST', 
+        body: JSON.stringify(data), // data can be `string` or {object}!
+        headers:{ 'Content-Type': 'application/json' } 
+      })
+        .then( async responsenext => {
+            //data2 is an array of objects
+            const data = await responsenext.json();
+            console.log('response data?', data[0]['github_token']);
+            this.setState({
+              token : data[0]['github_token'],
+            });
+
+            
+           // window.location.href='/teamMembers';
+        }).then(e => {
+          localStorage.setItem("github_token", JSON.stringify(this.state.token));
+        }).then(s => {
+          window.location.href='/teamMembers';
+        });
+      
+       
     }
     
 

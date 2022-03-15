@@ -39,6 +39,37 @@ async function connectAndRun(task) {
     }
 }
 
+//ADMIN DB FUNCTIONS
+
+async function addAdmin(name, course, password, attendancedates, evalmetrics, evaluationtypes) {
+  return await connectAndRun((db) =>
+    db.none(
+      "INSERT INTO admin (name, course, password, attendancedates, evalmetrics, evaluationtypes) VALUES ($1, $2, $3, $4, $5, $6);",
+      [name, course, password, attendancedates, evalmetrics, evaluationtypes]
+    )
+  );
+}
+
+async function updateAdminAttendance(name, course, attendancedates) {
+  return await connectAndRun((db) =>
+  db.any(
+    "UPDATE admin SET attendancedates = $1 WHERE name = $2 and course = $3;",
+    [attendancedates, name, course]
+      )
+    );
+}
+
+async function getAttendanceByAdmin(name, course){
+  return await connectAndRun((db) =>
+  db.any(
+    "SELECT attendancedates FROM admin WHERE name = $1 and course = $2;",
+    [name, course]
+      )
+    );
+}
+
+
+
 // Database functions for log in 
 async function addUser(name, classroom, github_username, github_reponame, github_token, password) {
     return await connectAndRun((db) =>
@@ -132,6 +163,15 @@ async function getRepoNameByManagerAndCourse(manager_name, course){
     );
 }
 
+async function getTokenByManager(manager_name){
+  return await connectAndRun((db) =>
+  db.any(
+    "SELECT github_token FROM managers WHERE github_username = $1;",
+    [manager_name]
+      )
+    );
+}
+
 async function addEval(teamMemberInfo, evalType, evalNumber, isChecked) {
   return await connectAndRun((db) =>
     db.none(
@@ -201,5 +241,9 @@ viewEval,
 updateEval,
 getEvalByMember,
 getDistinctEvalType,
-getChecked
+getChecked,
+getTokenByManager,
+addAdmin,
+updateAdminAttendance,
+getAttendanceByAdmin
 };

@@ -89,13 +89,42 @@ const AttendanceTableMember = (props) => {
        });
     }
     
+    const getTeamMembers = async () => {
+
+      let jsoncourse = JSON.parse(localStorage.getItem('course'));
+      let github_username = JSON.parse(localStorage.getItem('github_username'));
+
+      await fetch('/api/getAllTeamMembersByManagerAndCourse',{ 
+        method:'POST', 
+        body: JSON.stringify({manager_name:github_username, course:jsoncourse}), 
+        headers:{ 'Content-Type': 'application/json' } 
+      }).then(async (response) => 
+      {
+        let resp = await response.json();
+        console.log(resp);
+        
+        let team_github_username_arr = [];
+        let team_member_arr = [];
+        // response.json();
+        resp.forEach((item) => {
+          team_member_arr.push(item);
+          team_github_username_arr.push(item['github_username']);
+        })
+        localStorage.setItem('team_member_arr', JSON.stringify(team_member_arr))
+      });
+    }
     
     let member = "";
     let memberArr = [];
-    let teamMembers = ["Jane Dore", "Josh Hase", "Derek Hawks", "Rayne Masters", "Tez Martinez",
-"Naomi Reid", "Eric Anderson", "Dayton Peerson", "Lucy Lu", "Jackie Lester"];
+    //get teamMembers from the db
+    
+    getTeamMembers();
+
+    let teamMembers = JSON.parse(localStorage.getItem('team_member_arr'));
+    if(teamMembers.length != 0){
     teamMembers.forEach(async (teamMember) => {
-        let data = {teammemberinfo:teamMember, date:props.data};
+        console.log("tem" + teamMember);
+        let data = {teammemberinfo:teamMember['github_username'], date:props.data};
         // let returnedData = assignChecked(data);
         let res = assignChecked(data);
         console.log(JSON.stringify(res));
@@ -109,8 +138,8 @@ const AttendanceTableMember = (props) => {
         member = (
             <tr>
               <td>{count}</td>
-              <td>{teamMember}</td> 
-              <td>{teamMember + "@gmail.com"}</td>
+              <td>{teamMember['github_username']}</td> 
+              <td>{teamMember['course']}</td>
               <td>
                 <Form>
                   {["radio"].map((type) => (
@@ -158,6 +187,7 @@ const AttendanceTableMember = (props) => {
     });
     console.log(memberArr);
     return (memberArr);
+  }
 }
 
 export default AttendanceTableMember;

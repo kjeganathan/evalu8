@@ -15,6 +15,7 @@ class teamMembers extends Component {
 
     this.state = {
       teamMember_count:0,
+      token:""
       };
   }
   

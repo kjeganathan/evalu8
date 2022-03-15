@@ -61,7 +61,8 @@ class contributionPage extends Component {
       const res = await response.json();
       console.log('response data3!', res[0]['github_reponame']);
       let reponame = res[0]['github_reponame'];
-      fetch(`/gitapi/github/commitInfo/${owner}/${reponame}`)
+      let token = JSON.parse(localStorage.getItem('github_token'));
+      fetch(`/gitapi/github/commitInfo/${owner}/${reponame}/${token}`)
       .then(async nextresponse => {
         const resnext = await nextresponse.json();
         console.log('response!', resnext);
@@ -99,7 +100,8 @@ class contributionPage extends Component {
       });
       //get all task information
       let state = 'all';
-      fetch(`/gitapi/github/issueInfo/${owner}/${reponame}/${state}`)
+      let token2 = JSON.parse(localStorage.getItem('github_token'));
+      fetch(`/gitapi/github/issueInfo/${owner}/${reponame}/${state}/${token2}`)
       .then(async taskresponse => {
         const taskres = await taskresponse.json();
         let numTasksAssigned = 0;

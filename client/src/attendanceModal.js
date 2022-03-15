@@ -91,16 +91,43 @@ const AttendanceModal = (props) => {
     // let parsedData = parsed[1];
     // console.log("getChildData" + parsedData.name); //val is the present status, name of the person, date from the child component
 
+  /* ADMIN PAGE CODE*/
 
+  //get this information from the admin login
+
+  let admin_name = "Cindy Shah";
+  let admin_course = "COMPSCI 320";
+
+  // end of information from admin login
   const today = new Date();
   const tomorrow = new Date();
 
   tomorrow.setDate(tomorrow.getDate() + 1);
 
   const [values, setValues] = useState([]);
+  //set values to the values of the dates in the admin table
+  console.log(values);
+  if(values.length != 0){
+    let arrDates = [];
+    values.forEach((item)=> {
+      let year = item['year'];
+      let month = item['month']['number'];
+      let day = item['day'];
+      let whole_date = year + "/" + month + "/" + day;
+      arrDates.push(whole_date);
+    });
+    console.log("whole_date " + arrDates);
 
+    //push values into the db of the admin
+    let data = {name:admin_name, course:admin_course, attendancedates:arrDates}
+    
+    fetch('/api/adminAttendance',{ 
+      method:'POST', 
+      body: JSON.stringify(data), // data can be `string` or {object}!
+      headers:{ 'Content-Type': 'application/json' } 
+    });
+  }
   // for each date we want to generate a new meeting WHICH IS a new collapsible trigger
-
   return (
     <Modal
       {...props}

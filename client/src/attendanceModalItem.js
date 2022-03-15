@@ -57,7 +57,26 @@ const AttendanceModalItem = (props) => {
 
   let element = "";
   let elementArr = [];
-  let dates = ["2022/01/04", "2022/01/11", "2022/01/21"];
+
+  //get the dates from the db
+  let admin_name = "Cindy Shah";
+  let admin_course = "COMPSCI 320";
+  // const [newdates, setDates] = useState([]);
+  let data2 = {name:admin_name, course:admin_course}
+  fetch('/api/getAttendanceByAdmin',{ 
+    method:'POST', 
+    body: JSON.stringify(data2), // data can be `string` or {object}!
+    headers:{ 'Content-Type': 'application/json' } 
+  }).then((responsenext) => responsenext.json())
+  .then(async (responseJSONnext) => {
+    console.log("res " + responseJSONnext[0]['attendancedates']); //this should be the dates
+    // setDates(responseJSONnext[0]['attendancedates'])
+    localStorage.setItem('attendance_dates', JSON.stringify(responseJSONnext[0]['attendancedates']))
+  });
+  let dates = JSON.parse(localStorage.getItem('attendance_dates'));
+  // localStorage.removeItem('attendance_dates');
+  // console.log("newDates " + newDates);
+  // let dates = ["2022/01/04", "2022/01/11", "2022/01/21"];
   let count = 1;
   dates.forEach((date) => {
     console.log(date);
@@ -67,8 +86,8 @@ const AttendanceModalItem = (props) => {
           <thead>
             <tr>
               <th>#</th>
-              <th>Name</th>
-              <th>Email</th>
+              <th>Github Username</th>
+              <th>Course</th>
               <th>Attendance</th>
             </tr>
           </thead>
