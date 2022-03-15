@@ -26,7 +26,7 @@ const AttendanceModal = (props) => {
     }
     
     newArr.forEach(async (element) => {
-      console.log(element);
+      console.log("element" + element + "teammemberinfo" + element[1]);
       let data = await fetch('/api/viewAttendanceByDate',{ 
         method:'POST', 
         body: JSON.stringify({teammemberinfo:element[1], date:element[2]}), 

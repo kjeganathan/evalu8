@@ -71,7 +71,7 @@ class engagementPage extends Component {
     // console.log(evalTypeArr);
     
     let numTotalEvals = 3; //CHANGE THIS TO BE DYNAMIC LATER and grabbed from db
-
+    
         await fetch('/api/getEvalByMember',{ 
           method:'POST',
           body: JSON.stringify({teammemberinfo:'Jane Dore', ischecked:true}), 
@@ -143,9 +143,12 @@ class engagementPage extends Component {
       paddingBottom: 0
     }));
     
+    let team_member = JSON.parse(localStorage.getItem('team_member'));
+    let github_username = team_member['github_username'];
+
     await fetch('/api/getMemberAttendanceByDate',{ 
       method:'POST', 
-      body: JSON.stringify({teammemberinfo:'Jane Dore'}), 
+      body: JSON.stringify({teammemberinfo:github_username}), 
       headers:{ 'Content-Type': 'application/json' } 
     }).then((response) => response.json())
     .then(async (responseJSON) => {

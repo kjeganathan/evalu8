@@ -152,7 +152,7 @@ const AttendanceTableMember = (props) => {
                         label="Present"
                         name="group1"
                         type={type}
-                        id={"present," + teamMember + "," + props.data}
+                        id={"present," + teamMember['github_username'] + "," + props.data}
                       />
                       <Form.Check
                         inline
@@ -160,7 +160,7 @@ const AttendanceTableMember = (props) => {
                         onChange={handleAbsentClick}
                         label="Absent"
                         name="group1"
-                        id={"absent," + teamMember + "," + props.data}
+                        id={"absent," + teamMember['github_username'] + "," + props.data}
                         type={type}
                       />
                       <Form.Check
@@ -169,7 +169,7 @@ const AttendanceTableMember = (props) => {
                         onChange={handleExcusedClick}
                         label="Excused"
                         name="group1"
-                        id={"excused," + teamMember + "," + props.data}
+                        id={"excused," + teamMember['github_username'] + "," + props.data}
                         type={type}
                         // id={`inline-${type}-3`}
                       />
