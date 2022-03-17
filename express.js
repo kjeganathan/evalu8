@@ -36,9 +36,21 @@ app.post("/api/adminAttendance", async (req, res) => {
     res.sendStatus(200);
 });
 
+app.post("/api/adminEvalMetrics", async (req, res) => {
+    const data = req.body;
+    await dblast.updateAdminEvalMetrics(data.name, data.course, data.evalmetrics);
+    res.sendStatus(200);
+});
+
 app.post("/api/getAttendanceByAdmin", async (req, res) => {
     const data = req.body;
     let result = await dblast.getAttendanceByAdmin(data.name, data.course);
+    res.send(result);
+});
+
+app.post("/api/getEvalMetricsByAdmin", async (req, res) => {
+    const data = req.body;
+    let result = await dblast.getEvalMetricsByAdmin(data.name, data.course);
     res.send(result);
 });
 

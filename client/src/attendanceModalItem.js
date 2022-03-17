@@ -74,9 +74,6 @@ const AttendanceModalItem = (props) => {
     localStorage.setItem('attendance_dates', JSON.stringify(responseJSONnext[0]['attendancedates']))
   });
   let dates = JSON.parse(localStorage.getItem('attendance_dates'));
-  // localStorage.removeItem('attendance_dates');
-  // console.log("newDates " + newDates);
-  // let dates = ["2022/01/04", "2022/01/11", "2022/01/21"];
   let count = 1;
   dates.forEach((date) => {
     console.log(date);

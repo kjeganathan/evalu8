@@ -14,7 +14,10 @@ const EvaluationModalItem = (props) => {
 
     console.log(props.evalData);
     let element = "";
-    let evaluations = props.evalData;
+    let getEvals = props.evalData;
+    let evaluations = getEvals;
+    // evaluations.push(getEvals.split(","));
+    console.log("evals:" + evaluations);
     let evalArray = [];
     evaluations.forEach((evaluation) => {
         console.log(evaluation);

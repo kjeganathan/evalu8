@@ -34,7 +34,7 @@ const AttendanceModal = (props) => {
       }).then((response) => response.json())
         .then(async (responseJSON) => {
         console.log(responseJSON);
-        if(responseJSON.length === 0){
+        if(responseJSON.length === 0){ //if there is no entry for the attendance of that day for that person
           await fetch('/api/addAttendanceByDate',{ 
             method:'POST', 
             body: JSON.stringify({status:element[0], teammemberinfo:element[1], date:element[2]}), 
@@ -44,7 +44,7 @@ const AttendanceModal = (props) => {
             console.log("reset client error-------",error);
        });
         }else{
-          await fetch('/api/updateAttendanceByDate',{ 
+          await fetch('/api/updateAttendanceByDate',{ //if there is already an entry for the attendance of that day for that person
             method:'POST', 
             body: JSON.stringify({status:element[0], teammemberinfo:element[1], date:element[2]}), 
             headers:{ 'Content-Type': 'application/json' } 

@@ -59,10 +59,28 @@ async function updateAdminAttendance(name, course, attendancedates) {
     );
 }
 
+async function updateAdminEvalMetrics(name, course, evalmetrics) {
+  return await connectAndRun((db) =>
+  db.any(
+    "UPDATE admin SET evalmetrics = $1 WHERE name = $2 and course = $3;",
+    [evalmetrics, name, course]
+      )
+    );
+}
+
 async function getAttendanceByAdmin(name, course){
   return await connectAndRun((db) =>
   db.any(
     "SELECT attendancedates FROM admin WHERE name = $1 and course = $2;",
+    [name, course]
+      )
+    );
+}
+
+async function getEvalMetricsByAdmin(name, course){
+  return await connectAndRun((db) =>
+  db.any(
+    "SELECT evalmetrics FROM admin WHERE name = $1 and course = $2;",
     [name, course]
       )
     );
@@ -245,5 +263,7 @@ getChecked,
 getTokenByManager,
 addAdmin,
 updateAdminAttendance,
-getAttendanceByAdmin
+getAttendanceByAdmin,
+updateAdminEvalMetrics,
+getEvalMetricsByAdmin
 };
