@@ -5,8 +5,11 @@ import Collapsible from "react-collapsible";
 import Table from "react-bootstrap/Table";
 import Form from "react-bootstrap/Form";
 import EvaluationModalTeamMembers from "./evaluationModalTeamMembers";
+import EvalModelIndividualItems from "./EvalModelIndividualItems";
 
 const EvaluationModalItem = (props) => {
+
+    let teamMembers = props.team_members;
 
     let getData = (val) => {
       props.sendFinalParent(val);
@@ -18,12 +21,17 @@ const EvaluationModalItem = (props) => {
     let evaluations = getEvals;
     // evaluations.push(getEvals.split(","));
     console.log("evals:" + evaluations);
+    
     let evalArray = [];
-    evaluations.forEach((evaluation) => {
+    evaluations.forEach((evaluation) => { 
         console.log(evaluation);
+        //we should send the number of evals depending on the object.keys(evaluation)
+        let numOfEvals = Object.values(evaluation); //gives the number of each eval
+        console.log("numOfEvals:" + numOfEvals);
         element = (
             <Collapsible id="meeting-list" trigger={Object.keys(evaluation)}>
-        <Table striped bordered hover>
+              <EvalModelIndividualItems team_members={teamMembers} evalType={Object.keys(evaluation)} numOfEvals={Object.values(evaluation)} sendFinalParent={getData} evalData={evaluation} allEvalData={evaluations}></EvalModelIndividualItems>
+        {/* <Table striped bordered hover>
           <thead>
             <tr>
               <th>#</th>
@@ -34,9 +42,9 @@ const EvaluationModalItem = (props) => {
           </thead>
           <tbody>
             {/* Send In one evaluation object depending on what evalutation it is*/}
-            <EvaluationModalTeamMembers sendDataParent={getData} evalData={evaluation} allEvalData={evaluations}></EvaluationModalTeamMembers> 
+            {/* <EvaluationModalTeamMembers sendDataParent={getData} evalData={evaluation} allEvalData={evaluations}></EvaluationModalTeamMembers> 
           </tbody>
-        </Table>
+        </Table> */} 
       </Collapsible>
         );
         evalArray.push(element);

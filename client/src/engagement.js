@@ -30,7 +30,11 @@ class engagementPage extends Component {
       percentPeerEvals:0,
       percentGoalEvals:0,
       numPeerEvals:0,
-      numGoalEvals:0
+      numGoalEvals:0,
+      total_num_manager_evals:0,
+      total_num_peer_evals:0,
+      total_num_goal_evals:0
+      
     }
     
     this.showModal = this.showModal.bind(this);
@@ -51,7 +55,41 @@ class engagementPage extends Component {
     return this.state.numDaysPresent;
   }
 
+  getTeamMembers = async () => {
+
+    let jsoncourse = JSON.parse(localStorage.getItem('course'));
+    let github_username = JSON.parse(localStorage.getItem('github_username'));
+
+    await fetch('/api/getAllTeamMembersByManagerAndCourse',{ 
+      method:'POST', 
+      body: JSON.stringify({manager_name:github_username, course:jsoncourse}), 
+      headers:{ 'Content-Type': 'application/json' } 
+    }).then(async (response) => 
+    {
+      let resp = await response.json();
+      console.log(resp);
+      
+      let team_github_username_arr = [];
+      let team_member_arr = [];
+      let team_member_name = [];
+      // response.json();
+      resp.forEach((item) => {
+        team_member_arr.push(item);
+        team_github_username_arr.push(item['github_username']);
+        team_member_name.push(item['name']);
+      })
+      localStorage.setItem('team_member_github_username', JSON.stringify(team_github_username_arr));
+      localStorage.setItem('team_member_name', JSON.stringify(team_member_name)); 
+      localStorage.setItem('team_member_arr', JSON.stringify(team_member_arr)); 
+
+    });
+  }
+  
+  
+
   async componentDidMount() {
+    
+    this.getTeamMembers();
 
     //evaluation calculations
     let count = 0;
@@ -70,11 +108,43 @@ class engagementPage extends Component {
     // });
     // console.log(evalTypeArr);
     
-    let numTotalEvals = 3; //CHANGE THIS TO BE DYNAMIC LATER and grabbed from db
+    let eval_metrics_arr = JSON.parse(localStorage.getItem('eval_arr'));
+    console.log("eval_metrics_arr:" + JSON.stringify(eval_metrics_arr));
+  
+     //CHANGE THIS TO BE DYNAMIC LATER and grabbed from db
+     eval_metrics_arr.forEach((evaluation) => { 
+       console.log("objkeys:"+(Object.keys(evaluation) == 'Manager Evaluations'));
+       if(Object.keys(evaluation) ==  'Manager Evaluations'){
+       let newState = evaluation['Manager Evaluations'];
+       console.log(newState);
+       this.setState({
+        total_num_manager_evals: newState
+      });
+       }
+       if(Object.keys(evaluation) ==  'Peer Evaluations'){
+       let newState = evaluation['Peer Evaluations'];
+       this.setState({
+        total_num_peer_evals: newState
+      });
+       }
+       if(Object.keys(evaluation) ==  'Goal Setting Evaluations'){
+        let newState = evaluation['Goal Setting Evaluations'];
+        this.setState({
+          total_num_goal_evals: newState
+        });
+       }
+     });
+
+     
+     console.log(this.state.total_num_manager_evals);
+     
+     
+    let team_member2 = JSON.parse(localStorage.getItem('team_member'));
+    let github_username2 = team_member2['github_username'];
     
         await fetch('/api/getEvalByMember',{ 
           method:'POST',
-          body: JSON.stringify({teammemberinfo:'Jane Dore', ischecked:true}), 
+          body: JSON.stringify({teammemberinfo:github_username2, ischecked:true}), 
           headers:{ 'Content-Type': 'application/json' } 
         }).then((responsenext) => responsenext.json())
         .then(async (responseJSONnext) => {
@@ -84,7 +154,8 @@ class engagementPage extends Component {
             if(item['evaltype'] == 'Manager Evaluations'){
               let newState = this.state.numManagerEvals + 1;
               console.log("new" + newState);
-              let newPercent = ((100 * newState) / numTotalEvals).toFixed(0);
+              let newPercent = ((100 * newState) / this.state.total_num_manager_evals).toFixed(0);
+              console.log(newPercent);
                this.setState({
                 numManagerEvals: newState,
                 percentManagerEvals:newPercent
@@ -94,7 +165,7 @@ class engagementPage extends Component {
               console.log(item['evaltype'] == 'Peer Evaluations');
               let newPeerState = this.state.numPeerEvals + 1;
               console.log("newPeerState" + newPeerState);
-              let newPeerPercent = ((100 * newPeerState) / numTotalEvals).toFixed(0);
+              let newPeerPercent = ((100 * newPeerState) / this.state.total_num_peer_evals).toFixed(0);
               this.setState({
                numPeerEvals: newPeerState,
                percentPeerEvals:newPeerPercent
@@ -102,7 +173,7 @@ class engagementPage extends Component {
            }
            if(item['evaltype'] == 'Goal Setting Evaluations'){
             let newGoalState = this.state.numGoalEvals + 1;
-            let newGoalPercent = ((100 * newGoalState) / numTotalEvals).toFixed(0);
+            let newGoalPercent = ((100 * newGoalState) / this.state.total_num_goal_evals).toFixed(0);
             this.setState({
              numGoalEvals: newGoalState,
              percentGoalEvals:newGoalPercent

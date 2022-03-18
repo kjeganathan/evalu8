@@ -8,6 +8,7 @@ import EvaluationModalItem from "./evaluationModalItem";
 import { useState } from "react";
 
 const EvaluationModal = (props) => {
+  
 
   const [managerEval, setManagerEval] = useState('');
   const [peerEval, setPeerEval] = useState('');
@@ -98,7 +99,7 @@ const EvaluationModal = (props) => {
   let saveFunction = async (valArr) => {
     //find if team member is already in the db
     console.log(valArr);
-
+    if(valArr[0] != null){
     let data = await fetch("/api/viewEvaluation", {
       method: "POST",
       body: JSON.stringify({
@@ -146,6 +147,7 @@ const EvaluationModal = (props) => {
       .catch((error) => {
         console.log("reset client error-------", error);
       });
+    }
   };
 
   return (
@@ -193,6 +195,7 @@ const EvaluationModal = (props) => {
         <EvaluationModalItem
           sendFinalParent={saveFunction}
           evalData={evaluations}
+          
         ></EvaluationModalItem>
       </Modal.Body>
       <Modal.Footer>

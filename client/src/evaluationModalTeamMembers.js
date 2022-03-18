@@ -9,6 +9,8 @@ import EvaluationModalEvals from "./evaluationModalevals";
 
 const EvaluationModalTeamMembers = (props) => {
 
+  
+
   let teamMemberEvalObj = {
     teamMemberName: "",
     evalType:"",
@@ -31,29 +33,42 @@ const EvaluationModalTeamMembers = (props) => {
 
     
     //pass in prop
-    let evaluation = props.evalData;
+    // let evaluation = props.evalData;
+    let evaluationType = props.evalType;
+    let evaluationNum = props.evalNum;
+    console.log("evalNum:" + evaluationNum);
     let count = 1;
+    let index = 0;
     let member = "";
     let memberArr = [];
-    let teamMembers = ["Jane Dore", "Josh Hase", "Derek Hawks", "Rayne Masters", "Tez Martinez",
-    "Naomi Reid", "Eric Anderson", "Dayton Peerson", "Lucy Lu", "Jackie Lester"];
+    let teamMembers = JSON.parse(localStorage.getItem('team_member_github_username'));
+    let team_member_name_arr = JSON.parse(localStorage.getItem('team_member_name'));
+    console.log(teamMembers);
+    // let teamMembers = ["Jane Dore", "Josh Hase", "Derek Hawks", "Rayne Masters", "Tez Martinez",
+    // "Naomi Reid", "Eric Anderson", "Dayton Peerson", "Lucy Lu", "Jackie Lester"];
+
+    if(teamMembers.length != 0){
+
+    // let teamMembers = ["Jane Dore", "Josh Hase", "Derek Hawks", "Rayne Masters", "Tez Martinez",
+    // "Naomi Reid", "Eric Anderson", "Dayton Peerson", "Lucy Lu", "Jackie Lester"];
 
     teamMembers.forEach((teamMember) => {
-    console.log(teamMember);
-    console.log(evaluation);
+    // console.log(teamMember['github_username']);
+    // console.log(evaluation);
+    let team_member_name = team_member_name_arr[index];
   
     member = (
     
           <tr>
               <td>{count}</td>
               <td>{teamMember}</td>
-              <td>{teamMember + "@gmail.com"}</td>
+              <td>{team_member_name}</td>
               <td>
                 <Form>
                   {["radio"].map((type) => (
                     <div key={`inline-${type}`} className="mb-3">
                       
-                      <EvaluationModalEvals sendData={getData} sendTeamMember={teamMember} evalData={Object.keys(evaluation)} evalInfo={evaluation}></EvaluationModalEvals>
+                      <EvaluationModalEvals sendData={getData} sendTeamMember={teamMember} evalNum={evaluationNum} evalType={evaluationType}></EvaluationModalEvals>
                     </div>
                   ))}
                 </Form>
@@ -62,9 +77,11 @@ const EvaluationModalTeamMembers = (props) => {
     );
     memberArr.push(member);
     count++;
+    index++;
 });
 console.log(memberArr);
 return (memberArr);
+    }
 
 };
 
