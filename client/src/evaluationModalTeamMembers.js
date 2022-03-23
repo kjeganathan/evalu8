@@ -57,14 +57,14 @@ const EvaluationModalTeamMembers = (props) => {
               <td>{teamMember}</td>
               <td>{team_member_name}</td>
               <td>
-                <Form>
-                  {["radio"].map((type) => (
-                    <div key={`inline-${type}`} className="mb-3">
+                {/* <Form> */}
+                  {/* {["radio"].map((type) => ( */}
+                     {/* <div key={`inline-${type}`} className="mb-3"> */}
                       
                       <EvaluationModalEvals sendData={getData} sendTeamMember={teamMember} evalNum={evaluationNum} evalType={evaluationType}></EvaluationModalEvals>
-                    </div>
-                  ))}
-                </Form>
+                    {/* </div> */}
+                  {/* ))} */}
+                {/* </Form> */}
               </td>
             </tr>
     );
