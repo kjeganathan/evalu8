@@ -86,14 +86,22 @@ async function getEvalMetricsByAdmin(name, course){
     );
 }
 
+async function getAllAdmins(){
+  return await connectAndRun((db) =>
+  db.any(
+    "SELECT * FROM admin;",
+      )
+    );
+}
+
 
 
 // Database functions for log in 
-async function addUser(name, classroom, github_username, github_reponame, github_token, password) {
+async function addUser(name, classroom, github_username, github_reponame, github_token, password, admin) {
     return await connectAndRun((db) =>
       db.none(
-        "INSERT INTO managers (name, classroom, github_username, github_reponame, github_token, password) VALUES ($1, $2, $3, $4, $5, $6);",
-        [name, classroom, github_username, github_reponame, github_token, password]
+        "INSERT INTO managers (name, classroom, github_username, github_reponame, github_token, password, admin) VALUES ($1, $2, $3, $4, $5, $6, $7);",
+        [name, classroom, github_username, github_reponame, github_token, password, admin]
       )
     );
 }
@@ -285,5 +293,6 @@ getAttendanceByAdmin,
 updateAdminEvalMetrics,
 getEvalMetricsByAdmin,
 getAllAttendanceByDate,
-getAllEvaluations
+getAllEvaluations,
+getAllAdmins
 };

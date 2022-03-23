@@ -9,6 +9,7 @@ import HomePage from './homePage.js';
 import teamMembers from './teamMembers';
 import engagementPage from './engagement';
 import contributionPage from './contribution';
+import AdminPage from './adminPage';
 
 
 class App extends Component {
@@ -30,6 +31,7 @@ class App extends Component {
              <Route path="/teamMembers" component={teamMembers}/>
              <Route path="/engagement" component={engagementPage}/>
              <Route path="/contribution" component={contributionPage}/>
+             <Route path="/admin" component={AdminPage}/>
            </Switch>
         </div> 
       </BrowserRouter>

@@ -42,6 +42,11 @@ app.post("/api/adminEvalMetrics", async (req, res) => {
     res.sendStatus(200);
 });
 
+app.post("/api/getAllAdmins", async (req, res) => {
+    let result = await dblast.getAllAdmins();
+    res.send(result);
+});
+
 app.post("/api/getAttendanceByAdmin", async (req, res) => {
     const data = req.body;
     let result = await dblast.getAttendanceByAdmin(data.name, data.course);
@@ -58,7 +63,7 @@ app.post("/api/getEvalMetricsByAdmin", async (req, res) => {
 
 app.post("/api/createAccount", async (req, res) => {
     const data = req.body;
-    await dblast.addUser(data.name, data.classroom, data.github_username, data.github_reponame, data.github_token, data.password);
+    await dblast.addUser(data.name, data.classroom, data.github_username, data.github_reponame, data.github_token, data.password, data.admin);
     console.log("Created a new account successfully!");
     res.sendStatus(200);
 });
@@ -171,9 +176,6 @@ app.post("/api/updateEvaluation", async (req, res) => {
     await dblast.updateEval(data.ischecked, data.teammemberinfo, data.evaltype, data.evalnumber);
     res.sendStatus(200);
 });
-
-//GITHUB API CALLS
-
 
 
 //Creates links to every route on the client side
