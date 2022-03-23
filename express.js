@@ -81,6 +81,12 @@ app.post("/api/viewAttendanceByDate", async (req, res) => {
     res.send(result);
 });
 
+app.post("/api/getAllAttendanceByDate", async (req, res) => {
+    const data = req.body;
+    let result = await dblast.getAllAttendanceByDate(data.date);
+    res.send(result);
+});
+
 app.post("/api/statusAttendanceByDate", async (req, res) => {
     const data = req.body;
     let result = await dblast.statusAttendanceByDate(data.teammemberinfo, data.date);
@@ -129,6 +135,12 @@ app.post("/api/addEvaluation", async (req, res) => {
     const data = req.body;
     await dblast.addEval(data.teammemberinfo, data.evaltype, data.evalnumber, data.ischecked);
     res.sendStatus(200);
+});
+
+app.post("/api/getAllEvaluations", async (req, res) => {
+    const data = req.body;
+    let result = await dblast.getAllEvaluations(data.evaltype, data.evalnumber);
+    res.send(result);
 });
 
 app.post("/api/viewEvaluation", async (req, res) => {

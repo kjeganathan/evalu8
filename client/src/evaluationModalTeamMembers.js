@@ -19,7 +19,7 @@ const EvaluationModalTeamMembers = (props) => {
   }
 
   let getData = async (val) => {
-    console.log(val); //ex. Jane Dore, Manager Evaluation, 2
+    console.log("val:" + val); //ex. Jane Dore, Manager Evaluation, 2
     let valArr = val.split(",");
     teamMemberEvalObj = {
       teamMemberInfo: valArr[0],
@@ -44,17 +44,10 @@ const EvaluationModalTeamMembers = (props) => {
     let teamMembers = JSON.parse(localStorage.getItem('team_member_github_username'));
     let team_member_name_arr = JSON.parse(localStorage.getItem('team_member_name'));
     console.log(teamMembers);
-    // let teamMembers = ["Jane Dore", "Josh Hase", "Derek Hawks", "Rayne Masters", "Tez Martinez",
-    // "Naomi Reid", "Eric Anderson", "Dayton Peerson", "Lucy Lu", "Jackie Lester"];
 
     if(teamMembers.length != 0){
 
-    // let teamMembers = ["Jane Dore", "Josh Hase", "Derek Hawks", "Rayne Masters", "Tez Martinez",
-    // "Naomi Reid", "Eric Anderson", "Dayton Peerson", "Lucy Lu", "Jackie Lester"];
-
     teamMembers.forEach((teamMember) => {
-    // console.log(teamMember['github_username']);
-    // console.log(evaluation);
     let team_member_name = team_member_name_arr[index];
   
     member = (

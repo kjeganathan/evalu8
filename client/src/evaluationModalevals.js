@@ -47,12 +47,13 @@ const EvaluationModalEvals = (props) => {
       }else{
         setLabel('Not Completed');
       }
+      
       let checkedValue = event.target.value;
       console.log(checkedValue);
 
       let checkedInfo = event.target.id;
       console.log(checkedInfo); //Send checkedInfo To Parent
-
+      
       props.sendData(checkedInfo + "," + checked);
 
   }
@@ -104,9 +105,6 @@ const EvaluationModalEvals = (props) => {
   }
   console.log("flag2:"+flag);
  
-
-  //pass in prop
-   //object of type of eval and the number of each eval
   
 
   //DO CALCULATION BASED ON NUMBER OF EVALS HERE TO GET THE PERCENTAGE

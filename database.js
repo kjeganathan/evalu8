@@ -125,6 +125,15 @@ async function viewAttendanceByDate(teammemberinfo, date){
     );
 }
 
+async function getAllAttendanceByDate(date){
+  return await connectAndRun((db) =>
+  db.any(
+    "SELECT * FROM attendanceondate WHERE date = $1;",
+    [date]
+      )
+    );
+}
+
 async function getMemberAttendanceOnDate(teammemberinfo){
   return await connectAndRun((db) =>
   db.any(
@@ -199,6 +208,15 @@ async function addEval(teamMemberInfo, evalType, evalNumber, isChecked) {
   );
 }
 
+async function getAllEvaluations( evaltype, evalnumber){
+  return await connectAndRun((db) =>
+  db.any(
+    "SELECT * FROM evaluations WHERE evaltype = $1 and evalnumber = $2;",
+    [evaltype, evalnumber]
+      )
+    );
+}
+
 async function viewEval(teammemberinfo, evaltype, evalnumber){
   return await connectAndRun((db) =>
   db.any(
@@ -265,5 +283,7 @@ addAdmin,
 updateAdminAttendance,
 getAttendanceByAdmin,
 updateAdminEvalMetrics,
-getEvalMetricsByAdmin
+getEvalMetricsByAdmin,
+getAllAttendanceByDate,
+getAllEvaluations
 };

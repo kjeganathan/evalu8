@@ -89,7 +89,7 @@ class engagementPage extends Component {
 
   async componentDidMount() {
     
-    this.getTeamMembers();
+    // this.getTeamMembers();
 
     //evaluation calculations
     let count = 0;

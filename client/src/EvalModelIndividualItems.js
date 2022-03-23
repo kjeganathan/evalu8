@@ -13,6 +13,10 @@ const EvalModelIndividualItems = (props) => {
       props.sendFinalParent(val);
     }
 
+    let eval_status = props.evaluationStatus;
+    let total_index = props.totalIndex;
+    let statusForEval = "";
+    console.log("eval_status:" + eval_status);
     let evaluationType = props.evalType;
     let numOfEvals = props.numOfEvals;
 
@@ -27,11 +31,24 @@ const EvalModelIndividualItems = (props) => {
     for(let i = 0; i < numOfEvals; i++){
         numEvalArr.push(i);
     }
+    
     console.log(numEvalArr);
     numEvalArr.forEach((item) => { //does this 3 times for each individual evaluation, should do this the number of times of the evaluation
         
+        console.log("evalLength:" + eval_status.length);
+        for(let i = 0; i<eval_status.length;i++){
+          console.log('i:' + i);
+          if(eval_status[i]['type'] == evaluationType){
+            if(eval_status[i]['num'] == count){
+              console.log("evalObj: " + eval_status[i]['num'] + " " + eval_status[i]['type'] + " " + eval_status[i]['status']);
+              statusForEval = eval_status[i]['status'];
+            }
+          }
+        }
+        
+    
         element = (
-            <Collapsible id="meeting-list" trigger={evaluationType + " " + count}>
+            <Collapsible id="meeting-list" trigger={evaluationType + " " + count + "  |  " + statusForEval}>
          <Table striped bordered hover>
           <thead>
             <tr>

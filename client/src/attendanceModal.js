@@ -17,6 +17,41 @@ const AttendanceModal = (props) => {
   let valArr = [];
   let numChanges = 0;
 
+  let getAttendanceStatus = async () => {
+    let dates = JSON.parse(localStorage.getItem('attendance_dates'));
+    let attendanceStatusArr = [];
+    dates.forEach((dateitem) => {
+    let teamMembers = JSON.parse(localStorage.getItem('team_member_arr'));
+
+    let newdata = {date:dateitem}
+    
+    fetch('/api/getAllAttendanceByDate',{ 
+      method:'POST', 
+      body: JSON.stringify(newdata), // data can be `string` or {object}!
+      headers:{ 'Content-Type': 'application/json' } 
+    }).then((responsenext) => responsenext.json())
+    .then(async (responseJSONnext) => {
+      console.log("res " + responseJSONnext);
+
+      console.log("reslength:" + responseJSONnext.length);
+      console.log("print:" + (responseJSONnext.length != teamMembers.length));
+      console.log("teamMemberlength:" + teamMembers.length);
+      let flag = (responseJSONnext.length != teamMembers.length);
+      if(flag == true){
+        attendanceStatusArr.push({date:dateitem, status:"Incomplete"});
+      }
+      else{
+        attendanceStatusArr.push({date:dateitem, status:"Complete"});
+      }
+      localStorage.setItem('attendance_status', JSON.stringify(attendanceStatusArr));
+      
+    });
+
+    // let attendance_status = JSON.parse(localStorage.getItem('attendance_status'));
+    // console.log("attendanceStatusArr:" + attendance_status);
+  })
+}
+
   let handleSubmit = async () => {
     let slicedArr = valArr.slice(Math.max(valArr.length - numChanges, 0));
     let newArr = [];
@@ -24,7 +59,7 @@ const AttendanceModal = (props) => {
       let splitArr = slicedArr[i].split(",");
       newArr.push(splitArr);
     }
-    
+
     newArr.forEach(async (element) => {
       console.log("element" + element + "teammemberinfo" + element[1]);
       let data = await fetch('/api/viewAttendanceByDate',{ 
@@ -70,18 +105,6 @@ const AttendanceModal = (props) => {
     Object.keys(parsed).forEach((key) => {
       valArr.push(parsed[key]['status'] + "," + parsed[key]['name'] + "," + parsed[key]['date']);
       console.log(parsed[key]['status'] + "," + parsed[key]['name'] + "," + parsed[key]['date']);
-      //let data = {status: parsed[key]['status'], teammemberinfo:parsed[key]['name'], date:parsed[key]['date']};
-  //     fetch('/api/addAttendanceByDate',{ 
-  //       method:'POST', 
-  //       body: JSON.stringify(data), // data can be `string` or {object}!
-  //       headers:{ 'Content-Type': 'application/json' } 
-  //     }).then((response) => response.json())
-  //       .then((responseJSON) => {
-  //       console.log(responseJSON)
-  //     })
-  //     .catch((error) => {
-  //       console.log("reset client error-------",error);
-  //  });
     });
   }
 
@@ -104,29 +127,37 @@ const AttendanceModal = (props) => {
 
   tomorrow.setDate(tomorrow.getDate() + 1);
 
-  const [values, setValues] = useState([]);
-  //set values to the values of the dates in the admin table
-  console.log(values);
-  if(values.length != 0){
-    let arrDates = [];
-    values.forEach((item)=> {
-      let year = item['year'];
-      let month = item['month']['number'];
-      let day = item['day'];
-      let whole_date = year + "/" + month + "/" + day;
-      arrDates.push(whole_date);
-    });
-    console.log("whole_date " + arrDates);
+  getAttendanceStatus();
+  let attendance_status = JSON.parse(localStorage.getItem('attendance_status'));
 
-    //push values into the db of the admin
-    let data = {name:admin_name, course:admin_course, attendancedates:arrDates}
+  //ADMIN CODE
+
+  // const [values, setValues] = useState([]);
+  // //set values to the values of the dates in the admin table
+  // console.log(values);
+  // if(values.length != 0){
+  //   let arrDates = [];
+  //   values.forEach((item)=> {
+  //     let year = item['year'];
+  //     let month = item['month']['number'];
+  //     let day = item['day'];
+  //     let whole_date = year + "/" + month + "/" + day;
+  //     arrDates.push(whole_date);
+  //   });
+  //   console.log("whole_date " + arrDates);
+
+  //   //push values into the db of the admin
+  //   let data = {name:admin_name, course:admin_course, attendancedates:arrDates}
     
-    fetch('/api/adminAttendance',{ 
-      method:'POST', 
-      body: JSON.stringify(data), // data can be `string` or {object}!
-      headers:{ 'Content-Type': 'application/json' } 
-    });
-  }
+  //   fetch('/api/adminAttendance',{ 
+  //     method:'POST', 
+  //     body: JSON.stringify(data), // data can be `string` or {object}!
+  //     headers:{ 'Content-Type': 'application/json' } 
+  //   });
+  // }
+
+  //ADMIN CODE ENDS
+
   // for each date we want to generate a new meeting WHICH IS a new collapsible trigger
   return (
     <Modal
@@ -142,17 +173,19 @@ const AttendanceModal = (props) => {
       </Modal.Header>
       <Modal.Body>
         {/* <h4>Centered Modal</h4> */}
-        <DatePicker 
+        {/* ADMIN CODE */}
+        {/* <DatePicker 
       multiple
       plugins={[
         <DatePanel />
        ]}
       value={values} 
       onChange={setValues}
-    />
+    /> */}
+    {/* ADMIN CODE END */}
     <br/>
     <br/>
-    <AttendanceModalItem sendChildData={getChildData}></AttendanceModalItem>
+    <AttendanceModalItem sendChildData={getChildData} attendanceStatus={attendance_status}></AttendanceModalItem>
       </Modal.Body>
       <Modal.Footer>
         <Button onClick={props.onHide}>Done</Button>

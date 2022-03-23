@@ -13,6 +13,7 @@ const EvaluationModal = (props) => {
   const [managerEval, setManagerEval] = useState('');
   const [peerEval, setPeerEval] = useState('');
   const [goalEval, setGoalEval] = useState('');
+  let total_index = 0;
 
   let handleSubmit = (event) => {
     event.preventDefault();
@@ -68,37 +69,13 @@ const EvaluationModal = (props) => {
     console.log("bye");
   }
 
-  //DATA STORED IN DB
-  //get the dates from the db
-  let admin_name = "Cindy Shah";
-  let admin_course = "COMPSCI 320";
-  // const [newdates, setDates] = useState([]);
-  let data2 = {name:admin_name, course:admin_course}
-  fetch('/api/getEvalMetricsByAdmin',{ 
-    method:'POST', 
-    body: JSON.stringify(data2), // data can be `string` or {object}!
-    headers:{ 'Content-Type': 'application/json' } 
-  }).then(async (response) => 
-  {
-    let resp = await response.json();
-    console.log("resp:" + resp[0]['evalmetrics']);
-    
-    let eval_arr = [];
-    // response.json();
-    resp[0]['evalmetrics'].forEach((item) => {
-      eval_arr.push(JSON.parse(item));
-    })
-    console.log(eval_arr);
-    localStorage.setItem('eval_arr', JSON.stringify(eval_arr))
-  });
-
 
   let evaluations = JSON.parse(localStorage.getItem('eval_arr'));
 
 
   let saveFunction = async (valArr) => {
     //find if team member is already in the db
-    console.log(valArr);
+    console.log("valArr:" + valArr);
     if(valArr[0] != null){
     let data = await fetch("/api/viewEvaluation", {
       method: "POST",
@@ -150,6 +127,49 @@ const EvaluationModal = (props) => {
     }
   };
 
+  let getEvaluationStatus = async () => {
+    let evals = JSON.parse(localStorage.getItem('eval_arr'));
+    let evaluationStatusArr = [];
+    let teamMembers = JSON.parse(localStorage.getItem('team_member_arr'));
+
+    
+    evals.forEach((evalitem) => {
+      let evalType = Object.keys(evalitem);
+      let evalNum = Object.values(evalitem);
+      
+      for(let i = 0; i<evalNum; i++){
+        let index = i+1;
+        let newdata = {evaltype:evalType[0], evalnumber: index}
+        fetch('/api/getAllEvaluations',{ 
+          method:'POST', 
+          body: JSON.stringify(newdata), // data can be `string` or {object}!
+          headers:{ 'Content-Type': 'application/json' } 
+        }).then((responsenext) => responsenext.json())
+        .then(async (responseJSONnext) => {
+          console.log("reseval " + responseJSONnext);
+    
+          console.log("resevallength:" + responseJSONnext.length);
+          console.log("evalprint:" + (responseJSONnext.length != teamMembers.length));
+          console.log("teamMember2length:" + teamMembers.length);
+          let flag = (responseJSONnext.length != teamMembers.length);
+          if(flag == true){
+            evaluationStatusArr.push({type:evalType[0], num:index, status:"Incomplete"});
+          }
+          else{
+            evaluationStatusArr.push({type:evalType[0], num:index, status:"Complete"});
+          }
+          localStorage.setItem('eval_status', JSON.stringify(evaluationStatusArr));
+          
+        });
+
+      }
+    })
+  }
+      
+  getEvaluationStatus();
+  let eval_status = JSON.parse(localStorage.getItem('eval_status'));
+    
+
   return (
     <Modal
       {...props}
@@ -195,6 +215,8 @@ const EvaluationModal = (props) => {
         <EvaluationModalItem
           sendFinalParent={saveFunction}
           evalData={evaluations}
+          evaluationStatus={eval_status}
+          totalIndex={total_index}
           
         ></EvaluationModalItem>
       </Modal.Body>

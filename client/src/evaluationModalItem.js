@@ -10,6 +10,8 @@ import EvalModelIndividualItems from "./EvalModelIndividualItems";
 const EvaluationModalItem = (props) => {
 
     let teamMembers = props.team_members;
+    let eval_status = props.evaluationStatus;
+    let total_index = props.totalIndex;
 
     let getData = (val) => {
       props.sendFinalParent(val);
@@ -30,7 +32,7 @@ const EvaluationModalItem = (props) => {
         console.log("numOfEvals:" + numOfEvals);
         element = (
             <Collapsible id="meeting-list" trigger={Object.keys(evaluation)}>
-              <EvalModelIndividualItems team_members={teamMembers} evalType={Object.keys(evaluation)} numOfEvals={Object.values(evaluation)} sendFinalParent={getData} evalData={evaluation} allEvalData={evaluations}></EvalModelIndividualItems>
+              <EvalModelIndividualItems totalIndex={total_index} evaluationStatus={eval_status} team_members={teamMembers} evalType={Object.keys(evaluation)} numOfEvals={Object.values(evaluation)} sendFinalParent={getData} evalData={evaluation} allEvalData={evaluations}></EvalModelIndividualItems>
         {/* <Table striped bordered hover>
           <thead>
             <tr>
@@ -49,6 +51,7 @@ const EvaluationModalItem = (props) => {
         );
         evalArray.push(element);
         console.log(evalArray);
+        total_index++;
     });
    return evalArray;
 };

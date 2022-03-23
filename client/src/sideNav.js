@@ -32,6 +32,10 @@ const SideNav = () => {
     menuCollapse ? setMenuCollapse(false) : setMenuCollapse(true);
   };
 
+  const logoutClick = () => {
+    localStorage.clear();
+  }
+
   return (
     <>
       <div id="header">
@@ -172,6 +176,7 @@ const SideNav = () => {
                     />
                   </svg>
                 }
+                onClick={logoutClick}
               >
                 Logout
                 <Link to="/login" />

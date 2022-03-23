@@ -8,6 +8,8 @@ import { useState, useEffect, useRef } from "react";
 const AttendanceModalItem = (props) => {
   let valLargeObj = {};
   let i = 0;
+  let attendance_status = props.attendanceStatus;
+  console.log("attendanceStatusArr:" + attendance_status);
 //   let newVal = useRef('');
 
   let returnVal = (val) => {
@@ -58,27 +60,56 @@ const AttendanceModalItem = (props) => {
   let element = "";
   let elementArr = [];
 
-  //get the dates from the db
-  let admin_name = "Cindy Shah";
-  let admin_course = "COMPSCI 320";
-  // const [newdates, setDates] = useState([]);
-  let data2 = {name:admin_name, course:admin_course}
-  fetch('/api/getAttendanceByAdmin',{ 
-    method:'POST', 
-    body: JSON.stringify(data2), // data can be `string` or {object}!
-    headers:{ 'Content-Type': 'application/json' } 
-  }).then((responsenext) => responsenext.json())
-  .then(async (responseJSONnext) => {
-    console.log("res " + responseJSONnext[0]['attendancedates']); //this should be the dates
-    // setDates(responseJSONnext[0]['attendancedates'])
-    localStorage.setItem('attendance_dates', JSON.stringify(responseJSONnext[0]['attendancedates']))
-  });
   let dates = JSON.parse(localStorage.getItem('attendance_dates'));
   let count = 1;
-  dates.forEach((date) => {
-    console.log(date);
+  let attendanceStatusArr = [];
+  let statusForAttendance = "";
+  dates.forEach((dateitem) => {
+    // let teamMembers = JSON.parse(localStorage.getItem('team_member_arr'));
+
+    // let newdata = {date:dateitem}
+    // //fetch all the people under this date to get status of completeness for that day
+    // fetch('/api/getAllAttendanceByDate',{ 
+    //   method:'POST', 
+    //   body: JSON.stringify(newdata), // data can be `string` or {object}!
+    //   headers:{ 'Content-Type': 'application/json' } 
+    // }).then((responsenext) => responsenext.json())
+    // .then(async (responseJSONnext) => {
+    //   console.log("res " + responseJSONnext);
+
+    //   console.log("reslength:" + responseJSONnext.length);
+    //   console.log("print:" + (responseJSONnext.length != teamMembers.length));
+    //   console.log("teamMemberlength:" + teamMembers.length);
+    //   let flag = (responseJSONnext.length != teamMembers.length);
+    //   if(flag == true){
+    //     console.log("hello");
+    //     attendanceStatusArr.push("Incomplete");
+    //   }
+    //   else{
+    //     console.log("hi");
+    //     attendanceStatusArr.push("Complete");
+    //   }
+    //   localStorage.setItem('attendance_status', JSON.stringify(attendanceStatusArr));
+    // });
+
+    // let attendance_status = JSON.parse(localStorage.getItem('attendance_status'));
+    // console.log("attendanceStatusArr:" + attendance_status);
+    //console.log("attendanceStat[i]: " + attendance_status[count-1]);
+    
+    for(let i = 0; i<attendance_status.length; i++){
+      console.log("attendanceobj:"+ attendance_status[i]);
+      console.log("flag: "+ (attendance_status[i]['date'] == dateitem))
+      if(attendance_status[i]['date'] == dateitem){
+        statusForAttendance = attendance_status[i]['status'];
+        console.log("statusForAttendance:" + statusForAttendance);
+        break;
+      }else{
+        continue;
+      }
+    }
+    
     element = (
-      <Collapsible id="meeting-list" trigger={"Meeting " + count + ": " + date}>
+      <Collapsible id="meeting-list" trigger={"Meeting " + count + ": " + dateitem + "  |  " + statusForAttendance}>
         <Table striped bordered hover>
           <thead>
             <tr>
@@ -91,7 +122,7 @@ const AttendanceModalItem = (props) => {
           <tbody>
             {/* data sends the date to the child component */}
             <AttendanceTableMember
-              data={date}
+              data={dateitem}
               sendData={getData}
               sendCheckedPresent={getChildPresent}
               checkPresent = {returnVal}
