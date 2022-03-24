@@ -90,7 +90,7 @@
     transform: scaleX(1);
   }
 
-#homePage-header-button-id{
+#homePage-header-button-id, #homePage-header-admin-button-id{
     background-color: #101825;
     border-color:#EDAE49;
     border-width:1px;
@@ -110,7 +110,11 @@
     color:#EDAE49;
 }
 
-#homePage-header-button-id:hover{
+#homePage-header-admin-button-id{
+    margin-right:200px;
+}
+
+#homePage-header-button-id:hover, #homePage-header-admin-button-id:hover{
     color:white;
     background-color: #101825;
     border-color: white;

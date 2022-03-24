@@ -198,11 +198,11 @@ async function getRepoNameByManagerAndCourse(manager_name, course){
     );
 }
 
-async function getTokenByManager(manager_name){
+async function getTokenAndAdminByManager(manager_name, classroom){
   return await connectAndRun((db) =>
   db.any(
-    "SELECT github_token FROM managers WHERE github_username = $1;",
-    [manager_name]
+    "SELECT github_token, admin FROM managers WHERE github_username = $1 and classroom = $2;",
+    [manager_name, classroom]
       )
     );
 }
@@ -286,7 +286,7 @@ updateEval,
 getEvalByMember,
 getDistinctEvalType,
 getChecked,
-getTokenByManager,
+getTokenAndAdminByManager,
 addAdmin,
 updateAdminAttendance,
 getAttendanceByAdmin,

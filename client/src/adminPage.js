@@ -21,8 +21,9 @@ const AdminPage = (props) => {
 
   //ATTENDANCE CODE
 
-  let admin_name = "Cindy Shah";
-  let admin_course = "COMPSCI 320";
+  //change this to login information
+  let admin_name = JSON.parse(localStorage.getItem('username'));
+  let admin_course = JSON.parse(localStorage.getItem('course'));
 
   // end of information from admin login
   const today = new Date();
@@ -83,8 +84,8 @@ const AdminPage = (props) => {
     }
     console.log("arr " + arr);
 
-    let admin_name = "Cindy Shah";
-    let admin_course = "COMPSCI 320";
+    let admin_name = JSON.parse(localStorage.getItem('username'));
+    let admin_course = JSON.parse(localStorage.getItem('course'));
 
 
     let data = {name:admin_name, course:admin_course, evalmetrics:arr}

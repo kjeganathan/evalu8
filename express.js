@@ -130,9 +130,9 @@ app.post("/api/getRepoNameByManagerAndCourse", async (req, res) => {
     res.send(result);
 });
 
-app.post("/api/getTokenByManager", async (req, res) => {
+app.post("/api/getTokenAndAdminByManager", async (req, res) => {
     const data = req.body;
-    let result = await dblast.getTokenByManager(data.manager_name);
+    let result = await dblast.getTokenAndAdminByManager(data.manager_name, data.classroom);
     res.send(result);
 });
 

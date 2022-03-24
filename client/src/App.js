@@ -10,6 +10,8 @@ import teamMembers from './teamMembers';
 import engagementPage from './engagement';
 import contributionPage from './contribution';
 import AdminPage from './adminPage';
+import admincreateAccount from './adminCreateAccount';
+import adminLogin from './adminLogin';
 
 
 class App extends Component {
@@ -31,7 +33,9 @@ class App extends Component {
              <Route path="/teamMembers" component={teamMembers}/>
              <Route path="/engagement" component={engagementPage}/>
              <Route path="/contribution" component={contributionPage}/>
-             <Route path="/admin" component={AdminPage}/>
+             <Route path="/adminPage" component={AdminPage}/>
+             <Route path="/adminCreateAccount" component={admincreateAccount}/>
+             <Route path="/adminLogin" component={adminLogin}/>
            </Switch>
         </div> 
       </BrowserRouter>

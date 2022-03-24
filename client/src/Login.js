@@ -12,7 +12,8 @@ class Login extends Component {
     this.state = {
       github_username:'',
       course:'',
-      token:''
+      token:'',
+      admin:''
       };
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -29,12 +30,11 @@ class Login extends Component {
       localStorage.setItem("github_username", JSON.stringify(this.state.github_username));
       localStorage.setItem("course", JSON.stringify(this.state.course));
       // localStorage.setItem("github_token", JSON.stringify(this.state.token));
-      let github_username = JSON.parse(localStorage.getItem('github_username'));
-    let username = JSON.parse(localStorage.getItem("github_username"));
+      let jsoncourse = JSON.parse(localStorage.getItem("course"));
+      let username = JSON.parse(localStorage.getItem("github_username"));
       console.log(username);
-      let stringifiedUser = JSON.stringify(username);
-      let data = {manager_name:username}
-      fetch("/api/getTokenByManager",{ 
+      let data = {manager_name:username, classroom:jsoncourse}
+      fetch("/api/getTokenAndAdminByManager",{ 
         method:'POST', 
         body: JSON.stringify(data), // data can be `string` or {object}!
         headers:{ 'Content-Type': 'application/json' } 
@@ -42,15 +42,17 @@ class Login extends Component {
         .then( async responsenext => {
             //data2 is an array of objects
             const data = await responsenext.json();
-            console.log('response data?', data[0]['github_token']);
+            console.log('response data?', data[0]['github_token'] + " " + data[0]['admin']);
             this.setState({
               token : data[0]['github_token'],
+              admin : data[0]['admin']
             });
 
             
            // window.location.href='/teamMembers';
         }).then(e => {
           localStorage.setItem("github_token", JSON.stringify(this.state.token));
+          localStorage.setItem("admin", JSON.stringify(this.state.admin));
         }).then(s => {
           window.location.href='/teamMembers';
         });

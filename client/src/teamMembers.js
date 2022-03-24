@@ -50,8 +50,8 @@ class teamMembers extends Component {
   }
 
   getAttendanceDates = () => {
-    let admin_name = "Cindy Shah";
-    let admin_course = "COMPSCI 320";
+    let admin_name = JSON.parse(localStorage.getItem('admin'));
+    let admin_course = JSON.parse(localStorage.getItem('course'));
   // const [newdates, setDates] = useState([]);
     let data2 = {name:admin_name, course:admin_course}
   fetch('/api/getAttendanceByAdmin',{ 
@@ -69,8 +69,8 @@ class teamMembers extends Component {
   getEvaluationArray = () => {
     //DATA STORED IN DB
   //get the dates from the db
-  let admin_name = "Cindy Shah";
-  let admin_course = "COMPSCI 320";
+  let admin_name = JSON.parse(localStorage.getItem('admin'));
+    let admin_course = JSON.parse(localStorage.getItem('course'));
   // const [newdates, setDates] = useState([]);
   let data2 = {name:admin_name, course:admin_course}
   fetch('/api/getEvalMetricsByAdmin',{ 

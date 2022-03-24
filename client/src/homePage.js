@@ -14,12 +14,17 @@ class homePage extends Component {
         this.props.history.push("/login");
     }
 
+    routeChangeToAdminLogin=()=> {
+        this.props.history.push("/adminLogin");
+    }
+
   render() {
     return (
     <div>
         <div className="App-header">
             <img src={logo} className="App-logo" alt="logo" />
-            <button id="homePage-header-button-id" onClick={this.routeChangeToLogin} type="submit" className="btn btn-dark">Log In</button>
+            <button id="homePage-header-admin-button-id" onClick={this.routeChangeToAdminLogin} type="submit" className="btn btn-dark">Admin Log In</button>
+            <button id="homePage-header-button-id" onClick={this.routeChangeToLogin} type="submit" className="btn btn-dark">Student Log In</button>
         </div>
         <div className="homePage">
             <h1 className="homePage-header">Performance evaluation made easy</h1>
