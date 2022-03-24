@@ -71,7 +71,7 @@ label{
 
 }
 
-#createLastName, #createEmail, #createPassword, #createVerifyPassword, #reponame, #classRoomName{
+#createLastName, #adminName, #createEmail, #createPassword, #createVerifyPassword, #reponame, #classRoomName{
     margin-left:auto;
     margin-right:auto;
     width:75%;
@@ -80,6 +80,10 @@ label{
     background-color: #101825;
     border-color:#101825;
     box-shadow: 4px 4px 4px 2px rgba(0, 0, 0, 0.15);
+}
+
+#adminName{
+    width:100%;
 }
 
 #createAccountButton{

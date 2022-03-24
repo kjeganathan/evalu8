@@ -6,3 +6,54 @@
 .adminPage-content{
     margin-top:80px;
 }
+
+#attendance-box{
+    
+    border-right: 1px solid white;
+    padding-bottom:100px;
+    height:90vh;
+  
+}
+
+#attendance-box-title, #evaluation-box-title{
+    padding-top:180px;
+    margin-top:80px;
+    font-family: "Avenir LT Std Book", sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size:calc(4.5vmin + 0.5vmax);
+    letter-spacing: 0.05em;
+    line-height: 1.5;
+    text-align: center;
+    color: #EDAE49;
+    background-color: #101825;
+}
+
+#attendance-box-subtitle, #evaluation-box-subtitle{
+    margin-top:15px;
+    margin-bottom:30px;
+    font-family: "Avenir LT Std Book", sans-serif;
+    font-style: normal;
+    font-weight: 300; 
+    letter-spacing: .1em;
+    font-size:calc(2.3vmin + 0.01vmax);
+    /* font-size: 1.125rem; */
+    line-height: 1.75rem;
+    text-align: center;
+    color: white;
+}
+
+#evaluation-box-eval{
+    margin-top:15px;
+    margin-bottom:30px;
+    font-family: "Avenir LT Std Book", sans-serif;
+    font-style: normal;
+    font-weight: 300; 
+    letter-spacing: .1em;
+    font-size:calc(1.5vmin + 0.01vmax);
+    /* font-size: 1.125rem; */
+    line-height: 1.75rem;
+    text-align: center;
+    color: white;
+}
+

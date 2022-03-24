@@ -196,10 +196,12 @@ class createAccount extends Component {
                   />
                 </div>
                 <div id="last-name-form" className="form-group">
-                  <label>
-                    Pick your course Professor:
+                  <label for="adminName">
+                      Course Professor
+                      <br/>
                     <select
                       onChange={this.handleDropDownChange}
+                      id="adminName"
                     >
                     
                      {professorList}

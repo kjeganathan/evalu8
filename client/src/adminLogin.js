@@ -90,9 +90,9 @@ class adminLogin extends Component {
                 <h4 className="Login-subheader">Login to continue</h4>
 
                 <div id="last-name-form" className="form-group">
-                  <label>
-                    Pick your name:
-                    <select onChange={this.handleDropDownChange}>
+                  <label for="adminName">
+                    Name
+                    <select id="adminName" onChange={this.handleDropDownChange}>
                       {professorList}
                     </select>
                   </label>

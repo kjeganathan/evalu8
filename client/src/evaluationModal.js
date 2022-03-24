@@ -183,35 +183,6 @@ const EvaluationModal = (props) => {
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        {/* Admin Code */}
-        <form onSubmit={handleSubmit}>
-        <h5>
-          Choose How Many of Each Evaluation Type you Would Like For Your Class
-        </h5>
-
-        <label for="manager_eval">Manager Evaluations (0-15):</label>
-
-        <input
-          type="number"
-          onChange={handleChange1}
-          id="manager_eval"
-          name="Manager Evaluations"
-          min="0"
-          max="15"
-        />
-
-        <label for="peer_eval">Peer Evaluations (0-15):</label>
-
-        <input type="number" onChange={handleChange2} id="peer_eval" name="Peer Evaluations" min="0" max="15" />
-
-        <label for="goal-setting_eval">Goal-Setting Evaluations (0-15):</label>
-
-        <input type="number" onChange={handleChange3} id="goal-setting_eval" name="Goal Setting Evaluations" min="0" max="15" />
-        <button id="EvalButton" type="submit" className="btn btn-dark">Submit</button>
-        </form>
-
-
-        {/* Admin Code End*/}
         <EvaluationModalItem
           sendFinalParent={saveFunction}
           evalData={evaluations}

@@ -131,8 +131,11 @@ const AdminPage = (props) => {
           {/* Put all the code for admin here */}
           <div className="container">
             <div className="row">
+              
               <div id="attendance-box" className="col-sm">
                 {/* ADMIN CODE */}
+                <h3 id="attendance-box-title">Attendance</h3>
+                <h5 id="attendance-box-subtitle">Choose Attendance Dates</h5>
                 <DatePicker
                   multiple
                   plugins={[<DatePanel />]}
@@ -141,13 +144,11 @@ const AdminPage = (props) => {
                 />
               </div>
               <div id="evaluation-box" className="col-sm">
+                <h3 id="evaluation-box-title">Evaluation</h3>
+                <h5 id="evaluation-box-subtitle">Choose Number of Evaluations</h5>
                 <form onSubmit={handleSubmit}>
-                  <h5>
-                    Choose How Many of Each Evaluation Type you Would Like For
-                    Your Class
-                  </h5>
 
-                  <label for="manager_eval">Manager Evaluations (0-15):</label>
+                  <label id="evaluation-box-eval" for="manager_eval">Manager Evaluations (0-15):</label>
 
                   <input
                     type="number"
@@ -158,7 +159,7 @@ const AdminPage = (props) => {
                     max="15"
                   />
 
-                  <label for="peer_eval">Peer Evaluations (0-15):</label>
+                  <label id="evaluation-box-eval" for="peer_eval">Peer Evaluations (0-15):</label>
 
                   <input
                     type="number"
@@ -169,7 +170,7 @@ const AdminPage = (props) => {
                     max="15"
                   />
 
-                  <label for="goal-setting_eval">
+                  <label id="evaluation-box-eval" for="goal-setting_eval">
                     Goal-Setting Evaluations (0-15):
                   </label>
 
@@ -181,6 +182,7 @@ const AdminPage = (props) => {
                     min="0"
                     max="15"
                   />
+                  <div>
                   <button
                     id="EvalButton"
                     type="submit"
@@ -188,6 +190,7 @@ const AdminPage = (props) => {
                   >
                     Submit
                   </button>
+                  </div>
                 </form>
               </div>
             </div>
