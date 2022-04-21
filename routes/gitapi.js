@@ -14,7 +14,8 @@ router.get('/github/userInfo/:user/:token', async (req, res) => {
         hostname: 'api.github.com',
         path:'/users/'+user,
         headers: {
-            'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/29.0.1521.3 Safari/537.36'
+            'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/29.0.1521.3 Safari/537.36',
+            'Authorization': `Bearer ${token}`
         },
         OAUth: token
     }
@@ -38,7 +39,7 @@ router.get('/github/teamInfo/:owner/:reponame/:token', async (req, res) => {
         path:'/repos/'+ owner + '/' + reponame + '/collaborators',
         headers: {
             'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/29.0.1521.3 Safari/537.36',
-            'Authorization': 'Bearer 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'
+            'Authorization': `Bearer ${token}`
         },
         OAUth: token
     }
@@ -63,7 +64,7 @@ router.get('/github/contributorInfo/:owner/:reponame/:token', async (req, res) =
         path:'/repos/'+ owner + '/' + reponame + '/contributors',
         headers: {
             'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/29.0.1521.3 Safari/537.36',
-            'Authorization': 'Bearer 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'
+            'Authorization': `Bearer ${token}`
         },
         OAUth: token
     }
@@ -84,8 +85,8 @@ router.get('/github/commitInfo/:owner/:reponame/:token', async (req, res) => {
         hostname: 'api.github.com',
         path:'/repos/'+ owner + '/' + reponame + '/stats/contributors',
         headers: {
-            'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/29.0.1521.3 Safari/537.36'
-            // 'Authorization' : `Token ${token}`
+            'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/29.0.1521.3 Safari/537.36',
+            'Authorization': `Bearer ${token}`
         },
         OAUth: token
     }
@@ -108,7 +109,8 @@ router.get('/github/issueInfo/:owner/:reponame/:state/:token', async (req, res) 
         hostname: 'api.github.com',
         path:'/repos/'+ owner + '/' + reponame + '/issues?state=' + state,
         headers: {
-            'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/29.0.1521.3 Safari/537.36'
+            'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/29.0.1521.3 Safari/537.36',
+            'Authorization': `Bearer ${token}`
         },
         OAUth: token
     }

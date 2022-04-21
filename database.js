@@ -171,11 +171,11 @@ async function addTeamMembers(github_username, github_reponame, team_members){
     );
 }
 
-async function addToTeamMemberTable(name, course, github_username, manager_name) {
+async function addToTeamMemberTable(name, course, github_username, manager_name, email) {
   return await connectAndRun((db) =>
     db.none(
-      "INSERT INTO teammember (name, course, github_username, manager_name) VALUES ($1, $2, $3, $4);",
-      [name, course, github_username, manager_name]
+      "INSERT INTO teammember (name, course, github_username, manager_name, email) VALUES ($1, $2, $3, $4, $5);",
+      [name, course, github_username, manager_name, email]
     )
   );
 }

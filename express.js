@@ -113,7 +113,7 @@ app.post("/api/addTeamMembers", async (req, res) => {
 
 app.post("/api/addToTeamMemberTable", async (req, res) => {
     const data = req.body;
-    await dblast.addToTeamMemberTable(data.name, data.course, data.github_username, data.manager_name);
+    await dblast.addToTeamMemberTable(data.name, data.course, data.github_username, data.manager_name, data.email);
     console.log("Added team member to teammember table");
     res.sendStatus(200);
 });

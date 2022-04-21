@@ -121,6 +121,7 @@ class createAccount extends Component {
                       course: this.state.classroom,
                       github_username: obj["login"],
                       manager_name: this.state.github_username,
+                      email: data3["email"]
                     };
                     fetch("/api/addToTeamMemberTable", {
                       method: "POST",
