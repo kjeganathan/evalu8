@@ -3,14 +3,49 @@ import Table from "react-bootstrap/Table";
 import Form from "react-bootstrap/Form";
 import "./attendanceModalItem.css";
 import AttendanceTableMember from "./attendaceTableMembers.js";
+import { CSVLink, CSVDownload } from "react-csv";
 import { useState, useEffect, useRef } from "react";
 
 const AttendanceModalItem = (props) => {
+  let csvDat = [];
+  let newCSVData = [];
   let valLargeObj = {};
   let i = 0;
   let attendance_status = props.attendanceStatus;
   console.log("attendanceStatusArr:" + attendance_status);
+  let coursedata = JSON.parse(localStorage.getItem("course"));
 //   let newVal = useRef('');
+
+let getcsvData = async (dateitem) => { //call this in dateItem forEach
+  let newdata = {date:dateitem, course:coursedata}
+    
+    fetch('/api/getAllAttendanceByDate',{ 
+      method:'POST', 
+      body: JSON.stringify(newdata), // data can be `string` or {object}!
+      headers:{ 'Content-Type': 'application/json' } 
+    }).then((responsenext) => responsenext.json())
+    .then(async (responseJSONnext) => {
+      console.log("csvData: " + responseJSONnext);
+    csvDat = [["Last Name", "First Name", "Email Address", "", "Attend"]]
+    responseJSONnext.forEach((item) => {
+      console.log("csvitem2: " + item['teammemberinfo']);
+      //csv.push(["hello", "goodbye", "lastnight", "e", "a"]);
+      let nameArr = "";
+      let firstName = "";
+      let lastName = "";
+      if(item['fullname'].length != 0){
+        nameArr = item['fullname'].split(" ");
+        firstName = nameArr[0];
+        lastName = nameArr[1];
+      }
+      csvDat.push([lastName, firstName, item['email'], "", item['status'].charAt(0).toUpperCase()])
+    })
+    console.log("csvIS2: " + csvDat);
+    newCSVData.push(csvDat);
+    localStorage.setItem("csvdata2", JSON.stringify(newCSVData));
+    })
+
+}
 
   let returnVal = (val) => {
       return val;
@@ -66,7 +101,7 @@ const AttendanceModalItem = (props) => {
   let attendanceStatusArr = [];
   let statusForAttendance = "";
   dates.forEach((dateitem) => {
-    
+    getcsvData(dateitem);
     for(let i = 0; i<attendance_status.length; i++){
       console.log("attendanceobj:"+ attendance_status[i]);
       console.log("flag: "+ (attendance_status[i]['date'] == dateitem))
@@ -78,9 +113,12 @@ const AttendanceModalItem = (props) => {
         continue;
       }
     }
+    let newDataSaved = JSON.parse(localStorage.getItem("csvdata2")); 
+    console.log("newDataSaved: " + newDataSaved[0]);
     
     element = (
       <Collapsible id="meeting-list" trigger={"Meeting " + count + ": " + dateitem + "  |  " + statusForAttendance}>
+        <CSVLink data={newDataSaved[parseInt(count-1)]}>Download me</CSVLink>
         <Table striped bordered hover>
           <thead>
             <tr>

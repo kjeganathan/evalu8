@@ -14,11 +14,41 @@ import ReactHtmlParser, { processNodes, convertNodeToElement, htmlparser2 } from
 
 const AttendanceModal = (props) => {
 
-  const [parsedVal, setStateParsedVal] = useState('');
+  let csv = [];
   let valArr = [];
   let numChanges = 0;
   let coursedata = JSON.parse(localStorage.getItem("course"));
   let admindata = JSON.parse(localStorage.getItem("admin"));
+
+  
+
+  let getcsvData = async () => {
+
+    fetch('/api/getAllAttendance',{ 
+      method:'GET', 
+      headers:{ 'Content-Type': 'application/json' } 
+    }).then((responsenext) => responsenext.json())
+    .then(async (responseJSONnext) => {
+      console.log("csvData: " + responseJSONnext);
+      csv = [["Last Name", "First Name", "Email Address", "", "Attend"]]
+      responseJSONnext.forEach((item) => {
+        console.log("csvitem: " + item['teammemberinfo']);
+        //csv.push(["hello", "goodbye", "lastnight", "e", "a"]);
+        let nameArr = "";
+        let firstName = "";
+        let lastName = "";
+        if(item['fullname'].length != 0){
+          nameArr = item['fullname'].split(" ");
+          firstName = nameArr[0];
+          lastName = nameArr[1];
+        }
+        csv.push([lastName, firstName, item['email'], "", item['status'].charAt(0).toUpperCase()])
+      })
+      console.log("csvIS: " + csv);
+      localStorage.setItem("csvdata", JSON.stringify(csv));
+    });
+
+  }
 
   let getAttendanceStatus = async () => {
     let dates = JSON.parse(localStorage.getItem('attendance_dates'));
@@ -152,6 +182,10 @@ const AttendanceModal = (props) => {
   getAttendanceStatus();
   let attendance_status = JSON.parse(localStorage.getItem('attendance_status'));
 
+  //CSV Data
+  getcsvData();
+  let newCSVData = JSON.parse(localStorage.getItem("csvdata"));
+
   //ADMIN CODE
 
   // const [values, setValues] = useState([]);
@@ -194,7 +228,7 @@ const AttendanceModal = (props) => {
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <Button>Download Attendance (.CSV)</Button>
+      <CSVLink data={newCSVData}>Download me</CSVLink>
         {/* Make a new component here for downloading attendance */}
         {/* <h4>Centered Modal</h4> */}
         {/* ADMIN CODE */}

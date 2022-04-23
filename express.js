@@ -74,6 +74,11 @@ app.post("/api/createAccount", async (req, res) => {
     res.sendStatus(200);
 });
 
+app.get("/api/getAllAttendance", async (req, res) => {
+    let result = await dblast.getAllAttendance();
+    res.send(result);
+});
+
 app.post("/api/addAttendanceByDate", async (req, res) => {
     const data = req.body;
     await dblast.addAttendanceByDate(data.status, data.teammemberinfo, data.date, data.email, data.course, data.fullname, data.admin);

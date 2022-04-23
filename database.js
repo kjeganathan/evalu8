@@ -115,6 +115,16 @@ async function addUser(name, classroom, github_username, github_reponame, github
     );
 }
 
+// Database functions for attendance
+
+async function getAllAttendance(){
+  return await connectAndRun((db) =>
+  db.any(
+    "SELECT * FROM attendanceondate;"
+      )
+    );
+}
+
 async function addAttendanceByDate(status, teammemberinfo, date, email, course, fullname, admin) {
   return await connectAndRun((db) =>
   db.none(
@@ -304,5 +314,6 @@ getEvalMetricsByAdmin,
 getAllAttendanceByDate,
 getAllEvaluations,
 getAllAdmins,
-getEmailByGitUsername
+getEmailByGitUsername,
+getAllAttendance
 };
