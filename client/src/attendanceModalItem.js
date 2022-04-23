@@ -29,6 +29,7 @@ const AttendanceModalItem = (props) => {
     valObj.status = valDivideArr[0];
     valObj.name = valDivideArr[1];
     valObj.date = valDivideArr[2];
+    valObj.fullname = valDivideArr[3];
     //Don't push those elements with the same date and team member into the array
     //DO A CHECK HERE
     Object.keys(valLargeObj).forEach((key) => {
@@ -51,7 +52,7 @@ const AttendanceModalItem = (props) => {
     //Add the new element to the large object whether or not anything has been deleted beforehand
     valLargeObj[i] = valObj; // add the new item where there are no matches
     i++;
-    console.log(valLargeObj);
+    console.log("valLargeObj: " + JSON.stringify(valLargeObj));
     props.sendChildData(JSON.stringify(valLargeObj));
   };
 

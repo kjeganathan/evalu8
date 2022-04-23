@@ -61,6 +61,12 @@ app.post("/api/getEvalMetricsByAdmin", async (req, res) => {
 
 //ADMIN ENDPOINTS END
 
+app.post("/api/emailByGitUsername", async (req, res) => {
+    const data = req.body;
+    let result = await dblast.getEmailByGitUsername(data.name);
+    res.send(result);
+});
+
 app.post("/api/createAccount", async (req, res) => {
     const data = req.body;
     await dblast.addUser(data.name, data.classroom, data.github_username, data.github_reponame, data.github_token, data.password, data.admin);
@@ -70,37 +76,37 @@ app.post("/api/createAccount", async (req, res) => {
 
 app.post("/api/addAttendanceByDate", async (req, res) => {
     const data = req.body;
-    await dblast.addAttendanceByDate(data.status, data.teammemberinfo, data.date);
+    await dblast.addAttendanceByDate(data.status, data.teammemberinfo, data.date, data.email, data.course, data.fullname, data.admin);
     res.sendStatus(200);
 });
 
 app.post("/api/updateAttendanceByDate", async (req, res) => {
     const data = req.body;
-    await dblast.updateAttendanceByDate(data.status, data.teammemberinfo, data.date);
+    await dblast.updateAttendanceByDate(data.status, data.teammemberinfo, data.date, data.course);
     res.sendStatus(200);
 });
 
 app.post("/api/viewAttendanceByDate", async (req, res) => {
     const data = req.body;
-    let result = await dblast.viewAttendanceByDate(data.teammemberinfo, data.date);
+    let result = await dblast.viewAttendanceByDate(data.teammemberinfo, data.date, data.course);
     res.send(result);
 });
 
 app.post("/api/getAllAttendanceByDate", async (req, res) => {
     const data = req.body;
-    let result = await dblast.getAllAttendanceByDate(data.date);
+    let result = await dblast.getAllAttendanceByDate(data.date, data.course);
     res.send(result);
 });
 
 app.post("/api/statusAttendanceByDate", async (req, res) => {
     const data = req.body;
-    let result = await dblast.statusAttendanceByDate(data.teammemberinfo, data.date);
+    let result = await dblast.statusAttendanceByDate(data.teammemberinfo, data.date, data.course);
     res.send(result);
 });
 
 app.post("/api/getMemberAttendanceByDate", async (req, res) => {
     const data = req.body;
-    let result = await dblast.getMemberAttendanceOnDate(data.teammemberinfo);
+    let result = await dblast.getMemberAttendanceOnDate(data.teammemberinfo, data.course);
     res.send(result);
 });
 

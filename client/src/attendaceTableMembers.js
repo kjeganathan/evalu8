@@ -14,7 +14,7 @@ const AttendanceTableMember = (props) => {
     // in other words we push check status based on db and team member, if date already exists, then we modify already existant date otherwise we create a new row
     
     let count = 1;
-   
+    let coursedata = JSON.parse(localStorage.getItem('course'));
     
     const handlePresentClick = (event) => {
         let checked = event.target.checked;
@@ -24,7 +24,7 @@ const AttendanceTableMember = (props) => {
         console.log(checkedValue);
 
         let checkedInfo = event.target.id;
-        console.log(checkedInfo); //Send checkedInfo To Parent
+        console.log("checkedInfo: " + checkedInfo); //Send checkedInfo To Parent
 
         props.sendData(checkedInfo);
 
@@ -39,7 +39,7 @@ const AttendanceTableMember = (props) => {
 
         let checkedInfo = event.target.id;
         console.log(checkedInfo); //Send checkedInfo To Parent
-
+        console.log("checkedInfo: " + checkedInfo);
         props.sendData(checkedInfo);
 
     }
@@ -53,13 +53,13 @@ const AttendanceTableMember = (props) => {
 
         let checkedInfo = event.target.id;
         console.log(checkedInfo); //Send checkedInfo To Parent
-
+        console.log("checkedInfo: " + checkedInfo);
         props.sendData(checkedInfo);
 
     }
 
     const assignChecked = async (data) => {
-
+      
         await fetch('/api/statusAttendanceByDate',{ 
             method:'POST', 
             body: JSON.stringify(data), 
@@ -124,7 +124,7 @@ const AttendanceTableMember = (props) => {
     if(teamMembers.length != 0){
     teamMembers.forEach(async (teamMember) => {
         console.log("tem" + teamMember);
-        let data = {teammemberinfo:teamMember['github_username'], date:props.data};
+        let data = {teammemberinfo:teamMember['github_username'], date:props.data, course:coursedata};
         // let returnedData = assignChecked(data);
         let res = assignChecked(data);
         console.log(JSON.stringify(res));
@@ -152,7 +152,7 @@ const AttendanceTableMember = (props) => {
                         label="Present"
                         name="group1"
                         type={type}
-                        id={"present," + teamMember['github_username'] + "," + props.data}
+                        id={"present," + teamMember['github_username'] + "," + props.data + "," + teamMember['name']}
                       />
                       <Form.Check
                         inline
@@ -160,7 +160,7 @@ const AttendanceTableMember = (props) => {
                         onChange={handleAbsentClick}
                         label="Absent"
                         name="group1"
-                        id={"absent," + teamMember['github_username'] + "," + props.data}
+                        id={"absent," + teamMember['github_username'] + "," + props.data  + "," + teamMember['name']}
                         type={type}
                       />
                       <Form.Check
@@ -169,7 +169,7 @@ const AttendanceTableMember = (props) => {
                         onChange={handleExcusedClick}
                         label="Excused"
                         name="group1"
-                        id={"excused," + teamMember['github_username'] + "," + props.data}
+                        id={"excused," + teamMember['github_username'] + "," + props.data  + "," + teamMember['name']}
                         type={type}
                         // id={`inline-${type}-3`}
                       />

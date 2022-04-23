@@ -94,6 +94,15 @@ async function getAllAdmins(){
     );
 }
 
+async function getEmailByGitUsername(name){
+  return await connectAndRun((db) =>
+  db.any(
+    "SELECT email FROM teammember WHERE github_username = $1;",
+    [name]
+      )
+    );
+}
+
 
 
 // Database functions for log in 
@@ -106,56 +115,56 @@ async function addUser(name, classroom, github_username, github_reponame, github
     );
 }
 
-async function addAttendanceByDate(status, teammemberinfo, date) {
+async function addAttendanceByDate(status, teammemberinfo, date, email, course, fullname, admin) {
   return await connectAndRun((db) =>
   db.none(
-    "INSERT INTO attendanceondate (status, teammemberinfo, date) VALUES ($1, $2, $3);",
-    [status, teammemberinfo, date]
+    "INSERT INTO attendanceondate (status, teammemberinfo, date, email, course, fullname, admin) VALUES ($1, $2, $3, $4, $5, $6, $7);",
+    [status, teammemberinfo, date, email, course, fullname, admin]
       )
     );
 }
 
-async function updateAttendanceByDate(status, teammemberinfo, date) {
+async function updateAttendanceByDate(status, teammemberinfo, date, course) {
   return await connectAndRun((db) =>
   db.any(
-    "UPDATE attendanceondate SET status = $1 WHERE teammemberinfo = $2 and date = $3;",
-    [status, teammemberinfo, date]
+    "UPDATE attendanceondate SET status = $1 WHERE teammemberinfo = $2 and date = $3 and course = $4;",
+    [status, teammemberinfo, date, course]
       )
     );
 }
 
-async function viewAttendanceByDate(teammemberinfo, date){
+async function viewAttendanceByDate(teammemberinfo, date, course){
   return await connectAndRun((db) =>
   db.any(
-    "SELECT * FROM attendanceondate WHERE teammemberinfo = $1 and date = $2;",
-    [teammemberinfo, date]
+    "SELECT * FROM attendanceondate WHERE teammemberinfo = $1 and date = $2 and course = $3;",
+    [teammemberinfo, date, course]
       )
     );
 }
 
-async function getAllAttendanceByDate(date){
+async function getAllAttendanceByDate(date, course){
   return await connectAndRun((db) =>
   db.any(
-    "SELECT * FROM attendanceondate WHERE date = $1;",
-    [date]
+    "SELECT * FROM attendanceondate WHERE date = $1 and course = $2;",
+    [date, course]
       )
     );
 }
 
-async function getMemberAttendanceOnDate(teammemberinfo){
+async function getMemberAttendanceOnDate(teammemberinfo, course){
   return await connectAndRun((db) =>
   db.any(
-    "SELECT * FROM attendanceondate WHERE teammemberinfo = $1;",
-    [teammemberinfo]
+    "SELECT * FROM attendanceondate WHERE teammemberinfo = $1 and course = $2;",
+    [teammemberinfo, course]
       )
     );
 }
 
-async function statusAttendanceByDate(teammemberinfo, date){
+async function statusAttendanceByDate(teammemberinfo, date, course){
   return await connectAndRun((db) =>
   db.any(
-    "SELECT status FROM attendanceondate WHERE teammemberinfo = $1 and date = $2;",
-    [teammemberinfo, date]
+    "SELECT status FROM attendanceondate WHERE teammemberinfo = $1 and date = $2 and course = $3;",
+    [teammemberinfo, date, course]
       )
     );
 }
@@ -294,5 +303,6 @@ updateAdminEvalMetrics,
 getEvalMetricsByAdmin,
 getAllAttendanceByDate,
 getAllEvaluations,
-getAllAdmins
+getAllAdmins,
+getEmailByGitUsername
 };

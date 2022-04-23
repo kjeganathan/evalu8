@@ -1,5 +1,6 @@
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
+import { CSVLink, CSVDownload } from "react-csv";
 import Table from "react-bootstrap/Table";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Collapsible from "react-collapsible";
@@ -16,6 +17,8 @@ const AttendanceModal = (props) => {
   const [parsedVal, setStateParsedVal] = useState('');
   let valArr = [];
   let numChanges = 0;
+  let coursedata = JSON.parse(localStorage.getItem("course"));
+  let admindata = JSON.parse(localStorage.getItem("admin"));
 
   let getAttendanceStatus = async () => {
     let dates = JSON.parse(localStorage.getItem('attendance_dates'));
@@ -23,7 +26,7 @@ const AttendanceModal = (props) => {
     dates.forEach((dateitem) => {
     let teamMembers = JSON.parse(localStorage.getItem('team_member_arr'));
 
-    let newdata = {date:dateitem}
+    let newdata = {date:dateitem, course:coursedata}
     
     fetch('/api/getAllAttendanceByDate',{ 
       method:'POST', 
@@ -53,41 +56,60 @@ const AttendanceModal = (props) => {
 }
 
   let handleSubmit = async () => {
+   
     let slicedArr = valArr.slice(Math.max(valArr.length - numChanges, 0));
+    console.log("slicedArr: " + slicedArr);
     let newArr = [];
     for(let i = 0; i<slicedArr.length;i++){
       let splitArr = slicedArr[i].split(",");
       newArr.push(splitArr);
     }
+    console.log("newArr: " + newArr);
 
     newArr.forEach(async (element) => {
-      console.log("element" + element + "teammemberinfo" + element[1]);
+      console.log(element[3]);
+      console.log("element" + element[3] + "teammemberinfo" + element[1]);
       let data = await fetch('/api/viewAttendanceByDate',{ 
         method:'POST', 
-        body: JSON.stringify({teammemberinfo:element[1], date:element[2]}), 
+        body: JSON.stringify({teammemberinfo:element[1], date:element[2], course:coursedata}), 
         headers:{ 'Content-Type': 'application/json' } 
       }).then((response) => response.json())
         .then(async (responseJSON) => {
         console.log(responseJSON);
-        if(responseJSON.length === 0){ //if there is no entry for the attendance of that day for that person
-          await fetch('/api/addAttendanceByDate',{ 
-            method:'POST', 
-            body: JSON.stringify({status:element[0], teammemberinfo:element[1], date:element[2]}), 
-            headers:{ 'Content-Type': 'application/json' } 
-          }).then((response) => response.json())
-          .catch((error) => {
-            console.log("reset client error-------",error);
-       });
-        }else{
-          await fetch('/api/updateAttendanceByDate',{ //if there is already an entry for the attendance of that day for that person
-            method:'POST', 
-            body: JSON.stringify({status:element[0], teammemberinfo:element[1], date:element[2]}), 
-            headers:{ 'Content-Type': 'application/json' } 
-          }).then((response) => response.json())
-          .catch((error) => {
-            console.log("reset client error-------",error);
-       });
-        }
+        await fetch('/api/emailByGitUsername',{ 
+          method:'POST', 
+          body: JSON.stringify({name:element[1], course:coursedata}), 
+          headers:{ 'Content-Type': 'application/json' } 
+        }).then((emailres) => emailres.json())
+        .then(async (emailresJSON) => {
+          let tm_email = "";
+          if(emailresJSON != null){
+            tm_email = emailresJSON[0]["email"];
+          }
+          console.log("email: " + tm_email);
+          
+          if(responseJSON.length === 0){ //if there is no entry for the attendance of that day for that person
+            console.log("name: " + element[3] + " teammember: " + element[1]);
+            await fetch('/api/addAttendanceByDate',{ 
+              method:'POST', 
+              body: JSON.stringify({status:element[0], teammemberinfo:element[1], date:element[2], email:tm_email, course:coursedata, fullname:element[3], admin:admindata}), 
+              headers:{ 'Content-Type': 'application/json' } 
+            }).then((response) => response.json())
+            .catch((error) => {
+              console.log("reset client error-------",error);
+         });
+          }else{
+            await fetch('/api/updateAttendanceByDate',{ //if there is already an entry for the attendance of that day for that person
+              method:'POST', 
+              body: JSON.stringify({status:element[0], teammemberinfo:element[1], date:element[2], course:coursedata}), 
+              headers:{ 'Content-Type': 'application/json' } 
+            }).then((response) => response.json())
+            .catch((error) => {
+              console.log("reset client error-------",error);
+         });
+          }
+        })
+        
       })
       .catch((error) => {
         console.log("reset client error-------",error);
@@ -103,8 +125,8 @@ const AttendanceModal = (props) => {
     let parsed = JSON.parse(val);
     numChanges = Object.keys(parsed).length;
     Object.keys(parsed).forEach((key) => {
-      valArr.push(parsed[key]['status'] + "," + parsed[key]['name'] + "," + parsed[key]['date']);
-      console.log(parsed[key]['status'] + "," + parsed[key]['name'] + "," + parsed[key]['date']);
+      valArr.push(parsed[key]['status'] + "," + parsed[key]['name'] + "," + parsed[key]['date'] + "," + parsed[key]['fullname']);
+      console.log("parsedVal: " + parsed[key]['status'] + "," + parsed[key]['name'] + "," + parsed[key]['date'] + "," + parsed[key]['fullname']);
     });
   }
 
@@ -172,6 +194,8 @@ const AttendanceModal = (props) => {
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
+        <Button>Download Attendance (.CSV)</Button>
+        {/* Make a new component here for downloading attendance */}
         {/* <h4>Centered Modal</h4> */}
         {/* ADMIN CODE */}
         {/* <DatePicker 

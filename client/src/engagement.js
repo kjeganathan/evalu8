@@ -216,10 +216,10 @@ class engagementPage extends Component {
     
     let team_member = JSON.parse(localStorage.getItem('team_member'));
     let github_username = team_member['github_username'];
-
+    let coursedata = JSON.parse(localStorage.getItem('course'));
     await fetch('/api/getMemberAttendanceByDate',{ 
       method:'POST', 
-      body: JSON.stringify({teammemberinfo:github_username}), 
+      body: JSON.stringify({teammemberinfo:github_username, course:coursedata}), 
       headers:{ 'Content-Type': 'application/json' } 
     }).then((response) => response.json())
     .then(async (responseJSON) => {
