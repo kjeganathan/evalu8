@@ -1,6 +1,7 @@
 import React, { Component, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Button from "react-bootstrap/Button";
+import { ProgressBar } from "react-bootstrap";
 import "./engagement.css";
 import logo from "./logo.png";
 import SideNav from "./sideNav";
@@ -18,7 +19,7 @@ class progressPage extends Component {
         super();
         this.state = {
             progress:0,
-            pacing:0,
+            pace:0,
             satisfaction:0,
             environment:0
         }
@@ -38,6 +39,12 @@ class progressPage extends Component {
             let resp = await response.json();
             console.log("resp: " + JSON.stringify(resp[0]["progress"]));
             //set states for everything
+            this.setState({ progress: (resp[0]["progress"]*20) });
+            this.setState({ pace: (resp[0]["pacing"]*20) });
+            this.setState({ environment: (resp[0]["environment"]*20) });
+            this.setState({ satisfaction: (resp[0]["satisfaction"]*20) });
+            
+            
           });
 
     }
@@ -176,6 +183,7 @@ class progressPage extends Component {
           noClick
           noDrag
           onRemoveFile={this.handleOnRemoveFile}
+          className="uploadbar"
         >
           {({ file }) => (
             <aside
@@ -190,9 +198,9 @@ class progressPage extends Component {
                 onClick={this.handleOpenDialog}
                 style={{
                   borderRadius: 0,
-                  marginLeft: 0,
+                  marginLeft: '30%',
                   marginRight: 0,
-                  width: '40%',
+                  width: '10%',
                   paddingLeft: 0,
                   paddingRight: 0
                 }}
@@ -210,7 +218,7 @@ class progressPage extends Component {
                   marginBottom: 5,
                   paddingLeft: 13,
                   paddingTop: 3,
-                  width: '60%'
+                  width: '20%'
                 }}
               >
                 {file && file.name}
@@ -221,7 +229,8 @@ class progressPage extends Component {
                   marginLeft: 0,
                   marginRight: 0,
                   paddingLeft: 20,
-                  paddingRight: 20
+                  paddingRight: 20,
+                  width:'10%'
                 }}
                 onClick={this.handleRemoveFile}
               >
@@ -234,7 +243,57 @@ class progressPage extends Component {
 
             <div className="container">
               <div className="row">
-                {/* <div class="col-sm">One of three columns</div> */}
+                <div class="col-sm">
+                    <div id="progress-box">
+                    
+                    <svg xmlns="http://www.w3.org/2000/svg" width="206" height="206" fill="#00798C" class="bi bi-check-circle-fill" viewBox="0 0 16 16">
+                        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+                    </svg>
+
+                    <br/>
+                    <br/>
+
+                    <div id="progress-header">
+                        PROGRESS
+                    </div>
+                    <div id="progress-percent">
+                        {this.state.progress}%
+                    </div>
+                    </div>
+                </div>
+                <div class="col-sm">
+                    <div id="progress-bar-box">
+                    <div>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="#00798C" class="bi bi-check-circle-fill" viewBox="0 0 16 16">
+                        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+                    </svg> &nbsp;
+                        Satisfaction
+                        <ProgressBar now={this.state.satisfaction} variant="warning"/>
+                        {this.state.satisfaction}%
+                    </div>
+                    <br/>
+
+                    <div>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="#00798C" class="bi bi-check-circle-fill" viewBox="0 0 16 16">
+                        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+                    </svg> &nbsp;
+                        Pacing
+                        <ProgressBar now={this.state.pace} variant="warning"/>
+                        {this.state.pace}%
+                    </div>
+                    <br/>
+
+                    <div>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="#00798C" class="bi bi-check-circle-fill" viewBox="0 0 16 16">
+                        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+                    </svg> &nbsp; 
+                        Environmental Impact
+                        <ProgressBar now={this.state.environment} variant="warning"/>
+                        {this.state.environment}%
+                    </div>
+                    </div>
+                    
+                </div>
               </div>
             </div>
           </div>
