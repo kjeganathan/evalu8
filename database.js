@@ -288,6 +288,28 @@ async function updateEval(ischecked, teammemberinfo, evaltype, evalnumber) {
     );
 }
 
+//progress endpoints
+
+async function addProgress(progress, pacing, satisfaction, environment, email, course) {
+  return await connectAndRun((db) =>
+  db.none(
+    "INSERT INTO progress (progress, pacing, satisfaction, environment, email, course) VALUES ($1, $2, $3, $4, $5, $6);",
+    [progress, pacing, satisfaction, environment, email, course]
+      )
+    );
+}
+
+async function getProgressByEmailAndCourse(email, course){
+  return await connectAndRun((db) =>
+  db.any(
+    "SELECT * FROM progress WHERE email = $1 and course = $2;",
+    [email, course]
+      )
+    );
+}
+
+
+
 module.exports = {
 addUser,
 addTeamMembers,
@@ -315,5 +337,7 @@ getAllAttendanceByDate,
 getAllEvaluations,
 getAllAdmins,
 getEmailByGitUsername,
-getAllAttendance
+getAllAttendance,
+addProgress,
+getProgressByEmailAndCourse
 };

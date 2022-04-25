@@ -188,6 +188,21 @@ app.post("/api/updateEvaluation", async (req, res) => {
     res.sendStatus(200);
 });
 
+//Progress Endpoints
+
+app.post("/api/addProgress", async (req, res) => {
+    const data = req.body;
+    await dblast.addProgress(data.progress, data.pacing, data.satisfaction, data.environment, data.email, data.course);
+    console.log("Created a new account successfully!");
+    res.sendStatus(200);
+});
+
+app.post("/api/getProgressByEmailAndCourse", async (req, res) => {
+    const data = req.body;
+    let result = await dblast.getProgressByEmailAndCourse(data.email, data.course);
+    res.send(result);
+});
+
 
 //Creates links to every route on the client side
 app.get('*', (req, res) => {

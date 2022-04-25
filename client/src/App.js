@@ -12,6 +12,7 @@ import contributionPage from './contribution';
 import AdminPage from './adminPage';
 import admincreateAccount from './adminCreateAccount';
 import adminLogin from './adminLogin';
+import progressPage from './progressPage';
 
 
 class App extends Component {
@@ -36,6 +37,7 @@ class App extends Component {
              <Route path="/adminPage" component={AdminPage}/>
              <Route path="/adminCreateAccount" component={admincreateAccount}/>
              <Route path="/adminLogin" component={adminLogin}/>
+             <Route path="/progressPage" component={progressPage}/>
            </Switch>
         </div> 
       </BrowserRouter>

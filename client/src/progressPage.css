@@ -1,0 +1,28 @@
+.progressPage{
+    background-color:#101825;
+    height:100vh;
+}
+
+.progressPage-content{
+    margin-top:80px;
+}
+
+.flex-progress-header{
+    display:flex;
+    flex-direction:horizontal;
+    justify-content: center;
+}
+
+.progress-header{
+    padding-top:20px;
+    /* margin-top:80px; */
+    font-family: "Avenir LT Std Book", sans-serif;
+    font-style: normal;
+    font-weight: 300;
+    font-size:calc(4.5vmin + 0.5vmax);
+    letter-spacing: 0.05em;
+    line-height: 1.5;
+    text-align: center;
+    color: #EDAE49;
+    background-color: #101825;
+}
