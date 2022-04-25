@@ -150,6 +150,7 @@ class createAccount extends Component {
         );
       });
     console.log(this.state.teamMemberArr);
+    window.alert("You successufully created a new account!  Now, go ahead and log in!");
     <Link to="/login" />;
   }
 
