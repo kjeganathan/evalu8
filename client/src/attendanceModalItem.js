@@ -14,10 +14,11 @@ const AttendanceModalItem = (props) => {
   let attendance_status = props.attendanceStatus;
   console.log("attendanceStatusArr:" + attendance_status);
   let coursedata = JSON.parse(localStorage.getItem("course"));
+  let managerdata = JSON.parse(localStorage.getItem("github_username"));
 //   let newVal = useRef('');
 
 let getcsvData = async (dateitem) => { //call this in dateItem forEach
-  let newdata = {date:dateitem, course:coursedata}
+  let newdata = {date:dateitem, course:coursedata, manager:managerdata}
     
     fetch('/api/getAllAttendanceByDate',{ 
       method:'POST', 
@@ -42,6 +43,7 @@ let getcsvData = async (dateitem) => { //call this in dateItem forEach
     })
     console.log("csvIS2: " + csvDat);
     newCSVData.push(csvDat);
+    console.log("newCSVData: " + newCSVData);
     localStorage.setItem("csvdata2", JSON.stringify(newCSVData));
     })
 
@@ -100,6 +102,9 @@ let getcsvData = async (dateitem) => { //call this in dateItem forEach
   let count = 1;
   let attendanceStatusArr = [];
   let statusForAttendance = "";
+
+  console.log("dates: " + dates);
+  if(dates != null){
   dates.forEach((dateitem) => {
     getcsvData(dateitem);
     for(let i = 0; i<attendance_status.length; i++){
@@ -113,12 +118,17 @@ let getcsvData = async (dateitem) => { //call this in dateItem forEach
         continue;
       }
     }
-    let newDataSaved = JSON.parse(localStorage.getItem("csvdata2")); 
-    console.log("newDataSaved: " + newDataSaved[0]);
     
+    let recordedData = [];
+    let newDataSaved = JSON.parse(localStorage.getItem("csvdata2"));
+    if(newDataSaved != null){
+      recordedData = newDataSaved[parseInt(count-1)];
+    }
+    
+    console.log("newDataSaved: " + newDataSaved);
     element = (
       <Collapsible id="meeting-list" trigger={"Meeting " + count + ": " + dateitem + "  |  " + statusForAttendance}>
-        <CSVLink data={newDataSaved[parseInt(count-1)]}>Download me</CSVLink>
+        <CSVLink data={recordedData}>Download me</CSVLink>
         <Table striped bordered hover>
           <thead>
             <tr>
@@ -144,6 +154,7 @@ let getcsvData = async (dateitem) => { //call this in dateItem forEach
     count++;
     console.log(elementArr);
   });
+}
 
   return elementArr;
 };

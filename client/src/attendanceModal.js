@@ -19,36 +19,37 @@ const AttendanceModal = (props) => {
   let numChanges = 0;
   let coursedata = JSON.parse(localStorage.getItem("course"));
   let admindata = JSON.parse(localStorage.getItem("admin"));
+  let managerdata = JSON.parse(localStorage.getItem("github_username"));
 
   
 
-  let getcsvData = async () => {
+  // let getcsvData = async () => {
 
-    fetch('/api/getAllAttendance',{ 
-      method:'GET', 
-      headers:{ 'Content-Type': 'application/json' } 
-    }).then((responsenext) => responsenext.json())
-    .then(async (responseJSONnext) => {
-      console.log("csvData: " + responseJSONnext);
-      csv = [["Last Name", "First Name", "Email Address", "", "Attend"]]
-      responseJSONnext.forEach((item) => {
-        console.log("csvitem: " + item['teammemberinfo']);
-        //csv.push(["hello", "goodbye", "lastnight", "e", "a"]);
-        let nameArr = "";
-        let firstName = "";
-        let lastName = "";
-        if(item['fullname'].length != 0){
-          nameArr = item['fullname'].split(" ");
-          firstName = nameArr[0];
-          lastName = nameArr[1];
-        }
-        csv.push([lastName, firstName, item['email'], "", item['status'].charAt(0).toUpperCase()])
-      })
-      console.log("csvIS: " + csv);
-      localStorage.setItem("csvdata", JSON.stringify(csv));
-    });
+  //   fetch('/api/getAllAttendance',{ 
+  //     method:'GET', 
+  //     headers:{ 'Content-Type': 'application/json' } 
+  //   }).then((responsenext) => responsenext.json())
+  //   .then(async (responseJSONnext) => {
+  //     console.log("csvData: " + responseJSONnext);
+  //     csv = [["Last Name", "First Name", "Email Address", "", "Attend"]]
+  //     responseJSONnext.forEach((item) => {
+  //       console.log("csvitem: " + item['teammemberinfo']);
+  //       //csv.push(["hello", "goodbye", "lastnight", "e", "a"]);
+  //       let nameArr = "";
+  //       let firstName = "";
+  //       let lastName = "";
+  //       if(item['fullname'].length != 0){
+  //         nameArr = item['fullname'].split(" ");
+  //         firstName = nameArr[0];
+  //         lastName = nameArr[1];
+  //       }
+  //       csv.push([lastName, firstName, item['email'], "", item['status'].charAt(0).toUpperCase()])
+  //     })
+  //     console.log("csvIS: " + csv);
+  //     localStorage.setItem("csvdata", JSON.stringify(csv));
+  //   });
 
-  }
+  // }
 
   let getAttendanceStatus = async () => {
     let dates = JSON.parse(localStorage.getItem('attendance_dates'));
@@ -56,7 +57,7 @@ const AttendanceModal = (props) => {
     dates.forEach((dateitem) => {
     let teamMembers = JSON.parse(localStorage.getItem('team_member_arr'));
 
-    let newdata = {date:dateitem, course:coursedata}
+    let newdata = {date:dateitem, course:coursedata, manager:managerdata}
     
     fetch('/api/getAllAttendanceByDate',{ 
       method:'POST', 
@@ -122,7 +123,7 @@ const AttendanceModal = (props) => {
             console.log("name: " + element[3] + " teammember: " + element[1]);
             await fetch('/api/addAttendanceByDate',{ 
               method:'POST', 
-              body: JSON.stringify({status:element[0], teammemberinfo:element[1], date:element[2], email:tm_email, course:coursedata, fullname:element[3], admin:admindata}), 
+              body: JSON.stringify({status:element[0], teammemberinfo:element[1], date:element[2], email:tm_email, course:coursedata, fullname:element[3], admin:admindata, manager:managerdata}), 
               headers:{ 'Content-Type': 'application/json' } 
             }).then((response) => response.json())
             .catch((error) => {
@@ -183,8 +184,8 @@ const AttendanceModal = (props) => {
   let attendance_status = JSON.parse(localStorage.getItem('attendance_status'));
 
   //CSV Data
-  getcsvData();
-  let newCSVData = JSON.parse(localStorage.getItem("csvdata"));
+  // getcsvData();
+  // let newCSVData = JSON.parse(localStorage.getItem("csvdata"));
 
   //ADMIN CODE
 
@@ -228,7 +229,7 @@ const AttendanceModal = (props) => {
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-      <CSVLink data={newCSVData}>Download me</CSVLink>
+      {/* <CSVLink data={newCSVData}>Download me</CSVLink> */}
         {/* Make a new component here for downloading attendance */}
         {/* <h4>Centered Modal</h4> */}
         {/* ADMIN CODE */}

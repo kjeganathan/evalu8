@@ -74,6 +74,7 @@ app.post("/api/createAccount", async (req, res) => {
     res.sendStatus(200);
 });
 
+//Not used
 app.get("/api/getAllAttendance", async (req, res) => {
     let result = await dblast.getAllAttendance();
     res.send(result);
@@ -81,7 +82,7 @@ app.get("/api/getAllAttendance", async (req, res) => {
 
 app.post("/api/addAttendanceByDate", async (req, res) => {
     const data = req.body;
-    await dblast.addAttendanceByDate(data.status, data.teammemberinfo, data.date, data.email, data.course, data.fullname, data.admin);
+    await dblast.addAttendanceByDate(data.status, data.teammemberinfo, data.date, data.email, data.course, data.fullname, data.admin, data.manager);
     res.sendStatus(200);
 });
 
@@ -99,7 +100,7 @@ app.post("/api/viewAttendanceByDate", async (req, res) => {
 
 app.post("/api/getAllAttendanceByDate", async (req, res) => {
     const data = req.body;
-    let result = await dblast.getAllAttendanceByDate(data.date, data.course);
+    let result = await dblast.getAllAttendanceByDate(data.date, data.course, data.manager);
     res.send(result);
 });
 

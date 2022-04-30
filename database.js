@@ -125,11 +125,11 @@ async function getAllAttendance(){
     );
 }
 
-async function addAttendanceByDate(status, teammemberinfo, date, email, course, fullname, admin) {
+async function addAttendanceByDate(status, teammemberinfo, date, email, course, fullname, admin, manager) {
   return await connectAndRun((db) =>
   db.none(
-    "INSERT INTO attendanceondate (status, teammemberinfo, date, email, course, fullname, admin) VALUES ($1, $2, $3, $4, $5, $6, $7);",
-    [status, teammemberinfo, date, email, course, fullname, admin]
+    "INSERT INTO attendanceondate (status, teammemberinfo, date, email, course, fullname, admin, manager) VALUES ($1, $2, $3, $4, $5, $6, $7, $8);",
+    [status, teammemberinfo, date, email, course, fullname, admin, manager]
       )
     );
 }
@@ -152,11 +152,11 @@ async function viewAttendanceByDate(teammemberinfo, date, course){
     );
 }
 
-async function getAllAttendanceByDate(date, course){
+async function getAllAttendanceByDate(date, course, manager){
   return await connectAndRun((db) =>
   db.any(
-    "SELECT * FROM attendanceondate WHERE date = $1 and course = $2;",
-    [date, course]
+    "SELECT * FROM attendanceondate WHERE date = $1 and course = $2 and manager = $3;",
+    [date, course, manager]
       )
     );
 }
