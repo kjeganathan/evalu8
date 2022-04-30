@@ -150,31 +150,31 @@ app.post("/api/getTokenAndAdminByManager", async (req, res) => {
 
 app.post("/api/addEvaluation", async (req, res) => {
     const data = req.body;
-    await dblast.addEval(data.teammemberinfo, data.evaltype, data.evalnumber, data.ischecked);
+    await dblast.addEval(data.teammemberinfo, data.evaltype, data.evalnumber, data.ischecked, data.course, data.admin, data.manager);
     res.sendStatus(200);
 });
 
 app.post("/api/getAllEvaluations", async (req, res) => {
     const data = req.body;
-    let result = await dblast.getAllEvaluations(data.evaltype, data.evalnumber);
+    let result = await dblast.getAllEvaluations(data.evaltype, data.evalnumber, data.course, data.manager);
     res.send(result);
 });
 
 app.post("/api/viewEvaluation", async (req, res) => {
     const data = req.body;
-    let result = await dblast.viewEval(data.teammemberinfo, data.evaltype, data.evalnumber);
+    let result = await dblast.viewEval(data.teammemberinfo, data.evaltype, data.evalnumber, data.course);
     res.send(result);
 });
 
 app.post("/api/getChecked", async (req, res) => {
     const data = req.body;
-    let result = await dblast.getChecked(data.teammemberinfo, data.evaltype, data.evalnumber);
+    let result = await dblast.getChecked(data.teammemberinfo, data.evaltype, data.evalnumber, data.course);
     res.send(result);
 });
 
 app.post("/api/getEvalByMember", async (req, res) => {
     const data = req.body;
-    let result = await dblast.getEvalByMember(data.teammemberinfo, data.ischecked);
+    let result = await dblast.getEvalByMember(data.teammemberinfo, data.ischecked, data.course);
     res.send(result);
 });
 
@@ -185,7 +185,7 @@ app.get("/api/getDistinctEvalType", async (req, res) => {
 
 app.post("/api/updateEvaluation", async (req, res) => {
     const data = req.body;
-    await dblast.updateEval(data.ischecked, data.teammemberinfo, data.evaltype, data.evalnumber);
+    await dblast.updateEval(data.ischecked, data.teammemberinfo, data.evaltype, data.evalnumber, data.course);
     res.sendStatus(200);
 });
 

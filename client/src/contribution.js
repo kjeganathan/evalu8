@@ -139,6 +139,14 @@ class contributionPage extends Component {
     
   }
 
+  routeChangeToEngagement=()=> {
+    this.props.history.push("/engagement");
+}
+
+routeChangeToProgress=()=> {
+  this.props.history.push("/progressPage");
+}
+
   render() {
     return (
       <div>
@@ -191,6 +199,7 @@ class contributionPage extends Component {
               <button
                 id="engagement-header-button-contributionpage"
                 className="btn btn-dark"
+                onClick={this.routeChangeToEngagement}
               >
                 Engagement
               </button>
@@ -199,14 +208,16 @@ class contributionPage extends Component {
                 className="btn btn-dark"
               >
                 Contribution
+                
               </button>
               <button
                 id="progress-header-button-contributionpage"
                 className="btn btn-dark"
+                onClick={this.routeChangeToProgress}
               >
                 Progress
               </button>
-              <button
+              {/* <button
                 id="additional-metrics-button-contributionpage"
                 className="btn btn-dark"
               >
@@ -220,7 +231,7 @@ class contributionPage extends Component {
                 >
                   <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
                 </svg>
-              </button>
+              </button> */}
             </div>
             <hr className="header-line"></hr>
             <div className="container">

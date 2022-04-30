@@ -13,6 +13,7 @@ import * as am5percent from "@amcharts/amcharts5/percent";
 import am5themes_Animated from "@amcharts/amcharts5/themes/Animated";
 import SideNav from "./sideNav";
 import MetricsModal from "./metricsModal";
+import { Link } from 'react-router-dom';
 
 class engagementPage extends Component {
 
@@ -141,10 +142,11 @@ class engagementPage extends Component {
      
     let team_member2 = JSON.parse(localStorage.getItem('team_member'));
     let github_username2 = team_member2['github_username'];
+    let courseinfo = JSON.parse(localStorage.getItem("course"));
     
         await fetch('/api/getEvalByMember',{ 
           method:'POST',
-          body: JSON.stringify({teammemberinfo:github_username2, ischecked:true}), 
+          body: JSON.stringify({teammemberinfo:github_username2, ischecked:true, course:courseinfo}), 
           headers:{ 'Content-Type': 'application/json' } 
         }).then((responsenext) => responsenext.json())
         .then(async (responseJSONnext) => {
@@ -349,6 +351,14 @@ class engagementPage extends Component {
     });
   }
 
+  routeChangeToContribution=()=> {
+    this.props.history.push("/contribution");
+}
+
+routeChangeToProgress=()=> {
+  this.props.history.push("/progressPage");
+}
+
   componentWillUnmount() {
     if (this.root) {
       this.root.dispose();
@@ -380,9 +390,9 @@ class engagementPage extends Component {
           <hr className="header-line"></hr>
             <div className="dashboard-header-buttons-container">
               <button id="engagement-header-button" className="btn btn-dark">Engagement</button>
-              <button id="contribution-header-button" className="btn btn-dark">Contribution</button>
-              <button id="progress-header-button" className="btn btn-dark">Progress</button>
-              <button onClick={this.showModal} id="additional-metrics-button" className="btn btn-dark"> 
+              <button id="contribution-header-button" onClick={this.routeChangeToContribution} className="btn btn-dark">Contribution</button>
+              <button id="progress-header-button" onClick={this.routeChangeToProgress} className="btn btn-dark">Progress</button>
+              {/* <button onClick={this.showModal} id="additional-metrics-button" className="btn btn-dark"> 
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
                   <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
               </svg>
@@ -390,7 +400,7 @@ class engagementPage extends Component {
               <MetricsModal
                     show={this.state.show}
                     onHide={this.hideModal}
-              />
+              /> */}
 
             </div>
             <hr className="header-line"></hr>

@@ -14,6 +14,10 @@ const EvaluationModal = (props) => {
   const [peerEval, setPeerEval] = useState('');
   const [goalEval, setGoalEval] = useState('');
   let total_index = 0;
+  let coursedata = JSON.parse(localStorage.getItem("course"));
+  let admindata = JSON.parse(localStorage.getItem("admin"));
+  let managerdata = JSON.parse(localStorage.getItem("github_username"));
+
 
   let handleSubmit = (event) => {
     event.preventDefault();
@@ -83,6 +87,7 @@ const EvaluationModal = (props) => {
         teammemberinfo: valArr[0],
         evaltype: valArr[1],
         evalnumber: valArr[2],
+        course:coursedata
       }),
       headers: { "Content-Type": "application/json" },
     })
@@ -97,6 +102,9 @@ const EvaluationModal = (props) => {
               evaltype: valArr[1],
               evalnumber: valArr[2],
               ischecked: valArr[3],
+              course:coursedata,
+              admin:admindata,
+              manager:managerdata
             }),
             headers: { "Content-Type": "application/json" },
           })
@@ -112,6 +120,7 @@ const EvaluationModal = (props) => {
               teammemberinfo: valArr[0],
               evaltype: valArr[1],
               evalnumber: valArr[2],
+              course:coursedata
             }),
             headers: { "Content-Type": "application/json" },
           })
@@ -139,7 +148,7 @@ const EvaluationModal = (props) => {
       
       for(let i = 0; i<evalNum; i++){
         let index = i+1;
-        let newdata = {evaltype:evalType[0], evalnumber: index}
+        let newdata = {evaltype:evalType[0], evalnumber: index, course:coursedata, manager:managerdata}
         fetch('/api/getAllEvaluations',{ 
           method:'POST', 
           body: JSON.stringify(newdata), // data can be `string` or {object}!

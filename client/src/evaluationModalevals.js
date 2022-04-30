@@ -11,6 +11,7 @@ import React, { Component, useState, useEffect, useRef } from "react";
 const EvaluationModalEvals = (props) => {
   const [labelState, setLabel] = useState("Not Completed");
   const [data, setData] = useState("false");
+  let coursedata = JSON.parse(localStorage.getItem("course"));
   let flag = false;
   let count = 1;
   //sends in a single Object
@@ -35,6 +36,7 @@ const EvaluationModalEvals = (props) => {
     teammemberinfo: props.sendTeamMember,
     evaltype: outArrType,
     evalnumber: props.evalNum,
+    course:coursedata
   };
   useEffect(() => {
     console.log("use effect ran");

@@ -164,7 +164,7 @@ const SideNav = () => {
                 <br/>
 
 
-                <MenuItem
+                {/* <MenuItem
                 onClick={() => setProfileModalShow(true)}
                 icon={
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
@@ -177,7 +177,7 @@ const SideNav = () => {
               <ProfileModal
                     show={profileModalShow}
                     onHide={() => setProfileModalShow(false)}
-                />
+                /> */}
               
               <OverlayTrigger placement="left" overlay={logoutTooltip}>
               <MenuItem

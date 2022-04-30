@@ -226,51 +226,58 @@ async function getTokenAndAdminByManager(manager_name, classroom){
     );
 }
 
-async function addEval(teamMemberInfo, evalType, evalNumber, isChecked) {
+
+//evaluation endpoints
+
+async function addEval(teamMemberInfo, evalType, evalNumber, isChecked, course, admin, manager) {
   return await connectAndRun((db) =>
     db.none(
-      "INSERT INTO evaluations (teammemberinfo, evaltype, evalnumber, ischecked) VALUES ($1, $2, $3, $4);",
-      [teamMemberInfo, evalType, evalNumber, isChecked]
+      "INSERT INTO evaluations (teammemberinfo, evaltype, evalnumber, ischecked, course, admin, manager) VALUES ($1, $2, $3, $4, $5, $6, $7);",
+      [teamMemberInfo, evalType, evalNumber, isChecked, course, admin, manager]
     )
   );
 }
 
-async function getAllEvaluations( evaltype, evalnumber){
+async function getAllEvaluations(evaltype, evalnumber, course, manager){
   return await connectAndRun((db) =>
   db.any(
-    "SELECT * FROM evaluations WHERE evaltype = $1 and evalnumber = $2;",
-    [evaltype, evalnumber]
+    "SELECT * FROM evaluations WHERE evaltype = $1 and evalnumber = $2 and course = $3 and manager = $4;",
+    [evaltype, evalnumber, course, manager]
       )
     );
 }
 
-async function viewEval(teammemberinfo, evaltype, evalnumber){
+//added course
+async function viewEval(teammemberinfo, evaltype, evalnumber, course){
   return await connectAndRun((db) =>
   db.any(
-    "SELECT * FROM evaluations WHERE teammemberinfo = $1 and evaltype = $2 and evalnumber = $3;",
-    [teammemberinfo, evaltype, evalnumber]
+    "SELECT * FROM evaluations WHERE teammemberinfo = $1 and evaltype = $2 and evalnumber = $3 and course = $4;",
+    [teammemberinfo, evaltype, evalnumber, course]
       )
     );
 }
 
-async function getChecked(teammemberinfo, evaltype, evalnumber){
+//added course
+async function getChecked(teammemberinfo, evaltype, evalnumber, course){
   return await connectAndRun((db) =>
   db.any(
-    "SELECT ischecked FROM evaluations WHERE teammemberinfo = $1 and evaltype = $2 and evalnumber=$3;",
-    [teammemberinfo, evaltype, evalnumber]
+    "SELECT ischecked FROM evaluations WHERE teammemberinfo = $1 and evaltype = $2 and evalnumber=$3 and course = $4;",
+    [teammemberinfo, evaltype, evalnumber, course]
       )
     );
 }
 
-async function getEvalByMember(teammemberinfo, ischecked){
+//added course
+async function getEvalByMember(teammemberinfo, ischecked, course){
   return await connectAndRun((db) =>
   db.any(
-    "SELECT * FROM evaluations WHERE teammemberinfo = $1 and ischecked = $2;",
-    [teammemberinfo, ischecked]
+    "SELECT * FROM evaluations WHERE teammemberinfo = $1 and ischecked = $2 and course = $3;",
+    [teammemberinfo, ischecked, course]
       )
     );
 }
 
+//not used
 async function getDistinctEvalType(){
   return await connectAndRun((db) =>
   db.any(
@@ -279,11 +286,12 @@ async function getDistinctEvalType(){
     );
 }
 
-async function updateEval(ischecked, teammemberinfo, evaltype, evalnumber) {
+//added course
+async function updateEval(ischecked, teammemberinfo, evaltype, evalnumber, course) {
   return await connectAndRun((db) =>
   db.any(
-    "UPDATE evaluations SET ischecked = $1 WHERE teammemberinfo = $2 and evaltype = $3 and evalnumber = $4;",
-    [ischecked, teammemberinfo, evaltype, evalnumber]
+    "UPDATE evaluations SET ischecked = $1 WHERE teammemberinfo = $2 and evaltype = $3 and evalnumber = $4 and course = $5;",
+    [ischecked, teammemberinfo, evaltype, evalnumber, course]
       )
     );
 }

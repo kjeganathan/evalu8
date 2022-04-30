@@ -26,6 +26,14 @@ class progressPage extends Component {
         }
     }
 
+    routeChangeToEngagement=()=> {
+        this.props.history.push("/engagement");
+    }
+    
+    routeChangeToContribution=()=> {
+      this.props.history.push("/contribution");
+    }
+
     componentDidMount = async() => {
 
         let team_member_info = JSON.parse(localStorage.getItem("team_member"));
@@ -172,10 +180,10 @@ class progressPage extends Component {
             </div>
             <hr className="header-line"></hr>
             <div className="dashboard-header-buttons-container">
-              <button id="engagement-header-button" className="btn btn-dark">
+              <button id="engagement-header-button" onClick={this.routeChangeToEngagement} className="btn btn-dark">
                 Engagement
               </button>
-              <button id="contribution-header-button" className="btn btn-dark">
+              <button id="contribution-header-button" onClick={this.routeChangeToContribution} className="btn btn-dark">
                 Contribution
               </button>
               <button id="progress-header-button" className="btn btn-dark">
