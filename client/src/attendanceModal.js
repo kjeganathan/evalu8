@@ -148,6 +148,8 @@ const AttendanceModal = (props) => {
       // let data = {status: element[0], teammemberinfo:element[1], date:element[2]};
         
     });
+    // props.onHide;
+    // window.location.reload(false);
 
   }
   
@@ -247,7 +249,7 @@ const AttendanceModal = (props) => {
     <AttendanceModalItem sendChildData={getChildData} attendanceStatus={attendance_status}></AttendanceModalItem>
       </Modal.Body>
       <Modal.Footer>
-        <Button onClick={props.onHide}>Done</Button>
+        {/* <Button onClick={props.onHide}>Done</Button> */}
         <Button onClick={handleSubmit}>Save</Button>
       </Modal.Footer>
     </Modal>

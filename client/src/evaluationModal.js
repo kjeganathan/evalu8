@@ -201,7 +201,7 @@ const EvaluationModal = (props) => {
         ></EvaluationModalItem>
       </Modal.Body>
       <Modal.Footer>
-        <Button onClick={saveFunction}>Close</Button>
+        <Button onClick={saveFunction}>Save</Button>
       </Modal.Footer>
     </Modal>
   );
