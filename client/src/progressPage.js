@@ -18,6 +18,7 @@ class progressPage extends Component {
     constructor(){
         super();
         this.state = {
+            isNewTeamMember:true,
             progress:0,
             pace:0,
             satisfaction:0,
@@ -37,12 +38,27 @@ class progressPage extends Component {
           }).then(async (response) => 
           {
             let resp = await response.json();
-            console.log("resp: " + JSON.stringify(resp[0]["progress"]));
-            //set states for everything
-            this.setState({ progress: (resp[0]["progress"]*20) });
-            this.setState({ pace: (resp[0]["pacing"]*20) });
-            this.setState({ environment: (resp[0]["environment"]*20) });
-            this.setState({ satisfaction: (resp[0]["satisfaction"]*20) });
+
+            if(resp.length == 0){ //if we get back nothing we know that there is no row of that team member in the db
+                this.setState({ isNewTeamMember:true });
+            }else{
+                this.setState({ isNewTeamMember:false });
+            }
+            console.log("this.state: " + this.state.isNewTeamMember);
+            if(this.state.isNewTeamMember == false){ //if the table is filled
+                console.log("resp: " + JSON.stringify(resp[0]["progress"]));
+                //set states for everything
+                this.setState({ progress: (resp[0]["progress"]*20) });
+                this.setState({ pace: (resp[0]["pacing"]*20) });
+                this.setState({ environment: (resp[0]["environment"]*20) });
+                this.setState({ satisfaction: (resp[0]["satisfaction"]*20) });
+            }else{
+                this.setState({ progress:0 });
+                this.setState({ pace:0 });
+                this.setState({ environment:0 });
+                this.setState({ satisfaction:0 });
+            }
+            
             
             
           });
@@ -91,12 +107,23 @@ class progressPage extends Component {
                     email: team_member_email,
                     course: coursedata
                   };
-                  //Fetch request to create an account for a new manager
-                  fetch("/api/addProgress", {
-                    method: "POST",
-                    body: JSON.stringify(data), // data can be `string` or {object}!
-                    headers: { "Content-Type": "application/json" },
-                  })
+                  if(this.state.isNewTeamMember == true){
+                    //Fetch request to create an account for a new manager
+                    fetch("/api/addProgress", {
+                        method: "POST",
+                        body: JSON.stringify(data), // data can be `string` or {object}!
+                        headers: { "Content-Type": "application/json" },
+                      })
+                  }else{
+                      //update existing team member with different data
+                      fetch("/api/updateProgress", {
+                        method: "POST",
+                        body: JSON.stringify(data), // data can be `string` or {object}!
+                        headers: { "Content-Type": "application/json" },
+                      })
+                  }
+                  
+                 
 
             }
 

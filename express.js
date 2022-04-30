@@ -203,6 +203,12 @@ app.post("/api/getProgressByEmailAndCourse", async (req, res) => {
     res.send(result);
 });
 
+app.post("/api/updateProgress", async (req, res) => {
+    const data = req.body;
+    await dblast.updateProgress(data.progress, data.pacing, data.satisfaction, data.environment, data.email, data.course);
+    res.sendStatus(200);
+});
+
 
 //Creates links to every route on the client side
 app.get('*', (req, res) => {

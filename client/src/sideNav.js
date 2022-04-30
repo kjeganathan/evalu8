@@ -1,6 +1,8 @@
 //import useState hook to create menu collapse state
 import React, { useState } from "react";
 import { Link } from 'react-router-dom';
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+import Tooltip from "react-bootstrap/Tooltip";
 
 //import react pro sidebar components
 import {
@@ -35,6 +37,23 @@ const SideNav = () => {
   const logoutClick = () => {
     localStorage.clear();
   }
+
+
+  const myTeamTooltip = props => (
+    <Tooltip {...props}>My Team</Tooltip>
+  );
+
+  const attendanceTooltip = props => (
+    <Tooltip {...props}>Attendance</Tooltip>
+  );
+
+  const evaluationTooltip = props => (
+    <Tooltip {...props}>Evaluation</Tooltip>
+  );
+
+  const logoutTooltip = props => (
+    <Tooltip {...props}>Log Out</Tooltip>
+  );
 
   return (
     <>
@@ -88,6 +107,7 @@ const SideNav = () => {
           <SidebarContent>
             <Menu iconShape="square">
                 <br/>
+                <OverlayTrigger placement="left" overlay={myTeamTooltip}>
               <MenuItem
                 // active={true}
                 icon={
@@ -101,7 +121,8 @@ const SideNav = () => {
                 My Team
                 <Link to="/teamMembers" />
               </MenuItem>
-
+              </OverlayTrigger>
+              <OverlayTrigger placement="left" overlay={attendanceTooltip}>
               <MenuItem
                 onClick={() => setAttendanceModalShow(true)}
                 icon={
@@ -112,10 +133,12 @@ const SideNav = () => {
               >
                 Attendance
               </MenuItem>
+              </OverlayTrigger>
               <AttendanceModal
                     show={attendanceModalShow}
                     onHide={() => setAttendanceModalShow(false)}
                 />
+                <OverlayTrigger placement="left" overlay={evaluationTooltip}>
               <MenuItem
                 onClick={() => setEvaluationModalShow(true)}
                 icon={
@@ -133,6 +156,7 @@ const SideNav = () => {
               >
                 Evaluation
               </MenuItem>
+              </OverlayTrigger>
               <EvaluationModal
                     show={evaluationModalShow}
                     onHide={() => setEvaluationModalShow(false)}
@@ -155,7 +179,7 @@ const SideNav = () => {
                     onHide={() => setProfileModalShow(false)}
                 />
               
-
+              <OverlayTrigger placement="left" overlay={logoutTooltip}>
               <MenuItem
                 icon={
                   <svg
@@ -181,6 +205,7 @@ const SideNav = () => {
                 Logout
                 <Link to="/login" />
               </MenuItem>
+              </OverlayTrigger>
             </Menu>
           </SidebarContent>
         </ProSidebar>

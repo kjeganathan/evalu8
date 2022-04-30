@@ -299,6 +299,15 @@ async function addProgress(progress, pacing, satisfaction, environment, email, c
     );
 }
 
+async function updateProgress(progress, pacing, satisfaction, environment, email, course) {
+  return await connectAndRun((db) =>
+  db.any(
+    "UPDATE progress SET progress = $1, pacing = $2, satisfaction = $3, environment = $4 WHERE email = $5 and course = $6;",
+    [progress, pacing, satisfaction, environment, email, course]
+      )
+    );
+}
+
 async function getProgressByEmailAndCourse(email, course){
   return await connectAndRun((db) =>
   db.any(
@@ -307,6 +316,8 @@ async function getProgressByEmailAndCourse(email, course){
       )
     );
 }
+
+
 
 
 
@@ -339,5 +350,7 @@ getAllAdmins,
 getEmailByGitUsername,
 getAllAttendance,
 addProgress,
-getProgressByEmailAndCourse
+getProgressByEmailAndCourse,
+updateProgress
+
 };
