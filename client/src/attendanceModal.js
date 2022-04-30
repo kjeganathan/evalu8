@@ -10,6 +10,8 @@ import DatePicker from "react-multi-date-picker";
 import DatePanel from "react-multi-date-picker/plugins/date_panel";
 import AttendanceModalItem from "./attendanceModalItem";
 import ReactDOM from 'react-dom';
+import "./attendanceModal.css";
+
 import ReactHtmlParser, { processNodes, convertNodeToElement, htmlparser2 } from 'react-html-parser';
 
 const AttendanceModal = (props) => {
@@ -224,33 +226,24 @@ const AttendanceModal = (props) => {
       size="lg"
       aria-labelledby="contained-modal-title-vcenter"
       centered
+      className="attendanceModal"
     >
       <Modal.Header closeButton>
-        <Modal.Title id="contained-modal-title-vcenter">
-          Attendance Modal
+        <Modal.Title className="attendance-modal-header" id="contained-modal-title-vcenter">
+        <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-calendar2-week-fill" viewBox="0 0 16 16">
+                    <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zm9.954 3H2.545c-.3 0-.545.224-.545.5v1c0 .276.244.5.545.5h10.91c.3 0 .545-.224.545-.5v-1c0-.276-.244-.5-.546-.5zM8.5 7a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1zm3 0a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1zM3 10.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5zm3.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1z"/>
+                  </svg>
+                  &nbsp;
+          <div id="attendance-modal-header-text">Attendance Modal</div>
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-      {/* <CSVLink data={newCSVData}>Download me</CSVLink> */}
-        {/* Make a new component here for downloading attendance */}
-        {/* <h4>Centered Modal</h4> */}
-        {/* ADMIN CODE */}
-        {/* <DatePicker 
-      multiple
-      plugins={[
-        <DatePanel />
-       ]}
-      value={values} 
-      onChange={setValues}
-    /> */}
-    {/* ADMIN CODE END */}
-    <br/>
-    <br/>
+  
     <AttendanceModalItem sendChildData={getChildData} attendanceStatus={attendance_status}></AttendanceModalItem>
       </Modal.Body>
       <Modal.Footer>
         {/* <Button onClick={props.onHide}>Done</Button> */}
-        <Button onClick={handleSubmit}>Save</Button>
+        <Button className="attendanceSaveButton" onClick={handleSubmit}>Save</Button>
       </Modal.Footer>
     </Modal>
   );

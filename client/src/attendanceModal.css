@@ -1,0 +1,34 @@
+
+.attendanceModal .modal-header{
+    background-color: #a53860;
+    color: #101825;;
+    border-bottom: 1px solid #101825;
+
+}
+
+.attendance-modal-header{
+    width:100%;
+    display:flex;
+    flex-direction: row;
+}
+
+.attendanceModal .modal-footer{
+    background-color: #101825;
+    color: #fff; 
+    border-top: 1px solid #182437;
+}
+
+.attendanceModal .modal-body{
+    background-color: #101825;
+    color: #fff
+
+}
+
+.attendanceSaveButton{
+    background-color:#a53860;
+    color:#101825;
+    border:#a53860;
+    font-weight:bold;
+}
+
+

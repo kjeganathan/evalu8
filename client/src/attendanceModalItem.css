@@ -1,3 +1,46 @@
 .Collapsible{
     margin-top:30px;
+    border-bottom: 1px solid gainsboro;
+    color:gainsboro
 }
+
+.csvlink{
+    color: #a53860;
+}
+
+.attendanceAccordion .accordion-button:not(.collapsed) {
+    color: #ffffff;
+    background-color: #a53860;
+    /* box-shadow: inset 0 -1px 0 rgb(0 0 0 / 13%); */
+}
+
+.attendanceAccordion .accordion-button:is(.collapsed) {
+    color: #ffffff;
+    background-color: #101825;
+    /* box-shadow: inset 0 -1px 0 rgb(0 0 0 / 13%); */
+
+}
+
+.attendanceAccordion .accordion-button:not(.collapsed)::after{
+    filter: brightness(0%) invert(100%)
+}
+
+.attendanceAccordion .accordion-button:is(.collapsed)::after{
+    filter: brightness(0%) invert(50%)
+}
+
+.attendanceAccordion .accordion-button:focus {
+    box-shadow:inherit;
+}
+
+.attendanceAccordion .accordion-body{
+    background-color:#101825;
+}
+
+.attendanceAccordion .accordion-item{
+    margin-bottom:20px;
+}
+
+
+
+

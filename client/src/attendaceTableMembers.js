@@ -2,6 +2,7 @@ import Table from "react-bootstrap/Table";
 import Form from "react-bootstrap/Form";
 import { useState, useEffect, useRef } from "react";
 import React, { Component } from "react";
+import "./attendanceTableMembers.css";
 
 let checkPresent = false;
 let checkAbsent = false;
