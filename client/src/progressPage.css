@@ -13,6 +13,15 @@
     justify-content: center;
 }
 
+.progressBar{
+    background-color:#101825;
+    fill:#EDAE49;
+}
+
+#progressbar-percent{
+    color:#EDAE49;
+}
+
 .progress-header{
     padding-top:20px;
     /* margin-top:80px; */
@@ -27,8 +36,13 @@
     background-color: #101825;
 }
 
-#progress-box, #progress-bar-box{
+#progress-box-level {
+    display:flex;
+    flex-direction:row;
+    justify-content: space-evenly;
+}
 
+#progress-bar-box, #progress-box{
     color:white;
     background-color: hsl(215, 40%, 18%);
     border-color:hsl(215, 40%, 18%);
@@ -38,22 +52,220 @@
     padding:20px;
 }
 
+#progress-icon{
+    margin-top:40px;
+    margin-left:30px;
+}
+
 #progress-header{
-    color: rgba(255, 255, 255, 0.934);
+    font-size: 20px;
+    font-weight:300;
+    letter-spacing: 0.05em;
+    line-height: 1.5;
+    text-align: center;
 }
 
 #progress-percent{
     color:#EDAE49;
-    padding-top:20px;
+    padding-top:20%;
     font-size:120px;
     line-height: 112.5px;
-    font-weight:500;
+    font-weight:300;
     padding-bottom:50px;
+}
+
+#loaderBar{
+    background-color: hsl(215, 40%, 18%);
+    border-color: hsl(215, 40%, 18%);
+    color:white;
 }
 
 .uploadbar{
     width:50%;
 }
+
+#upload-title-text{
+    font-size: 15;
+    font-weight:300;
+    letter-spacing: 0.05em;
+    line-height: 1.5;
+    text-align: center;
+    color:white;
+}
+
+#satisfaction-header, #pace-header, #environment-header{
+    font-size: 20px;
+    font-weight:300;
+    letter-spacing: 0.05em;
+    line-height: 1.5;
+    text-align: left;
+    color:white;
+}
+   
+   
+
+#remove-button, #browse-button{
+    border-radius:5px;
+    background-color: #101825; 
+    border: 0.02px solid hsl(215, 40%, 18%);;
+    color:white;
+    border-width:4px; 
+    font-family: "Avenir LT Std Book", sans-serif; 
+    font-style: normal; 
+    font-weight: 350; 
+    font-size: calc(2.0vmin + 0.01vmax); 
+   
+    
+    display: inline-block;
+    vertical-align: middle;
+    -webkit-transform: perspective(1px) translateZ(0);
+    transform: perspective(1px) translateZ(0);
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+    -webkit-transition-property: color;
+    transition-property: color;
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+}
+
+#remove-button:hover, #browse-button:hover{
+    
+    box-shadow: 
+    inset -3.5em 0 0 0 var(--hover),
+    inset 3.5em 0 0 0 var(--hover); 
+    
+}
+
+#remove-button:before, #browse-button:before {
+   
+    content: "";
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: hsl(215, 40%, 18%);;
+    -webkit-transform: scaleX(0);
+    transform: scaleX(0);
+    -webkit-transform-origin: 50%;
+    transform-origin: 50%;
+    -webkit-transition-property: transform;
+    transition-property: transform;
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+    -webkit-transition-timing-function: ease-out;
+    transition-timing-function: ease-out;
+  }
+  #remove-button:hover, #remove-button:focus, #remove-button:active {
+    
+    color: white;
+  }
+  #remove-button:hover:before, #remove-button:focus:before, #remove-button:active:before {
+ 
+    -webkit-transform: scaleX(1);
+    transform: scaleX(1);
+  }
+
+  #browse-button:hover, #browse-button:focus, #browse-button:active {
+    
+    color: white;
+  }
+  #browse-button:hover:before, #browse-button:focus:before, #browse-button:active:before {
+ 
+    -webkit-transform: scaleX(1);
+    transform: scaleX(1);
+  }
+
+  #progress-header-button-pb{
+    background-color: #EDAE49;
+    border-color:#EDAE49;
+    color:#101825;
+    border-width:2px;
+    box-shadow: 4px 4px 4px 2px rgba(0, 0, 0, 0.15);
+    border-radius: 10px;
+    font-family: "Avenir LT Std Book", sans-serif;
+    font-style: normal;
+    font-weight:bold;
+    font-size: calc(1.8vmin + 0.01vmax);
+    padding-top:12px;
+    padding-bottom:12px;
+    padding-left:28px;
+    padding-right:28px;
+    margin-top:15px;
+    margin-right: 50px;
+}
+
+#contribution-header-button-pb, #engagement-header-button-pb, #additional-metrics-button-pb{
+    background-color: #101825;
+    border-color:#00798C;
+    color:white;
+    border-width:2px;
+    box-shadow: 4px 4px 4px 2px rgba(0, 0, 0, 0.15);
+    border-radius: 10px;
+    font-family: "Avenir LT Std Book", sans-serif;
+    font-style: normal;
+    font-weight: 350; 
+    font-size: calc(1.8vmin + 0.01vmax);
+    padding-top:12px;
+    padding-bottom:12px;
+    padding-left:28px;
+    padding-right:28px;
+    margin-top:15px;
+    margin-right: 50px;
+    
+    display: inline-block;
+    vertical-align: middle;
+    -webkit-transform: perspective(1px) translateZ(0);
+    transform: perspective(1px) translateZ(0);
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+    -webkit-transition-property: color;
+    transition-property: color;
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+}
+
+#contribution-header-button-pb:before,
+#engagement-header-button-pb:before,
+#additional-metrics-button-pb:before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #00798C;
+    -webkit-transform: scaleX(0);
+    transform: scaleX(0);
+    -webkit-transform-origin: 50%;
+    transform-origin: 50%;
+    -webkit-transition-property: transform;
+    transition-property: transform;
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+    -webkit-transition-timing-function: ease-out;
+    transition-timing-function: ease-out;
+    border-radius: 7px;
+  }
+  #contribution-header-button-pb:hover, #engagement-header-button-pb:hover, #additional-metrics-button:hover,
+  #contribution-header-button-pb:focus, #engagement-header-button-pb:focus, #additional-metrics-button:focus,
+  #contribution-header-button-pb:active, #engagement-header-button-pb:active #additional-metrics-button:active {
+    color: #101825;
+    font-weight:bold;
+    box-shadow: 
+    inset -3.5em 0 0 0 var(--hover),
+    inset 3.5em 0 0 0 var(--hover); 
+    
+  }
+ #contribution-header-button-pb:hover:before, #engagement-header-button-pb:hover:before, #additional-metrics-button:hover:before,
+  #contribution-header-button-pb:focus:before, #engagement-header-button-pb:focus:before, #additional-metrics-button:focus:before,
+   #contribution-header-button-pb:active:before, #engagement-header-button-pb:active:before, #additional-metrics-button:active:before {
+    -webkit-transform: scaleX(1);
+    transform: scaleX(1);
+   
+  }
+
+
 
 
 

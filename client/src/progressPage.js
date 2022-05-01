@@ -198,7 +198,7 @@ class progressPage extends Component {
               <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
             </svg>
             </div> */}
-            <div id="team-member-profile-cp">
+              <div id="team-member-profile-cp">
                 {this.state.team_member_username} &nbsp;
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -218,154 +218,204 @@ class progressPage extends Component {
             </div>
             <hr className="header-line"></hr>
             <div className="dashboard-header-buttons-container">
-              <button id="engagement-header-button" onClick={this.routeChangeToEngagement} className="btn btn-dark">
-                Engagement
-              </button>
-              <button id="contribution-header-button" onClick={this.routeChangeToContribution} className="btn btn-dark">
-                Contribution
-              </button>
-              <button id="progress-header-button" className="btn btn-dark">
-                Progress
-              </button>
-              {/* <button
-                onClick={this.showModal}
-                id="additional-metrics-button"
+              <button
+                id="engagement-header-button-pb"
+                onClick={this.routeChangeToEngagement}
                 className="btn btn-dark"
               >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="20"
-                  height="20"
-                  fill="currentColor"
-                  class="bi bi-plus"
-                  viewBox="0 0 16 16"
-                >
-                  <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
-                </svg>
+                Engagement
               </button>
-              <MetricsModal show={this.state.show} onHide={this.hideModal} /> */}
+              <button
+                id="contribution-header-button-pb"
+                onClick={this.routeChangeToContribution}
+                className="btn btn-dark"
+              >
+                Contribution
+              </button>
+              <button id="progress-header-button-pb" className="btn btn-dark">
+                Progress
+              </button>
             </div>
             <hr className="header-line"></hr>
 
             <>
-        <h5>Basic Upload</h5>
-        <CSVReader
-          ref={buttonRef}
-          onFileLoad={this.handleOnFileLoad}
-          onError={this.handleOnError}
-          noClick
-          noDrag
-          onRemoveFile={this.handleOnRemoveFile}
-          className="uploadbar"
-        >
-          {({ file }) => (
-            <aside
-              style={{
-                display: 'flex',
-                flexDirection: 'row',
-                marginBottom: 10
-              }}
-            >
-              <button
-                type='button'
-                onClick={this.handleOpenDialog}
-                style={{
-                  borderRadius: 0,
-                  marginLeft: '30%',
-                  marginRight: 0,
-                  width: '10%',
-                  paddingLeft: 0,
-                  paddingRight: 0
-                }}
+              <br />
+              <h5 id="upload-title-text">Upload Goal Setting Survey CSV</h5>
+              <br />
+              <CSVReader
+                ref={buttonRef}
+                onFileLoad={this.handleOnFileLoad}
+                onError={this.handleOnError}
+                noClick
+                noDrag
+                onRemoveFile={this.handleOnRemoveFile}
+                className="uploadbar"
               >
-                Browse file
-              </button>
-              <div
-                style={{
-                  borderWidth: 1,
-                  borderStyle: 'solid',
-                  borderColor: '#ccc',
-                  height: 45,
-                  lineHeight: 2.5,
-                  marginTop: 5,
-                  marginBottom: 5,
-                  paddingLeft: 13,
-                  paddingTop: 3,
-                  width: '20%'
-                }}
-              >
-                {file && file.name}
-              </div>
-              <button
-                style={{
-                  borderRadius: 0,
-                  marginLeft: 0,
-                  marginRight: 0,
-                  paddingLeft: 20,
-                  paddingRight: 20,
-                  width:'10%'
-                }}
-                onClick={this.handleRemoveFile}
-              >
-                Remove
-              </button>
-            </aside>
-          )}
-        </CSVReader>
-      </>
+                {({ file }) => (
+                  <aside
+                    style={{
+                      display: "flex",
+                      flexDirection: "row",
+                      marginBottom: 10,
+                    }}
+                  >
+                    <button
+                      type="button"
+                      id="browse-button"
+                      onClick={this.handleOpenDialog}
+                      style={{
+                        borderRadius: 0,
+                        marginLeft: "20%",
+                        marginRight: 0,
+                        width: "10%",
+                        paddingLeft: 0,
+                        paddingRight: 0,
+                      }}
+                    >
+                      Browse file
+                    </button>
+                    <button
+                      id="remove-button"
+                      style={{
+                        borderRadius: 0,
+                        marginLeft: 0,
+                        marginRight: 0,
+                        paddingLeft: 20,
+                        paddingRight: 20,
+                        // width:'10%'
+                      }}
+                      onClick={this.handleRemoveFile}
+                    >
+                      Remove file
+                    </button>
+                    &nbsp; &nbsp;
+                    <div
+                      id="loaderBar"
+                      style={{
+                        borderWidth: 1,
+                        height: 45,
+                        lineHeight: 2.5,
+                        marginTop: 5,
+                        marginBottom: 5,
+                        paddingLeft: 13,
+                        paddingTop: 3,
+                        width: "40%",
+                      }}
+                    >
+                      {file && file.name.slice(0, 50)}
+                    </div>
+                  </aside>
+                )}
+              </CSVReader>
+            </>
 
             <div className="container">
               <div className="row">
                 <div class="col-sm">
-                    <div id="progress-box">
-                    
-                    <svg xmlns="http://www.w3.org/2000/svg" width="206" height="206" fill="#00798C" class="bi bi-check-circle-fill" viewBox="0 0 16 16">
-                        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
-                    </svg>
+                  <div id="progress-box">
+                    <div id="progress-header">Progress</div>
+                    <div id="progress-box-level">
+                      {/* <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="206"
+                        height="206"
+                        fill="#00798C"
+                        class="bi bi-check-circle-fill"
+                        viewBox="0 0 16 16"
+                      >
+                        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
+                      </svg> */}
 
-                    <br/>
-                    <br/>
-
-                    <div id="progress-header">
-                        PROGRESS
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        id="progress-icon"
+                        width="206"
+                        height="206"
+                        fill="#00798C"
+                        class="bi bi-bar-chart-line-fill"
+                        viewBox="0 0 16 16"
+                      >
+                        <path d="M11 2a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v12h.5a.5.5 0 0 1 0 1H.5a.5.5 0 0 1 0-1H1v-3a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3h1V7a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v7h1V2z" />
+                      </svg>
+                      <div id="progress-percent">{this.state.progress}%</div>
                     </div>
-                    <div id="progress-percent">
-                        {this.state.progress}%
-                    </div>
-                    </div>
+                  </div>
                 </div>
                 <div class="col-sm">
-                    <div id="progress-bar-box">
-                    <div>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="#00798C" class="bi bi-check-circle-fill" viewBox="0 0 16 16">
-                        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
-                    </svg> &nbsp;
-                        Satisfaction
-                        <ProgressBar now={this.state.satisfaction} variant="warning"/>
-                        {this.state.satisfaction}%
+                  <div id="progress-bar-box">
+                    <div id="satisfaction-header">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="26"
+                        height="26"
+                        fill="#00798C"
+                        class="bi bi-check-circle-fill"
+                        viewBox="0 0 16 16"
+                      >
+                        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
+                      </svg>{" "}
+                      &nbsp; Satisfaction :{" "}
+                      <span id="progressbar-percent">
+                        {this.state.satisfaction}%{" "}
+                      </span>
+                      <br />
+                      <br />
+                      <ProgressBar
+                        className="progressBar"
+                        now={this.state.satisfaction}
+                        variant="warning"
+                      />
                     </div>
-                    <br/>
+                    <br />
 
-                    <div>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="#00798C" class="bi bi-check-circle-fill" viewBox="0 0 16 16">
-                        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
-                    </svg> &nbsp;
-                        Pacing
-                        <ProgressBar now={this.state.pace} variant="warning"/>
-                        {this.state.pace}%
+                    <div id="pace-header">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="26"
+                        height="26"
+                        fill="#00798C"
+                        class="bi bi-check-circle-fill"
+                        viewBox="0 0 16 16"
+                      >
+                        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
+                      </svg>{" "}
+                      &nbsp; Pacing :{" "}
+                      <span id="progressbar-percent">{this.state.pace}% </span>
+                      <br />
+                      <br />
+                      <ProgressBar
+                        className="progressBar"
+                        now={this.state.pace}
+                        variant="warning"
+                      />
                     </div>
-                    <br/>
+                    <br />
 
-                    <div>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="#00798C" class="bi bi-check-circle-fill" viewBox="0 0 16 16">
-                        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
-                    </svg> &nbsp; 
-                        Environmental Impact
-                        <ProgressBar now={this.state.environment} variant="warning"/>
-                        {this.state.environment}%
+                    <div id="environment-header">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="26"
+                        height="26"
+                        fill="#00798C"
+                        class="bi bi-check-circle-fill"
+                        viewBox="0 0 16 16"
+                      >
+                        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
+                      </svg>{" "}
+                      &nbsp; Environmental Impact :{" "}
+                      <span id="progressbar-percent">
+                        {this.state.environment}%{" "}
+                      </span>
+                      <br />
+                      <br />
+                      <ProgressBar
+                        className="progressBar"
+                        now={this.state.environment}
+                        variant="warning"
+                      />
+                      <br />
                     </div>
-                    </div>
-                    
+                  </div>
                 </div>
               </div>
             </div>
