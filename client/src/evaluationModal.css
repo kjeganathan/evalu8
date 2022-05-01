@@ -1,0 +1,31 @@
+.evaluationModal .modal-header{
+    background-color: #a53860;
+    color: #101825;;
+    border-bottom: 1px solid #101825;
+
+}
+
+.evaluation-modal-header{
+    width:100%;
+    display:flex;
+    flex-direction: row;
+}
+
+.evaluationModal .modal-footer{
+    background-color: #101825;
+    color: #fff; 
+    border-top: 1px solid #182437;
+}
+
+.evaluationModal .modal-body{
+    background-color: #101825;
+    color: #fff
+
+}
+
+.evaluationSaveButton{
+    background-color:#a53860;
+    color:#101825;
+    border:#a53860;
+    font-weight:bold;
+}

@@ -33,21 +33,8 @@ const EvaluationModalItem = (props) => {
         element = (
             <Collapsible id="meeting-list" trigger={Object.keys(evaluation)}>
               <EvalModelIndividualItems totalIndex={total_index} evaluationStatus={eval_status} team_members={teamMembers} evalType={Object.keys(evaluation)} numOfEvals={Object.values(evaluation)} sendFinalParent={getData} evalData={evaluation} allEvalData={evaluations}></EvalModelIndividualItems>
-        {/* <Table striped bordered hover>
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>Name</th>
-              <th>Email</th>
-              <th>Completed Evaluations</th>
-            </tr>
-          </thead>
-          <tbody>
-            {/* Send In one evaluation object depending on what evalutation it is*/}
-            {/* <EvaluationModalTeamMembers sendDataParent={getData} evalData={evaluation} allEvalData={evaluations}></EvaluationModalTeamMembers> 
-          </tbody>
-        </Table> */} 
-      </Collapsible>
+          </Collapsible>
+          
         );
         evalArray.push(element);
         console.log(evalArray);

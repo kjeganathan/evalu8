@@ -5,6 +5,8 @@ import Collapsible from "react-collapsible";
 import Table from "react-bootstrap/Table";
 import Form from "react-bootstrap/Form";
 import EvaluationModalTeamMembers from "./evaluationModalTeamMembers";
+import "./EvalIndividualItems.css";
+import { Accordion } from "react-bootstrap";
 
 const EvalModelIndividualItems = (props) => {
 
@@ -48,22 +50,47 @@ const EvalModelIndividualItems = (props) => {
         
     
         element = (
-            <Collapsible id="meeting-list" trigger={evaluationType + " " + count + "  |  " + statusForEval}>
-         <Table striped bordered hover>
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>Github Username</th>
-              <th>Name</th>
-              <th>Evaluation Completion</th>
-            </tr>
-          </thead>
-          <tbody>
-            {/* Send In one evaluation object depending on what evalutation it is*/}
-             <EvaluationModalTeamMembers sendDataParent={getData} allEvalData={evaluations} evalNum={count} evalType={evaluationType}></EvaluationModalTeamMembers> 
-          </tbody>
-        </Table>  
-      </Collapsible>
+      //       <Collapsible id="meeting-list" trigger={evaluationType + " " + count + "  |  " + statusForEval}>
+      //    <Table striped bordered hover>
+      //     <thead>
+      //       <tr>
+      //         <th>#</th>
+      //         <th>Github Username</th>
+      //         <th>Name</th>
+      //         <th>Evaluation Completion</th>
+      //       </tr>
+      //     </thead>
+      //     <tbody>
+      //       {/* Send In one evaluation object depending on what evalutation it is*/}
+      //        <EvaluationModalTeamMembers sendDataParent={getData} allEvalData={evaluations} evalNum={count} evalType={evaluationType}></EvaluationModalTeamMembers> 
+      //     </tbody>
+      //   </Table>  
+      // </Collapsible>
+
+      <Accordion defaultActiveKey="0" className="evaluationAccordion">
+          <Accordion.Item eventKey={count - 1}>
+            <Accordion.Header className="evaluationAccordionTitle">
+              {evaluationType + " " + count + "  |  " + statusForEval}
+            </Accordion.Header>
+            <Accordion.Body>
+              
+              <Table striped bordered hover variant="dark">
+           <thead>
+             <tr>
+               <th>#</th>
+               <th>Github Username</th>
+               <th>Name</th>
+               <th>Evaluation Completion</th>
+             </tr>
+           </thead>
+           <tbody>
+             {/* Send In one evaluation object depending on what evalutation it is*/}
+              <EvaluationModalTeamMembers sendDataParent={getData} allEvalData={evaluations} evalNum={count} evalType={evaluationType}></EvaluationModalTeamMembers> 
+           </tbody>
+         </Table>  
+            </Accordion.Body>
+          </Accordion.Item>
+        </Accordion>
         );
         evalArray.push(element);
         console.log(evalArray);
