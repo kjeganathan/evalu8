@@ -1,5 +1,5 @@
 .evaluationModal .modal-header{
-    background-color: #a53860;
+    background-color: #00798C;
     color: #101825;;
     border-bottom: 1px solid #101825;
 
@@ -24,8 +24,8 @@
 }
 
 .evaluationSaveButton{
-    background-color:#a53860;
+    background-color:#00798C;
     color:#101825;
-    border:#a53860;
+    border:#00798C;
     font-weight:bold;
 }
