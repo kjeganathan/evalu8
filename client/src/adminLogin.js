@@ -129,7 +129,7 @@ class adminLogin extends Component {
                 <div id="option-id" className="option">
                   Don't have an account? &nbsp;
                   <a
-                    href="http://localhost:3000/adminCreateAccount"
+                    href="./adminCreateAccount"
                     id="create-account-link-id"
                     className="createAccountLink"
                   >

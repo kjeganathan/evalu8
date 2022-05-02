@@ -40,6 +40,8 @@ class admincreateAccount extends Component {
       body: JSON.stringify(data), // data can be `string` or {object}!
       headers: { "Content-Type": "application/json" },
     })
+
+    window.alert("You successfully created a new account!  Now, go ahead and log in!");
   }
 
   render() {
@@ -112,7 +114,7 @@ class admincreateAccount extends Component {
                 <div id="createAccount-option-id" className="option">
                   Already have an account? &nbsp;
                   <a
-                    href="http://localhost:3000/adminLogin"
+                    href="./adminLogin"
                     id="loginLink-id"
                     className="loginLink"
                   >

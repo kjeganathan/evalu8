@@ -15,6 +15,8 @@ import SideNav from "./sideNav";
 import { useState } from "react";
 import DatePicker from "react-multi-date-picker";
 import DatePanel from "react-multi-date-picker/plugins/date_panel";
+import AdminSideNav from "./adminsideNav";
+
 
 const AdminPage = (props) => {
   //get this information from the admin login
@@ -123,6 +125,9 @@ const AdminPage = (props) => {
   return (
     <div>
       <div className="App-header">
+      <div>
+            <AdminSideNav></AdminSideNav>
+          </div>
         <div className="flex-admin-page"></div>
         <img src={logo} className="App-logo" alt="logo" />
       </div>

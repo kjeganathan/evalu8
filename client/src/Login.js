@@ -93,7 +93,7 @@ class Login extends Component {
                           </button>
                         </div>
                           <div id="option-id" className="option">Don't have an account? &nbsp;
-                          <a href="http://localhost:3000/createAccount" id="create-account-link-id" className="createAccountLink">sign up</a>
+                          <a href="./createAccount" id="create-account-link-id" className="createAccountLink">sign up</a>
                           </div>
                          
                  
