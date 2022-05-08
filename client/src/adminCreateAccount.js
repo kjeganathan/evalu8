@@ -30,8 +30,7 @@ class admincreateAccount extends Component {
     event.preventDefault();
     const data = {
       name: this.state.name,
-      course: this.state.classroom,
-      password: this.state.password
+      course: this.state.classroom
     };
     let token = this.state.github_token;
     //Fetch request to create an account for a new manager
@@ -80,9 +79,7 @@ class admincreateAccount extends Component {
                   />
                 </div>
                 
-                
-                
-                <div id="password-form" className="form-group">
+                {/* <div id="password-form" className="form-group">
                   <label for="createPassword">Password</label>
                   <input
                     onChange={this.handleChange}
@@ -101,7 +98,7 @@ class admincreateAccount extends Component {
                     className="form-control"
                     id="createVerifyPassword"
                   />
-                </div>
+                </div> */}
                 <div className="createAccountButton">
                   <button
                     id="createAccountButton"

@@ -252,7 +252,7 @@ class createAccount extends Component {
                     id="createPassword"
                   />
                 </div>
-                <div id="verify-password-form" className="form-group">
+                {/* <div id="verify-password-form" className="form-group">
                   <label for="createVerifyPassword">Verify Password</label>
                   <input
                     onChange={this.handleChange}
@@ -261,7 +261,7 @@ class createAccount extends Component {
                     className="form-control"
                     id="createVerifyPassword"
                   />
-                </div>
+                </div> */}
                 <div className="createAccountButton">
                   <button
                     id="createAccountButton"

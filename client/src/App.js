@@ -13,11 +13,11 @@ import AdminPage from './adminPage';
 import admincreateAccount from './adminCreateAccount';
 import adminLogin from './adminLogin';
 import progressPage from './progressPage';
+import { useState } from 'react';
 
 
-class App extends Component {
-
-  render() {
+function App() { 
+ 
     return (
       <div className="App">
         {/* <div className="App-header">
@@ -45,7 +45,7 @@ class App extends Component {
         </div>
       </div>
     );
-  }
+  
 }
 
 export default App;

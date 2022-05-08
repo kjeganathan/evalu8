@@ -21,11 +21,19 @@ app.use('/gitapi', gitapi);
 
 app.use(express.static(path.join(__dirname, "client/build")));
 
+//Password endpoint
+
+app.post("/api/getPassword", async (req, res) => {
+    const data = req.body;
+    let result = await dblast.getPassword(data.name, data.classroom);
+    res.send(result);
+});
+
 /* ADMIN END POINTS */
 
 app.post("/api/createAdmin", async (req, res) => {
     const data = req.body;
-    await dblast.addAdmin(data.name, data.course, data.password, data.attendancedates, data.evalmetrics, data.evaluationtypes);
+    await dblast.addAdmin(data.name, data.course, data.attendancedates, data.evalmetrics, data.evaluationtypes);
     console.log("Created a new account successfully!");
     res.sendStatus(200);
 });

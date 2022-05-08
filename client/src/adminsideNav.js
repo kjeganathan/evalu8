@@ -119,7 +119,7 @@ const AdminSideNav = () => {
                 onClick={logoutClick}
               >
                 Logout
-                <Link to="/login" />
+                <Link to="/adminLogin" />
               </MenuItem>
               </OverlayTrigger>
             </Menu>

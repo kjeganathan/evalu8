@@ -58,7 +58,7 @@ const AdminPage = (props) => {
       method: "POST",
       body: JSON.stringify(data), // data can be `string` or {object}!
       headers: { "Content-Type": "application/json" },
-    });
+    })
   }
 
   // EVALUATION CODE
@@ -96,7 +96,7 @@ const AdminPage = (props) => {
       method:'POST', 
       body: JSON.stringify(data), // data can be `string` or {object}!
       headers:{ 'Content-Type': 'application/json' } 
-    });
+    })
     //send arr to backend admin db evalmetrics
   }
 

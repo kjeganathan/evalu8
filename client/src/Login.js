@@ -6,6 +6,8 @@ import logo from './logo.png';
 
 class Login extends Component {
 
+  
+
   constructor() {
     super();
 
@@ -13,10 +15,15 @@ class Login extends Component {
       github_username:'',
       course:'',
       token:'',
-      admin:''
+      admin:'',
+      password: ""
       };
 
     this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  componentDidMount = () => {
+    
   }
 
   handleChange = (e) => {
@@ -33,7 +40,24 @@ class Login extends Component {
       let jsoncourse = JSON.parse(localStorage.getItem("course"));
       let username = JSON.parse(localStorage.getItem("github_username"));
       console.log(username);
-      let data = {manager_name:username, classroom:jsoncourse}
+      //check if the password entered is the same as the password which was logged in the db
+      //grab the password of manager using githubusername and course
+      //check if that password matches what was just typed in on submit for password
+      //if not, throw an alert saying wrong password
+      //if yes, continue
+      let logindata = {name:username, classroom:jsoncourse};
+      fetch("/api/getPassword",{ 
+        method:'POST', 
+        body: JSON.stringify(logindata), // data can be `string` or {object}!
+        headers:{ 'Content-Type': 'application/json' } 
+      }).then(async responselogin => {
+        //data2 is an array of objects
+        const newlogindata = await responselogin.json();
+        console.log("password:" + newlogindata[0]['password']);
+        if(newlogindata[0]['password'] != this.state.password){
+          window.alert("Oops! You have typed in the wrong password for this account!")
+        }else{
+          let data = {manager_name:username, classroom:jsoncourse};
       fetch("/api/getTokenAndAdminByManager",{ 
         method:'POST', 
         body: JSON.stringify(data), // data can be `string` or {object}!
@@ -56,7 +80,9 @@ class Login extends Component {
         }).then(s => {
           window.location.href='/teamMembers';
         });
-      
+        }
+
+      });
        
     }
     

@@ -107,7 +107,7 @@ class adminLogin extends Component {
                     id="loginCourse"
                   />
                 </div>
-                <div id="passwordForm" className="form-group">
+                {/* <div id="passwordForm" className="form-group">
                   <label for="loginPassword">Password</label>
                   <input
                     onChange={this.handleChange}
@@ -116,7 +116,7 @@ class adminLogin extends Component {
                     className="form-control"
                     id="loginPassword"
                   />
-                </div>
+                </div> */}
                 <div className="loginButton">
                   <button
                     id="loginButton"

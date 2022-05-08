@@ -39,13 +39,25 @@ async function connectAndRun(task) {
     }
 }
 
+//Password Function
+
+async function getPassword(name, classroom){
+  return await connectAndRun((db) =>
+  db.any(
+    "SELECT password FROM managers WHERE github_username = $1 and classroom = $2;",
+    [name, classroom]
+      )
+    );
+}
+
+
 //ADMIN DB FUNCTIONS
 
-async function addAdmin(name, course, password, attendancedates, evalmetrics, evaluationtypes) {
+async function addAdmin(name, course, attendancedates, evalmetrics, evaluationtypes) {
   return await connectAndRun((db) =>
     db.none(
-      "INSERT INTO admin (name, course, password, attendancedates, evalmetrics, evaluationtypes) VALUES ($1, $2, $3, $4, $5, $6);",
-      [name, course, password, attendancedates, evalmetrics, evaluationtypes]
+      "INSERT INTO admin (name, course, attendancedates, evalmetrics, evaluationtypes) VALUES ($1, $2, $3, $4, $5);",
+      [name, course, attendancedates, evalmetrics, evaluationtypes]
     )
   );
 }
@@ -359,6 +371,7 @@ getEmailByGitUsername,
 getAllAttendance,
 addProgress,
 getProgressByEmailAndCourse,
-updateProgress
+updateProgress,
+getPassword
 
 };
