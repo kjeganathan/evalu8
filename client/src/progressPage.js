@@ -128,7 +128,17 @@ class progressPage extends Component {
                 //fields are progress, pacing, satisfaction, environment
                 //add fields course (localStorage) and email (team_member)
                 let coursedata = JSON.parse(localStorage.getItem("course"));
+                let admindata = JSON.parse(localStorage.getItem("admin"));
                 const data = {
+                    progress: parseInt(item["data"][13]),
+                    pacing: parseInt(item["data"][15]),
+                    satisfaction: parseInt(item["data"][14]),
+                    environment:parseInt(item["data"][17]),
+                    email: team_member_email,
+                    course: coursedata,
+                    admin: admindata
+                  };
+                  const dataUpdate = {
                     progress: parseInt(item["data"][13]),
                     pacing: parseInt(item["data"][15]),
                     satisfaction: parseInt(item["data"][14]),
@@ -147,7 +157,7 @@ class progressPage extends Component {
                       //update existing team member with different data
                       fetch("/api/updateProgress", {
                         method: "POST",
-                        body: JSON.stringify(data), // data can be `string` or {object}!
+                        body: JSON.stringify(dataUpdate), // data can be `string` or {object}!
                         headers: { "Content-Type": "application/json" },
                       })
                   }

@@ -202,11 +202,11 @@ async function addTeamMembers(github_username, github_reponame, team_members){
     );
 }
 
-async function addToTeamMemberTable(name, course, github_username, manager_name, email) {
+async function addToTeamMemberTable(name, course, github_username, manager_name, email, admin) {
   return await connectAndRun((db) =>
     db.none(
-      "INSERT INTO teammember (name, course, github_username, manager_name, email) VALUES ($1, $2, $3, $4, $5);",
-      [name, course, github_username, manager_name, email]
+      "INSERT INTO teammember (name, course, github_username, manager_name, email, admin) VALUES ($1, $2, $3, $4, $5, $6);",
+      [name, course, github_username, manager_name, email, admin]
     )
   );
 }
@@ -310,11 +310,11 @@ async function updateEval(ischecked, teammemberinfo, evaltype, evalnumber, cours
 
 //progress endpoints
 
-async function addProgress(progress, pacing, satisfaction, environment, email, course) {
+async function addProgress(progress, pacing, satisfaction, environment, email, course, admin) {
   return await connectAndRun((db) =>
   db.none(
-    "INSERT INTO progress (progress, pacing, satisfaction, environment, email, course) VALUES ($1, $2, $3, $4, $5, $6);",
-    [progress, pacing, satisfaction, environment, email, course]
+    "INSERT INTO progress (progress, pacing, satisfaction, environment, email, course, admin) VALUES ($1, $2, $3, $4, $5, $6, $7);",
+    [progress, pacing, satisfaction, environment, email, course, admin]
       )
     );
 }
@@ -333,6 +333,53 @@ async function getProgressByEmailAndCourse(email, course){
   db.any(
     "SELECT * FROM progress WHERE email = $1 and course = $2;",
     [email, course]
+      )
+    );
+}
+
+//Deleting content of tables
+
+async function deleteManagers(admin, course){
+  return await connectAndRun((db) =>
+  db.any(
+    "DELETE FROM managers WHERE admin = $1 and classroom = $2;",
+    [admin, course]
+      )
+    );
+}
+
+async function deleteAttendance(admin, course){
+  return await connectAndRun((db) =>
+  db.any(
+    "DELETE FROM attendanceondate WHERE admin = $1 and course = $2;",
+    [admin, course]
+      )
+    );
+}
+
+async function deleteEvaluations(admin, course){
+  return await connectAndRun((db) =>
+  db.any(
+    "DELETE FROM evaluations WHERE admin = $1 and course = $2;",
+    [admin, course]
+      )
+    );
+}
+
+async function deleteProgress(admin, course){
+  return await connectAndRun((db) =>
+  db.any(
+    "DELETE FROM progress WHERE admin = $1 and course = $2;",
+    [admin, course]
+      )
+    );
+}
+
+async function deleteTeamMember(admin, course){
+  return await connectAndRun((db) =>
+  db.any(
+    "DELETE FROM teammember WHERE admin = $1 and course = $2;",
+    [admin, course]
       )
     );
 }
@@ -372,6 +419,11 @@ getAllAttendance,
 addProgress,
 getProgressByEmailAndCourse,
 updateProgress,
-getPassword
+getPassword,
+deleteAttendance,
+deleteEvaluations,
+deleteManagers,
+deleteProgress,
+deleteTeamMember
 
 };

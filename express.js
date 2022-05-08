@@ -140,7 +140,7 @@ app.post("/api/addTeamMembers", async (req, res) => {
 
 app.post("/api/addToTeamMemberTable", async (req, res) => {
     const data = req.body;
-    await dblast.addToTeamMemberTable(data.name, data.course, data.github_username, data.manager_name, data.email);
+    await dblast.addToTeamMemberTable(data.name, data.course, data.github_username, data.manager_name, data.email, data.admin);
     console.log("Added team member to teammember table");
     res.sendStatus(200);
 });
@@ -212,7 +212,7 @@ app.post("/api/updateEvaluation", async (req, res) => {
 
 app.post("/api/addProgress", async (req, res) => {
     const data = req.body;
-    await dblast.addProgress(data.progress, data.pacing, data.satisfaction, data.environment, data.email, data.course);
+    await dblast.addProgress(data.progress, data.pacing, data.satisfaction, data.environment, data.email, data.course, data.admin);
     console.log("Created a new account successfully!");
     res.sendStatus(200);
 });
@@ -226,6 +226,19 @@ app.post("/api/getProgressByEmailAndCourse", async (req, res) => {
 app.post("/api/updateProgress", async (req, res) => {
     const data = req.body;
     await dblast.updateProgress(data.progress, data.pacing, data.satisfaction, data.environment, data.email, data.course);
+    res.sendStatus(200);
+});
+
+//Delete table contents
+
+app.post("/api/deleteSemesterTables", async (req, res) => {
+    const data = req.body;
+    await dblast.deleteManagers(data.admin, data.course);
+    await dblast.deleteAttendance(data.admin, data.course);
+    await dblast.deleteEvaluations(data.admin, data.course);
+    await dblast.deleteProgress(data.admin, data.course);
+    await dblast.deleteTeamMember(data.admin, data.course);
+    console.log("Deleted Table Contents for New Semester!");
     res.sendStatus(200);
 });
 

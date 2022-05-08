@@ -25,6 +25,7 @@ class createAccount extends Component {
   }
 
   componentDidMount = async () => {
+    
     //get all the dropdown item names from the admin db
     console.log("value Of professor:" + this.state.value);
     await fetch("/api/getAllAdmins", {
@@ -83,6 +84,7 @@ class createAccount extends Component {
       password: this.state.password,
       admin:this.state.dropDownVal
     };
+    
     let token = this.state.github_token;
     //Fetch request to create an account for a new manager
     fetch("/api/createAccount", {
@@ -121,7 +123,8 @@ class createAccount extends Component {
                       course: this.state.classroom,
                       github_username: obj["login"],
                       manager_name: this.state.github_username,
-                      email: data3["email"]
+                      email: data3["email"],
+                      admin: this.state.dropDownVal
                     };
                     fetch("/api/addToTeamMemberTable", {
                       method: "POST",
