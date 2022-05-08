@@ -3,7 +3,10 @@
     height:100%;
 }
 
-
+body{
+    height:100vh;
+    background-color: #101825;
+  }
 
 .engagementPage-content{
     margin-top:80px;

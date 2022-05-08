@@ -5,8 +5,10 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import "./teamMembers.css";
 import logo from "./logo.png";
+import SideNav from "./sideNav";
 import { ResizeSensor } from "@amcharts/amcharts4/.internal/core/utils/ResizeSensor";
 import TeamMembersCol from "./teamMembersCol";
+import TeamSideNav from "./teamMemberSideNav";
 
 class teamMembers extends Component {
 
@@ -115,6 +117,9 @@ class teamMembers extends Component {
     return (
       <div>
         <div className="App-header">
+        <div>
+            <TeamSideNav />
+          </div>
           <img src={logo} className="App-logo" alt="logo" />
         </div>
         <div className="teamMembersPage">

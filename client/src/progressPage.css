@@ -1,7 +1,12 @@
 .progressPage{
     background-color:#101825;
-    height:100vh;
+    height:100%;
 }
+
+body{
+    height:100vh;
+    background-color: #101825;
+  }
 
 .progressPage-content{
     margin-top:80px;
@@ -50,6 +55,7 @@
     margin-top:50px;
     box-shadow: 4px 4px 4px 2px rgba(0, 0, 0, 0.15);
     padding:20px;
+    margin-bottom:50px;
 }
 
 #progress-icon{

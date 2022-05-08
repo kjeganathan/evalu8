@@ -97,14 +97,16 @@ const EvaluationModalEvals = (props) => {
         <div key={`inline-${type}`} className="mb-3">
           <Form.Check
             inline
-            type="radio"
+            name="group1"
+            type={type}
             onChange={handleEvalClick1}
             label="Completed"
             id={props.sendTeamMember + "," + nameOfEval + "," + numOfEvals}
           />
           <Form.Check
             inline
-            type="radio"
+            name="group1"
+            type={type}
             onChange={handleEvalClick2}
             label="Not Completed"
             id={props.sendTeamMember + "," + nameOfEval + "," + numOfEvals}

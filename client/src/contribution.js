@@ -149,7 +149,7 @@ routeChangeToProgress=()=> {
 
   render() {
     return (
-      <div>
+      <div id="outer-body">
         {/* <ProSidebar collapsed="true">
   <Menu iconShape="square">
     <MenuItem icon={<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-gem" viewBox="0 0 16 16">
