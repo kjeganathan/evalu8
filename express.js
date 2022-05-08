@@ -61,6 +61,8 @@ app.post("/api/getEvalMetricsByAdmin", async (req, res) => {
 
 //ADMIN ENDPOINTS END
 
+//Manager endpoints
+
 app.post("/api/emailByGitUsername", async (req, res) => {
     const data = req.body;
     let result = await dblast.getEmailByGitUsername(data.name);
@@ -73,6 +75,8 @@ app.post("/api/createAccount", async (req, res) => {
     console.log("Created a new account successfully!");
     res.sendStatus(200);
 });
+
+//Attendance endpoints
 
 //Not used
 app.get("/api/getAllAttendance", async (req, res) => {
@@ -110,12 +114,15 @@ app.post("/api/statusAttendanceByDate", async (req, res) => {
     res.send(result);
 });
 
+//Team member endpoints
+
 app.post("/api/getMemberAttendanceByDate", async (req, res) => {
     const data = req.body;
     let result = await dblast.getMemberAttendanceOnDate(data.teammemberinfo, data.course);
     res.send(result);
 });
 
+//Not used
 app.post("/api/addTeamMembers", async (req, res) => {
     const data = req.body;
     await dblast.addTeamMembers(data.github_username, data.github_reponame, data.team_members);
@@ -136,6 +143,8 @@ app.post("/api/getAllTeamMembersByManagerAndCourse", async (req, res) => {
     res.send(result);
 });
 
+//Manager Endpoints
+
 app.post("/api/getRepoNameByManagerAndCourse", async (req, res) => {
     const data = req.body;
     let result = await dblast.getRepoNameByManagerAndCourse(data.manager_name, data.course);
@@ -147,6 +156,8 @@ app.post("/api/getTokenAndAdminByManager", async (req, res) => {
     let result = await dblast.getTokenAndAdminByManager(data.manager_name, data.classroom);
     res.send(result);
 });
+
+//Evaluation Endpoints
 
 app.post("/api/addEvaluation", async (req, res) => {
     const data = req.body;

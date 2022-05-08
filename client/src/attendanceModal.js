@@ -17,6 +17,8 @@ import ReactHtmlParser, { processNodes, convertNodeToElement, htmlparser2 } from
 const AttendanceModal = (props) => {
 
   let csv = [];
+  let csvDat = [];
+  let newCSVData = [];
   let valArr = [];
   let numChanges = 0;
   let coursedata = JSON.parse(localStorage.getItem("course"));
@@ -25,7 +27,7 @@ const AttendanceModal = (props) => {
 
   
 
-  // let getcsvData = async () => {
+  // let getcsvData2 = async () => {
 
   //   fetch('/api/getAllAttendance',{ 
   //     method:'GET', 
@@ -40,18 +42,64 @@ const AttendanceModal = (props) => {
   //       let nameArr = "";
   //       let firstName = "";
   //       let lastName = "";
+  //       let data = item['date'];
   //       if(item['fullname'].length != 0){
   //         nameArr = item['fullname'].split(" ");
   //         firstName = nameArr[0];
   //         lastName = nameArr[1];
   //       }
-  //       csv.push([lastName, firstName, item['email'], "", item['status'].charAt(0).toUpperCase()])
+  //       csv.push([lastName, firstName, item['email'], "", item['status'].charAt(0).toUpperCase()], item['date'])
   //     })
   //     console.log("csvIS: " + csv);
   //     localStorage.setItem("csvdata", JSON.stringify(csv));
   //   });
 
   // }
+
+  //getcsvData2();
+
+  let getcsvData = async () => {
+    let dates = JSON.parse(localStorage.getItem('attendance_dates'));
+    //call this in dateItem forEach
+    dates.forEach((dateitem) => {
+    let newdata = { date: dateitem, course: coursedata, manager: managerdata };
+
+    fetch("/api/getAllAttendanceByDate", {
+      method: "POST",
+      body: JSON.stringify(newdata), // data can be `string` or {object}!
+      headers: { "Content-Type": "application/json" },
+    })
+      .then((responsenext) => responsenext.json())
+      .then(async (responseJSONnext) => {
+        console.log("csvData: " + responseJSONnext);
+        csvDat = [["Last Name", "First Name", "Email Address", "", "Attend", dateitem]];
+        responseJSONnext.forEach((item) => {
+          console.log("csvitem2: " + item["teammemberinfo"]);
+          //csv.push(["hello", "goodbye", "lastnight", "e", "a"]);
+          let nameArr = "";
+          let firstName = "";
+          let lastName = "";
+          if (item["fullname"].length != 0) {
+            nameArr = item["fullname"].split(" ");
+            firstName = nameArr[0];
+            lastName = nameArr[1];
+          }
+          csvDat.push([
+            lastName,
+            firstName,
+            item["email"],
+            "",
+            item["status"].charAt(0).toUpperCase(),
+            dateitem
+          ]);
+        });
+        console.log("csvIS2: " + csvDat);
+        newCSVData.push(csvDat); //pushes in csvdata for each date
+        console.log("newCSVData: " + newCSVData);
+        localStorage.setItem("csvdata2", JSON.stringify(newCSVData));
+      });
+    });
+  };
 
   let getAttendanceStatus = async () => {
     let dates = JSON.parse(localStorage.getItem('attendance_dates'));
@@ -186,7 +234,8 @@ const AttendanceModal = (props) => {
 
   getAttendanceStatus();
   let attendance_status = JSON.parse(localStorage.getItem('attendance_status'));
-
+  getcsvData();
+  let csvData = JSON.parse(localStorage.getItem('csvdata2'));
   //CSV Data
   // getcsvData();
   // let newCSVData = JSON.parse(localStorage.getItem("csvdata"));
@@ -239,7 +288,7 @@ const AttendanceModal = (props) => {
       </Modal.Header>
       <Modal.Body>
   
-    <AttendanceModalItem sendChildData={getChildData} attendanceStatus={attendance_status}></AttendanceModalItem>
+    <AttendanceModalItem sendChildData={getChildData} attendanceStatus={attendance_status} CSVDat={csvData}></AttendanceModalItem>
       </Modal.Body>
       <Modal.Footer>
         {/* <Button onClick={props.onHide}>Done</Button> */}

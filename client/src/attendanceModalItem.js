@@ -18,6 +18,9 @@ const AttendanceModalItem = (props) => {
   let managerdata = JSON.parse(localStorage.getItem("github_username"));
   //   let newVal = useRef('');
 
+  let csvdata = props.CSVDat;
+  console.log("csvdat: " + csvdata);
+
   let getcsvData = async (dateitem) => {
     //call this in dateItem forEach
     let newdata = { date: dateitem, course: coursedata, manager: managerdata };
@@ -108,11 +111,12 @@ const AttendanceModalItem = (props) => {
   let count = 1;
   let attendanceStatusArr = [];
   let statusForAttendance = "";
+  let csvobj = "";
 
   console.log("dates: " + dates);
   if (dates != null) {
     dates.forEach((dateitem) => {
-      getcsvData(dateitem);
+      //getcsvData(dateitem);
       for (let i = 0; i < attendance_status.length; i++) {
         console.log("attendanceobj:" + attendance_status[i]);
         console.log("flag: " + (attendance_status[i]["date"] == dateitem));
@@ -125,13 +129,27 @@ const AttendanceModalItem = (props) => {
         }
       }
 
-      let recordedData = [];
-      let newDataSaved = JSON.parse(localStorage.getItem("csvdata2"));
-      if (newDataSaved != null) {
-        recordedData = newDataSaved[parseInt(count - 1)];
+      
+      for(let j = 0; j < csvdata.length; j++){
+        console.log("csvobj:" + csvdata[j][0]);
+        // let splitCSVData = csvdata[j][0].split(",");
+        // console.log("splitCSV: " + splitCSVData);
+        let csvString = `Last Name,First Name,Email Address,,Attend,${dateitem}`;
+        if(csvdata[j][0] == csvString){
+          console.log("yay: " + csvdata[j]);
+          csvobj = csvdata[j];
+        }
       }
 
-      console.log("newDataSaved: " + newDataSaved);
+      let recordedData = [];
+      recordedData = csvobj;
+      console.log("recordedData: " + recordedData);
+      //let newDataSaved = JSON.parse(localStorage.getItem("csvdata2"));
+      //if (newDataSaved != null) {
+        //recordedData = newDataSaved[parseInt(count - 1)];
+      //}
+
+      // console.log("newDataSaved: " + newDataSaved);
       element = (
         // <Collapsible id="meeting-list" trigger={"MEETING " + count + ": " + dateitem + "  |  " + statusForAttendance}>
         //   <br/>
