@@ -53,11 +53,11 @@ async function getPassword(name, classroom){
 
 //ADMIN DB FUNCTIONS
 
-async function addAdmin(name, course, attendancedates, evalmetrics, evaluationtypes) {
+async function addAdmin(name, course, attendancedates, evalmetrics) {
   return await connectAndRun((db) =>
     db.none(
-      "INSERT INTO admin (name, course, attendancedates, evalmetrics, evaluationtypes) VALUES ($1, $2, $3, $4, $5);",
-      [name, course, attendancedates, evalmetrics, evaluationtypes]
+      "INSERT INTO admin (name, course, attendancedates, evalmetrics) VALUES ($1, $2, $3, $4);",
+      [name, course, attendancedates, evalmetrics]
     )
   );
 }

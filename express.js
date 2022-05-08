@@ -33,7 +33,7 @@ app.post("/api/getPassword", async (req, res) => {
 
 app.post("/api/createAdmin", async (req, res) => {
     const data = req.body;
-    await dblast.addAdmin(data.name, data.course, data.attendancedates, data.evalmetrics, data.evaluationtypes);
+    await dblast.addAdmin(data.name, data.course, data.attendancedates, data.evalmetrics);
     console.log("Created a new account successfully!");
     res.sendStatus(200);
 });
