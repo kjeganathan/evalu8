@@ -63,6 +63,29 @@
   #header .logo {
     padding: 20px;
   }
+
+   .modal-header{
+
+  }
+
+  .deleteModal .modal-header{
+    background-color: #EDAE49;
+    color: #101825;;
+    border-bottom: 1px solid #101825;
+
+}
+
+.deleteModal .modal-footer{
+    background-color: #101825;
+    color: #fff; 
+    border-top: 1px solid #182437;
+}
+
+.deleteModal .modal-body{
+    background-color: #101825;
+    color: #fff
+
+}
   
   @media only screen and (max-width: 720px) {
     html {

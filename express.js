@@ -235,7 +235,7 @@ app.post("/api/deleteSemesterTables", async (req, res) => {
     const data = req.body;
     await dblast.deleteManagers(data.admin, data.course);
     await dblast.deleteAttendance(data.admin, data.course);
-    await dblast.deleteEvaluations(data.admin, data.course);
+     await dblast.deleteEvaluations(data.admin, data.course);
     await dblast.deleteProgress(data.admin, data.course);
     await dblast.deleteTeamMember(data.admin, data.course);
     console.log("Deleted Table Contents for New Semester!");
