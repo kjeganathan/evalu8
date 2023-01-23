@@ -6,4 +6,4 @@ We adopt these newly established metrics in the performance evaluation tool Eval
 
 Evalu8 has been programmed with a ReactJS frontend, a NodeJS backend and a relational PostgreSQL database.
 
-Further documentation on this thesis project can be found in the repository file:  
+Further documentation on this thesis project can be found in the repository file: **Building and Evaluating an Application to Analyze.pdf**
