@@ -1,6 +1,13 @@
 # Evalu8
 
-Evalu8 is a web application meant to be used by students who take on a managerial role in a classroom setting.
+Evalu8 is a performance evaluation software tool with a user-friendly interface which is highly responsive and intuitive, and provides an efficient method for managers in a Computer Science university classroom setting to evaluate their team members with clear and standardized evaluation criteria.  Furthermore, it is a good tool for managers to use to collect data on individual team members to provide accurate feedback during team member performance evaluations.
+
+The metrics used for evaluation in Evalu8 are based on the  metrics currently used in the software engineering industry and have been modified as necessary to conform to the requirements and expectation of Computer Science courses at University of Massachusetts, Amherst. The main categories of the the evaluation software tool can be categorized broadly into engagement, contribution, and progress. The specific metrics used for Evalu8’s performance evaluation system in order to conform to Computer Science course requirements are team member attendance, total commits contributed to project codebase, total lines of code contributed to project codebase, project tasks completed, project tasks assigned and overall team member progress.  Additionally team member progress is measured by team member progress satisfaction, team member progress pacing, and team member progress environmental impact. 
+
+The application Evalu8 has been evaluated using usability testing guided by Nielsen’s definition of usability.  This was done by creating a questionnaire to measure qualitative and quantitative feedback on each parameter in Nielsen’s definition including learnability, efficiency, memorability, number of errors committed, number of assists and satisfaction.  
+
+Evalu8 has been programmed with a ReactJS frontend, a NodeJS backend and a relational PostgreSQL database.
+
 
 ## User Interface
 
